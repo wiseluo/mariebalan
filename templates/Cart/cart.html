@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="移动电商服务微分销平台">
+	<meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>购物车</title>
+
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	<!-- Icon-->
+	<link rel="icon" type="image/png" href="__PUBIMG__/favicon.png">
+	<!-- Add to homescreen for Chrome on Android -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="icon" sizes="192x192" href="__PUBIMG__/app-icon72x72@2x.png">
+	<!-- Add to homescreen for Safari on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+	<link rel="apple-touch-icon-precomposed" href="__PUBIMG__/app-icon72x72@2x.png">
+
+	<!-- Tile icon for Win8 (144x144 + tile color) -->
+	<meta name="msapplication-TileImage" content="__PUBIMG__/app-icon72x72@2x.png">
+	<meta name="msapplication-TileColor" content="#0e90d2">
+</head>
+<body>
+	<div id="loading">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<!-- 品牌直营店购物车 -->
+	<div class="wrapper-content am-margin-top-lg" style="opacity: 0;">
+<!--		<div class="head_item plat-back_white plat-border_bottom">
+			<div class="am-cf">
+				<div class="am-fl">
+					<i class="am-icon-md plat-theme_color am-icon-github"></i>
+				</div>
+				<div class="am-fl plat-black_color am-padding-left-sm"><a href=""><{$cart.customer_name}></a></div>
+				<div class="am-fr plat-black_color modify">编辑</div>
+			</div>
+		</div>-->
+                <form id="formBag" class="fnb_validate"  method="post" >
+		<ul class="products_list plat-back_white">
+                    <volist name="cartList" id="cartList">
+                        <volist name='cartList["std_goods_id"]' id='std_goods'>
+
+			<li class="plat-border_bottom">
+
+                                <input type="hidden" class="check_goods" value="<{$std_goods.std_id}>" name="std_goods_id[]" />
+                                <input type="hidden" value="<{$cartList.goods_id}>" name="goods_id[]" />
+				<div class="list_item">
+					<div class="select">
+						<label class="am-checkbox am-success" style="margin: 0;">
+							<input name="subBox[]" type="checkbox" class="sub_id checked_<{$cartList.goods_id}>_<{$std_goods.std_id}>" value="<{$cartList.goods_id}>_<{$std_goods.std_id}>_<{$std_goods['price']}>"  data-am-ucheck>
+                                                        <input type="hidden" name='owner_<{$cartList.goods_id}>_<{$std_goods.std_id}>' value="<{$std_goods.seller_owner_id}>"/>
+                                                </label>
+					</div>
+					<div class="information am-g">
+						<div class="am-u-sm-4">
+							<img src="<{$cartList.img_url}>" alt="<{$cartList.goods_name}>" class="am-img-responsive" />
+						</div>
+  						<div class="am-u-sm-8 product_detail">
+                                                    <span class='single_ammount'  line="<{$cartList.goods_id}>_<{$std_goods.std_id}>" amount="<?php echo number_format($std_goods['price']*$std_goods['count'],2,'.','')?>"></span>
+  							<div class="am-text-sm title"><{$cartList.goods_name}></div>
+  							<div class="am-text-xs plat-gray_color" >商品编码：<{$cartList.goods_no}>
+								<span class="am-text-trash delete_item" goods_id='<{$cartList.goods_id}>' std_id="<{$std_goods.std_id}>" seller_owner_id='<{$std_goods['customer_id']}>'><i class="fa fa-trash"></i></span>
+							</div>
+                                                        <if condition="$std_goods['spec_name'] neq ''">
+							<div class="am-text-xs plat-gray_color">规格：<{$std_goods.spec_name}></div>
+														</if>
+							<div class="am-text-xs am-cf"style="position: relative;">
+  								<div class="am-fl plat-gray_color">零售价：<span class="plat-red_color sale_price" sale_price="<{$std_goods['price']}>"><{$Think.const.CURRENCY}><{$std_goods['price']}>/<{$std_goods['unit_name']}></span></div>
+  								<!--<div class="am-fr plat-black_color">x <span class="special_price"><{$std_goods['count']}></span></div>-->
+								<div class="am-ax-default">
+                                                                        <input type="hidden" value="<{$cartList.goods_id}>" name="goods_id[]" />
+                                                                        <input type="hidden" value="<{$std_goods.sub_id}>" name="sub_id[]" />
+                                                                        <input type="hidden"  value="<{$std_goods.std_id}>" name="std_goods_id[]" />
+                                                                        <input type="hidden"  value="<{$std_goods['price']}>" name="sale_price[]" />
+                                                                        <input type="hidden"  value="<{$std_goods['barcode']}>" name="barcode[]" />
+                                                                        <input type="hidden"  value="<{$cartList['seller_owner_id']}>" name="seller_owner_id[]" />
+									<div class="am-ax-jcler am-ax-btn  minus_btn am-axtive">-</div>
+									<input type="text" value="<{$std_goods['count']}>" name="goods_id" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onpaste="return false;" class="am-ax-deval"  id="am-ax-deval">
+									<div class="am-ax-add am-ax-btn minus">+</div>
+								</div>
+							</div>
+
+
+  						</div>
+  						
+					</div>
+<!--					<div class="am-g plat-gray_color am-padding-vertical-sm">
+						<div class="am-u-sm-6">
+							<div class="am-text-sm">分销价：xxxxx</div>
+						</div>
+  						<div class="am-u-sm-6">
+  							<div class="am-text-sm">预计收益：xxxxx</div>
+  						</div>
+					</div>-->
+				</div>
+			</li>
+                        </volist>
+                    </volist>
+		</ul>
+                </form>
+			<div class="background_block"></div>
+
+
+		<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default am-no-layout plat-back_white am-padding-left-sm">
+			<div class="am-cf am-margin-0">
+				<div class="am-fl">
+					<label class="am-checkbox am-success all_check">
+						<input id="checkAll" type="checkbox" value="" data-am-ucheck> 全选
+					</label>
+				</div>
+				<div class="am-fr fnb_submit">
+               		<button class="am-btn am-btn-success am-btn-block am-text-sm fnb_btn">提交订单</button>
+				</div>
+				<div class="am-fr am-margin-right-xs">
+					<div>合计<span class="plat-red_color" id="total_account">00.00</span>元</div>
+				</div>
+			</div>
+	  </div>
+		<!-- 提交订单选择地址 -->
+		<div class=" an_addredd_content  page_1">
+			<!-- mark-->
+			<!--<div class="mark_con"></div>-->
+			<!-- 头部 -->
+			<form action="" method="POST" id="am_add_fo">
+				<div class="an_add_con">
+				<div class="an_head page_1_head">
+					请填写收货地址
+					<i class="fa fa-close"></i>
+
+				</div>
+				<!-- zhut -->
+				<div class="an_add_content ">
+					<ul id="receipt_form">
+						<li>
+							<label for="doc-ipt-name"> 姓名 :</label>
+							<input type="text" class=" js-txt-telphone " name="name" id="doc-ipt-name">
+						</li>
+
+						<li>
+							<label for="doc-ipt-phone">手机号 :</label>
+							<input type="text" class=" js-txt-telphone " name="phone" maxlength="15" id="doc-ipt-phone">
+						</li>
+						<li>
+							<label for="address">选择地址 :</label>
+
+							<input id="address" type="text" name="mustadd" class="js-txt-street get_address"  value=""/>
+							<input type="hidden" name="north" id="north" value="" >
+							<input type="hidden" name="west" id="west" value="" >
+							<div id="container"></div>
+						</li>
+						<li>
+							<textarea name="addr1_container" id="doc_tipinput" class="am-text-sm js-txt-street" rows="2" placeholder="详细地址"></textarea>
+						</li>
+						<li>
+							<label for="doc_youfonput">邮编 :</label>
+							<input type="text" id="doc_youfonput" name="zip_code" class="am-text-sm js-txt-street"/>
+						</li>
+					</ul>
+                                        <div id='delivery_modal'>
+
+                                        </div>
+						<!-- 确定 付款 -->
+					 <div class="btn_submie">
+						 <div class="clear_btn  am-btn am-btn-success  am-round  ">上一步</div>
+						 <div class="an_sub_btn am-btn am-btn-success  am-round  " id='btnorder'>付款</div>
+					 </div>
+					
+				</div>
+			</div>
+			</form>
+
+
+			<div class="motify"><div class="motify-inner">成功提交，待审核</div></div>
+		</div>
+		<!-- 二维码支付弹出框 -->
+		<div class=" an_addredd_content  page_2">
+			<div class="an_add_con">
+				<div class="an_head page_2_head">
+					提示
+					<i class="fa fa-close"></i>
+				</div>
+				<!-- zhut -->
+				<div class="an_add_content ">
+					<ul >
+						<li>请尽快跟卖家联系，付款！</li>
+						<li></li>
+						<li><img src="<{$userInfo.weixin_code}>" alt="二维码"></li>
+					</ul>
+				</div>
+		</div>
+		<!-- 删除弹出框 -->
+		</div>
+	</div>
+	<script>
+        var basePath = "__PUBLIC__";
+    </script>
+	<script src="__PUBJS__/require.js"></script>
+	<script src="__PUBJS__/common.js"></script>
+	<script src="__PUBJS__/module/cart/cart.js"></script>
+	<script src="http://webapi.amap.com/maps?v=1.3&key=40989534d85099ea4ca661f72e4eec72&plugin=AMap.Autocomplete,AMap.PlaceSearch"></script>
+	<script>
+		var real_address;
+		//地图加载
+		var map = new AMap.Map("container", {
+			resizeEnable: true
+		});
+		//输入提示
+		var autoOptions = {
+			input: "address"
+		};
+
+		var auto = new AMap.Autocomplete(autoOptions);
+		var placeSearch = new AMap.PlaceSearch({
+			map: map
+		});  //构造地点查询类
+		var listener = AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+		function select(e) {
+			placeSearch.setCity(e.poi.adcode);
+			placeSearch.search(e.poi.name);  //关键字查询查询
+			// real_address = e.poi.district+""+e.poi.name;
+		}
+
+		AMap.event.addListener(placeSearch, "complete",function(e){
+			console.log($(".amap-sug-result").css("top"));
+			// listener.Bl.input.value = real_address;
+		});
+		AMap.event.addListener(placeSearch, "selectChanged",function(e){//.address
+			var data = e.selected.data;
+			var addr = "";
+			console.log(e.selected);
+			if (data.adname === data.address) {
+				addr = "中国"+data.pname+data.cityname+data.adname+data.name;
+			}else{
+				addr = "中国"+data.pname+data.cityname+data.adname+data.address+"("+data.name+")";
+			}
+			$('#address').val(addr);
+			$('#north').val(data.location.lat);
+			$('#west').val(data.location.lng);
+		});
+	</script>
+	<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+
+</body>
+</html>

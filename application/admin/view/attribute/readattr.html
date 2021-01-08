@@ -1,0 +1,126 @@
+ <style type="text/css">
+    #typeinfo input[type="radio"],#typeinfo input[type="checkbox"]{ margin: 8px;}
+    .modal-body {
+        padding: 5px 20px;
+        overflow-y: scroll;
+        height: 450px;
+    }
+</style>
+<div class="form-group">
+    <input type="hidden" name="id" value="{$info['id']}" />
+</div>
+
+    <div class="form-group">
+        <label>属性名称：</label>
+        <input type="text" name="info[attr_name]" class="form-control" value="{$info['attr_name']}" id="attr_name">
+    </div>
+
+    <div class="form-group">
+        <label>所属产品类型：</label>
+         <select class="form-control parsley-validated" name="info[type_id]" id="type_id">
+                <option value="0">选择产品类型</option>
+            {foreach name='pdtype' item="rs" key="k"}
+                <option value="{$rs['id']}" data-fid="{$rs['fid']}" {if($info['type_id']==$rs['id'])}selected="selected"{/if} >{if condition="$rs['level']==1"}&nbsp;&nbsp;&nbsp;{/if}{$rs['name']}</option>
+
+            {/foreach}
+        </select>
+        <input type="hidden" name="info[type_fid]" value="{$info['type_fid']}" id="type_fid">
+    </div>
+
+    <div class="form-group">
+        <label>属性是否可选：</label>
+        <input type="radio" name="info[attr_type]" value="0" {if($info['attr_type']==0)}checked="true"{/if}> 唯一属性   &nbsp;&nbsp;<input type="radio" name="info[attr_type]" value="1" {if($info['attr_type']==1)}checked="true"{/if}> 单选属性
+        <br><span class="notice-span" style="display:block;font-size: 12px;" id="noticeAttrType">温馨提示：选择"单选属性"时，可以对商品该属性设置多个值，同时还能对不同属性值指定不同的价格加价，用户购买商品时需要选定具体的属性值。选择"唯一属性"时，商品的该属性值只能设置一个值，用户只能查看该值。</span>
+    </div>
+
+    <div class="form-group">
+        <label>该属性值的录入方式：</label> <br>
+        <input type="radio" name="info[attr_input_type]" value="0" {if($info['attr_input_type']==0)}checked="true"{/if} onclick="radioClicked(0)">
+          手工录入          &nbsp;&nbsp;<input type="radio" name="info[attr_input_type]" value="1" {if($info['attr_input_type']==1)}checked="true"{/if} onclick="radioClicked(1)">
+          从下面的列表中选择（一行代表一个可选值）          &nbsp;&nbsp;<input type="radio" name="info[attr_input_type]" value="2" {if($info['attr_input_type']==2)}checked="true"{/if} onclick="radioClicked(0)">
+          多行文本框
+    </div>
+
+    <div class="form-group">
+        <label>可选值列表：</label> <br>
+        <textarea name="info[attr_value]" style="width: 100%" rows="5"  {if($info['attr_input_type']!=1)}disabled{/if}>{$info['attr_value']}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>是否作为前台页面筛选条件：</label>
+        <input type="radio" name="info[is_filtrate]" value="0" {if($info['is_filtrate']==0)}checked="true"{/if}> 否   &nbsp;&nbsp;<input type="radio" name="info[is_filtrate]" value="1" {if($info['is_filtrate']==1)}checked="true"{/if}> 是
+    </div>
+
+    <div class="form-group">
+        <label>排序：</label>
+        <input type="text" name="info[sort]" class="form-control" value="{$info['sort']}" >
+    </div>
+<script type="text/javascript">
+/**
+ * 点击类型按钮时切换选项的禁用状态
+ */
+function radioClicked(n){
+    $("textarea").prop("disabled",(n > 0 ? false : true));
+}
+//提交   注意：该提交按钮在主页面中
+$(function(){
+    $("#type_id").change(function(){
+       var fid = $(this).find("option:selected").attr("data-fid");
+       $("#type_fid").val(fid);
+    })
+
+    $("#attr_submit").on("click",function(){
+        $(this).prop("disabled",true);
+        //alert("dsjfjsd");
+        var name = $('#attr_name').val();
+        if (name == '') {
+            layer.msg("请填写属性名称",{
+                                icon:5,
+                                time:1000,
+                            });
+            $('#attr_name').focus();
+            $(this).prop("disabled",false);
+            return false;
+        }
+        var type_id = $("#type_id").val();
+        if (type_id == 0) {
+            layer.msg("请选择所属产品类型",{
+                            icon:5,
+                            time:1000,
+                        });
+            $("#type_id").focus();
+            $(this).prop("disabled",false);
+            return false;
+        }
+        //alert({$info['id']});return
+        $.ajax({
+        type:"POST",
+        url:"/admin/attribute/{$info['id']? 'update' : 'add'}?id={$info['id']}",
+        data:$('#typeinfo').serialize(),
+        success: function(data){
+            if (data.status == 0) {
+                layer.msg(data.msg,{
+                              icon:6,
+                              time:2000,
+                          });
+                //alert(data.msg);
+
+                setTimeout(function(){
+                  window.location.reload();
+                },2000);
+            } else {
+                layer.msg("提交失败",{
+                            icon:5,
+                            time:1000,
+                        });
+                $('#attr_submit').prop("disabled",false);
+            }
+        }
+    })
+
+    })
+
+})
+
+</script>
+    

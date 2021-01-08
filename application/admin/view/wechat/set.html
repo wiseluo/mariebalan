@@ -1,0 +1,141 @@
+<style>
+    .currentbtn{
+        color: #FFF;
+        background: #06F;
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    .passbtn{
+        color: #FFF;
+        background: #999;
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+</style>
+
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a >微信公众号</a></li>
+              <li><a >基本配置</a></li>
+             </ul>
+
+<section class="panel panel-default" style="max-width:1140px;">
+  <div class="panel-body">
+<form class="form-horizontal" method="post">
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">公众号名称</label>
+<div class="col-sm-10">
+    <input type="text" placeholder="请输入公众号名称" name="name" value="{$mp.name}" class="form-control">
+</div>
+</div>
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">类型</label>
+<div class="col-sm-10">
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-sm btn-default {if $mp.type==1}active{/if}">
+            <input type="radio" name="type" id="option1" value="1">
+            <i class="fa fa-check text-active"></i>普通订阅号</label>
+        <label class="btn btn-sm btn-default {if $mp.type==2}active{/if}">
+            <input type="radio" name="type" id="option2" value="2">
+            <i class="fa fa-check text-active"></i>认证订阅号</label>
+        <label class="btn btn-sm btn-default {if $mp.type==3}active{/if}">
+            <input type="radio" name="type" id="option3" value="3">
+            <i class="fa fa-check text-active"></i>普通服务号</label>
+        <label class="btn btn-sm btn-default {if $mp.type==4}active{/if}">
+            <input type="radio" name="type" id="option3" value="4">
+            <i class="fa fa-check text-active"></i>认证服务号/认证媒体/政府订阅号</label>
+    </div>
+</div>
+</div>
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">APPID</label>
+<div class="col-sm-10">
+    <input type="text" name="appid" value="{$mp.appid}" placeholder="请输入APPID" class="form-control">
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">APPSECRET</label>
+<div class="col-sm-10">
+    <input type="text" name="appsecret" value="{$mp.appsecret}" placeholder="请输入APPSECRET" class="form-control">
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">原始ID</label>
+<div class="col-sm-10">
+    <input type="text" name="origin_id" value="{$mp.origin_id}"  placeholder="请输入原始ID" class="form-control">
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">微信号</label>
+<div class="col-sm-10">
+    <input type="text" name="mp_number"  value="{$mp.mp_number}" placeholder="请输入公众号微信号" class="form-control">
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">URL(服务器地址)</label>
+<div class="col-sm-10">
+    <input type="text" value="{$mp.url}" readonly placeholder="回调地址" class="form-control">
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">Token(令牌)</label>
+<div class="col-sm-10">
+    <input type="text" name="valid_token"  value="{$mp.valid_token}" placeholder="请输入公众号微信号" class="form-control">
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">EncodingAESKey(消息加解密密钥)</label>
+<div class="col-sm-10">
+    <input type="text" name="encodingaeskey"  value="{$mp.encodingaeskey}" placeholder="请输入公众号微信号" class="form-control">
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">开关状态</label>
+<div class="col-sm-10">
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-sm btn-default {if $mp.status==1}active{/if}">
+            <input type="radio" name="status" id="option1" value="1">
+            <i class="fa fa-check text-active"></i>开启</label>
+        <label class="btn btn-sm btn-default {if $mp.status==0}active{/if}">
+            <input type="radio" name="status" id="option2" value="0">
+            <i class="fa fa-check text-active"></i>关闭</label>
+    </div>
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+<label class="col-sm-2 control-label">关闭回复</label>
+<div class="col-sm-10">
+    <textarea name="desc"  placeholder="请输入内容" class="form-control">{$mp.desc}</textarea>
+</div>
+</div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+   <div class="form-group">
+<div class="col-sm-4 col-sm-offset-2" style="text-align:center; width:60%;">
+<button type="sumbit" class="btn btn-primary"> 修 改 </button>
+</div>
+</div>
+</form>
+    </div>
+  </section>
+</section>

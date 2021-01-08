@@ -1,0 +1,96 @@
+
+<!-- 内容主题 -->
+ <div id="comment_1">
+ {foreach name="shop_comment" item="v" key="k"}
+     <div class="comment-item">
+         <div class="user-column">
+             <div class="user-info">
+             {if condition="empty($v->userinfo->pic)"}
+                 <img src="https://storage.360buyimg.com/i.imageUpload/736561776f6f6531343633393139393430333533_sma.jpg" alt="{$v.username}" class="avatar" height="25" width="25">
+              {else /}
+                  <img src="{$v->userinfo->uthumbpic}" alt="{$v.username}" class="avatar" height="25" width="25">
+              {/if}
+                 {$v.username}
+              
+             </div>
+             <div class="user-level">
+                 <span style="color:#666666"></span>
+             </div>
+         </div>
+
+         <div class="comment-column">
+             <!-- 星级  star + 星级  -->
+             {if $v.star eq '5分'}<div class="comment-star  star5"></div>{/if}
+             {if $v.star eq '4分'}<div class="comment-star  star4"></div>{/if}
+             {if $v.star eq '3分'}<div class="comment-star  star3"></div>{/if}
+             {if $v.star eq '2分'}<div class="comment-star  star2"></div>{/if}
+             {if $v.star eq '1分'}<div class="comment-star  star1"></div>{/if}
+             <!-- 评论内容 -->
+             <p class="comment-con">{$v.content}
+             </p>
+             <!-- 评论图片 -->
+             <div class="pic-list">
+             {if condition="!empty($v.photos)"}
+                  {foreach name="v.photos" item="v1" key="k1"}
+                 <a href="javascript:void(0)" class="">
+                     <img src="{$v1}" alt="{$v.username}的晒单图片" height="48" width="48">
+                 </a>
+                  {/foreach}
+              {/if}
+             </div>
+             <div class=" fd_All_show hide clearfix" >
+                 <div class="pic-view clearfix">
+                     <div class="pic-op">
+                         <!-- 左转 右转 -->
+                         <a href="javascript:void(0)" class="turn-left">
+                             <i class="sprite-turn-left"></i> 左转
+                         </a>
+                         <a href="javascript:void(0)" class="">
+                             <i class="sprite-turn-right"></i> 右转
+                         </a>
+                     </div>
+                     <img src="https://img30.360buyimg.com/shaidan/s616x405_jfs/t4438/353/3788198217/67969/c992db62/5904c338Ndc2fe018.jpg" style="transform: rotate(0deg); margin-left: 0px; margin-top: 0px;">
+                     <div class="cursor-prev J-sprite-next "></div>
+                     <div class="cursor-small J-hide-big-show"></div>
+                     <div class="cursor-next J-sprite-next " style="display: block;"></div>
+                 </div>
+             </div>
+             <!-- 商品规格信息 -->
+             <div class="comment-message clearfix">
+                 <div class="order-info">
+                   <!--   <span>哈尔滨小麦王500ml*18听</span> -->
+                     <span></span>
+                     <span>{$v.create_time}</span>
+                 </div>
+                 <!-- <div class="comment-op">
+                     点赞 与 评论
+                     <a class="J-nice" href="javascript:void(0)" title="2">
+                         <p class="j-m-zan"><i class="sprite-praise"></i>2</p>
+                         <p class='y-m-zan hide'>已赞（2）</p>
+                     </a>
+                     <a href="##" target="_blank">
+                         <i class="sprite-comment"></i>0
+                     </a>
+                 </div> -->
+             </div>
+             <!-- 追评 信息 -->
+             <!-- <div class="append-comment J-append-comment" data-id="11165436">
+                 <div class="append-time">[购买10天后追评]</div>
+                 <p class="comment-con">想给五星，没操作好，只点了一星！</p>
+                 <div class="J-pic-view-wrap clearfix">
+                 </div>
+             </div> -->
+         </div>
+     </div>
+      {/foreach}
+     <!--  底部分页 -->
+     <div class="com-table-footer">
+         <div class="ui-page-wrap clearfix">
+             <div class="ui-page" data-pid="{$id}">
+                 {$page}
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <script type="text/javascript" src="/static/index/js/module/shopCon/shopCon.js"></script>

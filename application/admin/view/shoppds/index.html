@@ -1,0 +1,201 @@
+<style>
+.title-b a:hover{ color:#F63;}
+</style>
+
+<section class="scrollable padder">
+    <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+        <li><a href="/admin"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a >店铺管理</a></li>
+        <li><a >产品管理</a></li>
+    </ul>
+    <div class="m-b-md">
+        <h3 class="m-b-none">产品列表</h3>
+    </div>
+    <section class="panel panel-default">
+              <header class="panel-heading">删除将无法恢复，请谨慎你的操作！</header>
+              <div class="row text-sm wrapper">
+                <div class="col-sm-5 m-b-xs">
+                  <select id="doval" class="input-sm form-control input-s-sm inline">
+                    <option value="">操作类型</option>
+                    <option value="makeflag">上架</option>
+                    <option value="canelflag">下架</option>
+                     </select>
+                  <button id="delpds" class="btn btn-sm btn-default">执行</button>
+                  <button id="xiaoliang" class="btn btn-sm btn-default">更改销量</button>
+                </div>
+                
+                <div class="col-sm-3">
+                  <div class="input-group">
+                  {php}if(!isset($wk))$wk='';{/php}
+                    <input type="text" class="input-sm form-control" id="wk" value='{$wk}' placeholder="关键词">
+                    <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default" onClick="search()" type="button">搜索</button>
+                    </span> </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                  <thead>
+                    <tr>
+                      <th width="20"><input type="checkbox"></th>
+                      <th width="80">图片 </th>
+                      <th>名称</th>
+                      <th width="120">购物区间</th>
+                      <th width="80">售价</th>
+                      <th width="80">促销价</th>
+                      <th width="80">重量</th>
+                      <th width="80">总库存</th>
+                      <th width="100">类型</th>
+                      <th width="80">总销量</th>
+                      <th width="80">热度</th>
+                      <th width="60">状态</th>
+                      <th width="100">日期</th>
+                      <th width="100">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+{foreach name="goods" item="rs" key="k"}
+<tr id="pdlist{$rs['id']}">
+<td><input class="pdid" type="checkbox" name="IDS[]" value="{$rs['id']}"></td>
+<td>
+   <img src="{$rs['pics'][0]}" width="30" onclick="" />
+</td>
+<td class="title-b"><a href="/admin/shoppds/readpd?id={$rs['id']}" >{$rs['title']}</a></td>
+<td>{$rs['region']}</td>
+<td>{$rs['original_price']}</td>
+<td>{$rs['price']}</td>
+<td>{$rs['weight']}</td>
+<td>{$rs['stock']}</td>
+<td>{$types[$rs['category_id']]}</td>
+<td>{$rs['sales']}</td>
+<td>{$rs['hits']}</td>
+<td>{if $rs['state'] == 1}上架{else}下架{/if}</td>
+<td>{$rs['create_time']}</td>
+<td>
+                      <a data-id="{$rs['id']}" class="btn btn-primary btn-xs editpd" href="/admin/shoppds/readpd?id={$rs['id']}"><i class="fa fa-edit"></i></a>
+                      <a data-id="{$rs['id']}" class="btn btn-danger btn-xs delpd"><i class="fa fa-trash-o"></i></a>
+</td>
+</tr>
+{/foreach}
+
+</tbody>
+                </table>
+              </div>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 hidden-xs">
+                    <a class="btn btn-sm btn-danger"  href="/admin/shoppds/readpd?id=0">新增</a>
+                  </div>
+                  
+                  <div class="col-sm-4 text-center"></div>
+                  <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$pager|raw}
+                    </ul>
+                  </div>
+                </div>
+              </footer>
+            </section>
+</section>
+
+
+<script language="javascript">
+
+function view() {
+  $("#modal-view").modal("show");
+}
+
+function search() {
+  var wk = $('#wk').val();
+  /*if (wk == "已审"){
+    wk = 1;
+  }
+  if (wk == "未审"){
+    wk = 0;
+  } */
+
+  window.document.location='/admin/shoppds/index?wk='+wk;
+}
+
+$(function(){
+
+	$(".delpd").on("click",this,function(){
+		if(!confirm('你确定要删除吗？'))return false;
+		var id = $(this).attr("data-id");
+		$.ajax({
+			type:"GET",
+			cache:false,
+			url:"/admin/shoppds/deletepd?id="+id,
+			success: function(data){
+				if(data.status == 0){
+          layer.msg(data.msg,{
+                          icon:6,
+                          time:1000,
+                      });
+					$("#pdlist"+id).hide();
+				} else {
+            layer.msg("删除失败",{
+                            icon:5,
+                            time:1000,
+                        });
+        }
+			}
+		})
+	})
+  $('#xiaoliang').on("click",this,function(){
+    $.ajax({
+      type:"GET",
+      cache:false,
+      url:"/admin/shoppds/xiaoliang",
+      success: function(data){
+       console.log(data)
+      }
+    })
+  })
+	$("#delpds").on("click",this,function(){
+		var doval = $("#doval").val();
+		if(doval == ''){
+			alert('请选择操作类型！');
+			return false;
+		}
+		if(doval == 'deletes'){
+			if(!confirm('你确定要批量删除吗？'))return false;
+		}
+		var IDS = {};
+		var i = 0;
+		$(".pdid").each(function(index, element) {
+			if($(this).prop("checked")){
+				i=i+1;
+				IDS[i]=$(this).val();
+			}
+    });
+		if(i==0){
+			alert("请选择商品后再操作！");return false;
+		}
+		$.ajax({
+			type:"POST",
+			cache:false,
+			url:"/admin/shoppds/"+doval,
+			data:{IDS:IDS},
+			success: function(data){
+				if (data.status == 0){
+          layer.msg(data.msg,{
+                          icon:6,
+                          time:1000,
+                      });
+          setTimeout(function(){
+              window.location.reload(); 
+            },1000);
+				} else {
+            layer.msg("操作失败",{
+                            icon:5,
+                            time:1000,
+                        });
+        }
+			}
+		})
+	})	
+	
+})
+
+</script>

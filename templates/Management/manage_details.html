@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="keywords" content="移动电商服务微分销平台">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>完成任务</title>
+
+        <!-- Set render engine for 360 browser -->
+        <meta name="renderer" content="webkit">
+        <!-- No Baidu Siteapp-->
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        <!-- Icon-->
+        <link rel="icon" type="image/png" href="__PUBIMG__/favicon.png">
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="__PUBIMG__/app-icon72x72@2x.png">
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+        <link rel="apple-touch-icon-precomposed" href="__PUBIMG__/app-icon72x72@2x.png">
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="__PUBIMG__/app-icon72x72@2x.png">
+        <meta name="msapplication-TileColor" content="#0e90d2">
+    </head>
+    <body>
+        <div id="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- 品牌直营店购物车 -->
+        <div class="wrapper-content " style="opacity: 0;">
+            <div data-am-widget="intro" class="am-intro am-cf am-intro-default" >
+                <form name="myform" id="myform" action='modifydetailbywechat' enctype=”multipart/form-data”>
+                    <input name="partake_id" type="hidden" value="<{$Detail.partake_id}>"/>
+                    <div class="am-g am-intro-bd am-margin-vertical-sm">
+                        <div class=" am-text-center am-cf" style="margin-bottom: 10px;">
+                            <img src="<{$Detail.main_pic}>" alt="<{$Detail.title}>"  />
+                        </div>
+                        <div class="page_title">
+                            <div class="product_info">
+                                <h3 class="am-margin-0 am-text-lg plat-normal"><{$Detail.title}></h3>
+                            </div>
+                        </div>
+                        <div class="am-padding-horizontal-sm am-text-sm plat-black_color">
+                            结束时间：<span><{$Detail.end_time}> </span>
+                        </div>
+                        <div class="am-padding-horizontal-sm am-text-sm plat-black_color">
+                            任务奖励：<span><{$Detail.reward}></span>
+                        </div>
+                        <if condition="!empty($Detail['verify_fuil_detail'])">
+                            <div class="am-padding-horizontal-sm am-text-sm plat-black_color">
+                                拒绝理由：<span><{$Detail.verify_fuil_detail}></span>
+                            </div>
+                        </if>
+                        <!-- 活动详情 -->
+
+                        <div class="am-list-news-bd am-margin-horizontal-sm am-padding-vertical-sm plat-border_bottom" id="ar_content">
+                            <!--  上传图片-->
+                            <div class="am-padding-horizontal-sm am-text-sm plat-black_color" style="padding-bottom: 2rem;">
+                                <h6 class="am-pa-xs am-f14">请上传最大为    1M 图片 ( 格式为, jpg', 'png','gif','jpeg'.)</h6>
+                            </div>
+                            <input id="uploaderInput" class="weui-uploader__input projectfile" multiple  type="file" accept="image/*" >
+                        </div>
+                        <!--  间距 -->
+                        <div style="height: 40px;width: 100%;"></div>
+                        <div class="am-padding-vertical-lg join_activity">
+                            <button type="button" class="am-btn am-btn-success am-btn-block ">确认提交</button>
+                        </div>
+                    </div>
+                    <!-- 隐藏域 -->
+                    <div id="sh-header-con"></div>
+                </form>
+            </div>
+            <!-- 容器 -->
+            <!-- 返回首页 -->
+            <div id="goTo_Home" class="goTo_Home"> 
+                <if condition='session("manager_info.seller_type") eq "32"'>
+                    <a href="/Supplier/index"> 返回首页 </a>
+                    <elseif condition='session("manager_info.seller_type") eq "16"'/>
+                    <a href="/Distributor/index"> 返回首页 </a>                    
+                </if>
+            </div>
+            <!--<div class="weui-cells weui-cells_form">-->
+            <!--<div class="weui-cell">-->
+            <!--<div class="weui-cell__bd">-->
+            <!--<div class="weui-uploader">-->
+            <!--<div class="weui-uploader__hd">-->
+            <!--<p class="weui-uploader__title">图片上传</p>-->
+            <!--<div class="weui-uploader__info">0/2</div>-->
+            <!--</div>-->
+            <!--<div class="weui-uploader__bd">-->
+
+            <!--<div class="weui-uploader__input-box">-->
+            <!--<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+        </div>
+        <script>
+            var basePath = "__PUBLIC__";
+        </script>
+        <script src="__PUBJS__/require.js"></script>
+        <script src="__PUBJS__/common.js"></script>
+        <script src="__PUBJS__/module/management/manage_details.js"></script>
+    </body>
+</html>

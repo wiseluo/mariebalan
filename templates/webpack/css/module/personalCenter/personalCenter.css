@@ -1,0 +1,279 @@
+
+.personerBox{ width: 1200px; margin: 14px auto;}
+.leftsidebar{ width: 18%; height: auto; float: left; margin-right: 15px;}
+.leftsidebar h2{font-size: 18px; color: #ff0101;}
+
+.rightcontent{ width: 80.7%; height: auto;  float: left;}
+
+
+.orderlist {width: 100%; height:32px; line-height: 32px; border-bottom: 1px solid #ececec; }
+
+.orderlist a {padding:0px 22px; background: url(../../../images/line-short.png) no-repeat 0 10px; font-size:16px; display:block; float:left; color:#333; font-weight:bold;}
+.orderlist a samp{ color: #c00;}
+.orderlist a.reback{ font-size: 13px; float: right; background: url(../../../images/trash.png) no-repeat 5px 9px;}
+.orderlist a:last-child{ border-right: none;}
+.orderlist a:last-child.hover1{border-right:1px solid #d6d6d6;}
+.orderlist a.hover1 {background:#fff; cursor: pointer; color:#e90000; height: 31px; line-height: 28px; border-bottom: 2px solid #ff0101; box-sizing:content-box;}
+.orderlist a:hover{ cursor: pointer;}
+.none{ display: none;}
+
+
+
+.searchorder{ width: 100%; height: 26px; line-height: 26px;  margin: 15px 0;}
+.leftinput{ width: 220px;  line-height: 26px;  float: left;border:1px solid #eaeaea; padding-left: 5px; border-radius:4px 0 0 4px; font-size: 12px;}
+.rightbutton{ width: 80px; line-height: 26px; float: left;border:1px solid #eaeaea; background: #f5f5f5; border-left: none; cursor: pointer; border-radius:0px 4px 4px 0;}
+.rightbutton:hover{ background: #c00; color: #fff;}
+
+.s-margin20right{ width:63%;height: 28px; float: right;}
+.s-margin20right ul li{ width: 32.33%; float: left;}
+.s-margin20right ul li input{ border:1px solid #eaeaea;text-align: center; width: 120px; height: 26px;line-height: 26px; padding-left: 5px;}
+.s-margin20right ul li select{ border:1px solid #eaeaea; width: 120px; height: 26px;line-height: 26px;}
+
+.persViewTit{ height: 50px; color: #333; font-size: 14px; background: #ededed;}
+.persViewTit .h-text {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+.persViewTit .h-goods {
+    width: 325px;
+    padding-left: 20px;
+    text-align: left;
+}
+.h-price {
+    width: 70px;
+}
+.h-amount {
+    width: 48px;
+}
+.h-total {
+    width: 130px;
+}
+.h-gOperate {
+    width: 95px;
+}
+.h-status {
+    width: 130px;
+}
+.h-operate {
+    width: 150px;
+}
+.persViewCon{width: 100%; margin-bottom: 15px;}
+
+.myOdr_tb1 .oInfo {
+    height: 40px;
+    color: #999;
+}
+.myOdr_tb1 th {
+    border: 1px solid #e8e8e8;
+    text-align: left;
+    font-weight: normal;
+}
+.oInfo span {
+    display: inline-block;
+    margin-right: 25px;
+}
+
+.oInfo i.icon-location{  margin-right: 3px;}
+
+.oInfo span.delIcon{ float: right; cursor: pointer;}
+
+.aOrder-items {
+    border: 1px solid #e8e8e8;
+    border-top: 1px solid #e8e8e8;
+}
+.aImg img {
+    padding: 20px 12px 20px 20px;
+    width: 80px;
+    height: 80px;
+}
+.myOdr_tb2{ border-bottom: 1px solid #eaeaea;}
+.myOdr_tb2 .goodsTitle {
+    width: 220px;
+    padding-right: 12px;
+}
+.myOdr_tb2 .price {
+    width: 70px;
+}
+.myOdr_tb2 .amount {
+    width: 48px;
+}
+.myOdr_tb2 .goodsOperate {
+    width: 80px;
+}
+.myOdr_tb1 .rbBorder {
+    border-right: 1px solid #e8e8e8; width: 130px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.myOdr_tb1 .aOrder .operate {
+    padding: 0 8px;
+}
+.orderStatus a, .orderStatus strong {
+    display: block;
+}
+.orderStatus a.now{ color: #ff0101;}
+.btn-red30, .btn-gray30 {
+    width: 80px;
+    height: 30px; border-radius: 4px;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.aOrder .fb {
+    font-weight: bold;
+}
+.aOrder .fee {
+    font-size: 12px;
+    color: #999;
+}
+.operate .confirmReceived, .operate .payNow, .operate .comment, .payed, .evaluate {
+    display: block;
+    color: #fff; background: #ff0101;
+    text-decoration: none;
+    outline: none;
+    margin: 7px 0; cursor: pointer;
+}
+.payed{background: #049be9;}
+.nopayed{color: #ff0101; cursor: pointer;}
+.evaluate{ background: #f4f3f3; border:1px solid #eaeaea; color: #000;}
+
+
+.pageturn{ width: 100%; height: 30px; text-align: right;margin-top: 20px;}
+.pageturn a{ padding: 8px 14px; border:1px solid #eaeaea; font-size: 14px; text-align: right; cursor: pointer;}
+.pageturn a.active{ background: #eaeaea; border:1px solid #ddd;}
+.pageturn a:hover{ background: #eaeaea;}
+
+/**左侧手风琴  **/
+/** =======================
+ * Contenedor Principal
+ ===========================*/
+.list-title{
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+    border-top: solid 1px #ccc;
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    background: #FFF;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    color: #f39800;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.accordion {
+    width: 100%;
+    max-width: 200px;
+    border: solid 1px #ccc;
+    background: #FFF;
+}
+
+.accordion .link {
+    cursor: pointer;
+    display: block;
+    padding: 15px 15px 15px 42px;
+    color: #4D4D4D;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link {
+    border-bottom: 0;
+}
+.accordion li{
+    cursor: pointer;
+}
+.accordion li i {
+    position: absolute;
+    top: 16px;
+    left: 12px;
+    font-size: 18px;
+    color: #595959;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+    right: 12px;
+    left: auto;
+    font-size: 16px;
+}
+
+.accordion li.open .link {
+    color: #f39800;
+}
+
+.accordion li.open i {
+    color: #f39800;
+}
+
+.accordion li.open i.fa-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+.accordion li.open .submenu{
+    display:block;
+}
+.submenu {
+    display: none;
+    background: #f5f5f5;
+    font-size: 14px;
+}
+
+.submenu li {
+    border-bottom: 1px solid #d6d7dc;
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+    color: #666;
+    padding: 12px;
+    padding-left: 42px;
+    -webkit-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.submenu a:hover ,.submenu li.current a{
+    background: #f39800;
+    color: #FFF;
+}
+.ct-title {
+    padding-bottom: 10px;
+    line-height: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #191e1f;
+    border-bottom: 1px solid #ddd;
+}
+
+.personerBox{ width: 1200px; margin: 14px auto;}
+
+
+.leftsidebar{ width: 18%; height: auto; float: left; margin-right: 15px;}
+.leftsidebar h2{font-size: 18px;padding-left: 20px; color: #ff0101; border-bottom: 1px solid #ececec; line-height: 40px;}
+.leftsidebar ul { border-bottom: 1px solid #ececec; padding: 10px 0;}
+.leftsidebar ul li{ font-size: 14px; line-height:18px; padding: 0px 0 0px 20px; margin: 8px 0;}
+.leftsidebar ul li a{ cursor: pointer;}
+.leftsidebar ul li.active{ font-weight: bold; border-left: 2px solid #ff0101;}
+.leftsidebar ul li.active a{ color: #ff0101;}
+
+

@@ -1,0 +1,94 @@
+<!-- 头部栏开始-->
+
+<!-- 头部栏开始-->
+<div id="top">
+    <div class="header" style="width: 1200px; margin: 0 auto;">
+        <p class="fl header_con">欢迎来到{$_G['sitename']}商城！<a href="/ucenter/login">登录</a> <span>&nbsp;|&nbsp;</span> <a
+                href="/ucenter/register"><strong>注册</strong></a></p>
+        <div class="topmenu fr">
+            <ul class="menu">
+                <li style="background:none;position:relative; z-index:10;">
+                    <a href="/ucenter/order" class="arrow">我的账户</a>
+                    <!--<ul class="top_submenu">-->
+                    <!--<li><a href="personalCenter.html">订单中心</a></li>-->
+                    <!--<li><a href="#">物流跟踪</a></li>-->
+                    <!--&lt;!&ndash; <li><a href="#">我的优惠券</a></li> &ndash;&gt;-->
+                    <!--</ul>-->
+                </li>
+                <li class="phone">
+                    <a href="#">服务专线：</a>
+                    <font style="font-family:Arial; color:#c60000;"><strong>4008-579-288</strong></font>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--logo栏开始-->
+<div id="logobar">
+    <h1 class="fl"><a href="/index"><img src="/static/index/images/logo.png" alt=""/></a></h1>
+    <div class="searchcolumn fl">
+
+        <form style="position: relative;" action="/index/pdlist" method="post"autocomplete="off">
+            <input name="wk" type="text" class="search_center fl" id="gover_search_key"
+                   placeholder="请输入要搜索的商品" value="{$wk}"/>
+            <div id="gov_search_suggest" class="search_suggest">
+                <ul></ul>
+            </div>
+            <input name="" type="submit" class="search_right fl" value="搜索"/>
+        </form>
+    </div>
+
+    <div class="shopping fr">
+        <span></span>
+        <ul class="sales fr">
+            {foreach name="promotion_h" item="pt" key="k"}
+            <li><a data-id="{$pt['id']}" href="/index/notice/notice?id={$pt['id']}">{$pt['title']}</a></li>
+            {/foreach}
+
+        </ul>
+
+    </div>
+</div>
+
+<!--menu栏开始-->
+
+<!--search栏开始-->
+<div id="searchbar">
+    <div class="mennubox">
+        <div class="leftmenu fl">
+            <ul>
+                <li><a href="/index">首页</a></li>
+                {foreach name="types" item="pt" key="k"}
+                {if ($pt['fid']==0 && $k < 6)}
+                <li><a href="/index/pdlist?catid={$pt['id']}">{$pt['name']}</a></li>
+                {/if}
+                {/foreach}
+				<li><a href="/join/join/merchantEntry">商家入驻</a></li>
+            </ul>
+        </div>
+        <div class="input fl">
+            <ul class="chash fr">
+                <a href="/index/shopcar">
+                    <li id="gouwu_num">购物车
+                       <span class="num displayshow">{$num}</span>
+                        件
+                            <ul class="car display" style="display: none">
+                                <li>您的购物车中  <span class="num">{$num}</span>   件商品</li>
+                            </ul>
+                            <ul class="car displaynull" style="display: none">
+                                <li>您的购物车中暂无商品，赶快选择心爱的商品吧！</li>
+                            </ul>
+                    </li>
+                </a>
+                    <li><a href="/index/shopcar">去结算</a></li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+
+

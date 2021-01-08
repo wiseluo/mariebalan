@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="keywords" content="移动电商服务微分销平台">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>任务管理</title>
+
+        <!-- Set render engine for 360 browser -->
+        <meta name="renderer" content="webkit">
+        <!-- No Baidu Siteapp-->
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        <!-- Icon-->
+        <link rel="icon" type="image/png" href="__PUBIMG__/favicon.png">
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="__PUBIMG__/app-icon72x72@2x.png">
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+        <link rel="apple-touch-icon-precomposed" href="__PUBIMG__/app-icon72x72@2x.png">
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="__PUBIMG__/app-icon72x72@2x.png">
+        <meta name="msapplication-TileColor" content="#0e90d2">
+    </head>
+    <body>
+        <div id="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- 品牌直营店购物车 -->
+        <div class="wrapper-content " style="opacity: 0;">
+
+            <!-- 容器 -->
+            <div class="weui-tab">
+                <div class="weui-navbar">
+                    <a class="weui-navbar__item " href="#tab1">
+                        系统任务
+                    </a>
+                    <a class="weui-navbar__item weui-bar__item--on" href="#tab2">
+                        我的任务
+                    </a>
+
+                </div>
+                <div class="weui-tab__bd">
+                    <div id="tab1" class="weui-tab__bd-item ">
+
+                        <!-- 系统列表 -->
+                        <div class="weui-panel weui-panel_access">
+                            <!--<div class="weui-panel__hd we-id-head" >-->
+
+                            <!--<div class="az-left am-cf">-->
+                            <!--<div class="f_blur sho_head am-lf">-->
+                            <!--爱果果-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;  交易状态 &ndash;&gt;-->
+                            <!--<div class="am-rf am-F12 am-FF9600">-->
+                            <!--订单已关闭-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;  订单编号 &ndash;&gt;-->
+                            <!--<div class="ad_DT am-F12 ">-->
+                            <!--订单编号： <span> 789123951235123 </span>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!-- 系统任务名称 -->
+                            <div class="weui-panel__bd">
+                                <volist name='List' id='List_v'>
+                                    <div class="weui-media-box dd_dd weui-media-box_appmsg">
+                                        <a href="manage_detatitle?t_id=<{$List_v.task_id}>" >
+                                            <div class="weui-media-box__hd">
+                                                <img class="weui-media-box__thumb" src="<{$List_v.main_pic}>">
+                                            </div>
+                                        </a>
+                                        <div class="weui-media-box__bd">
+                                            <a href="manage_detatitle?t_id=<{$List_v.task_id}>" >
+                                                <h4 class="cc-cccyc">
+                                                    <!-- 商品标题 -->
+                                                    <{$List_v.title}>
+                                                </h4>
+                                            </a>
+                                            <div class="weuiaaa_con" style="position: relative;">
+
+                                                <div class="jg_con"> 任务奖励： <span class=""><{$List_v.reward}></span> </div>
+
+                                                <div class="jg-time-con"> 结束时间： <span><{$List_v.end_time}></span></div>
+
+                                                <!-- 我要参加 -->
+                                                <div class="weui-media-jg am-F12 am-btn am-badn-new" style="top: -30%;" t_id='<{$List_v.task_id}>'>
+                                                    我要参加
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </volist> 
+                            </div> 
+                        </div> 
+                        <!-- 查看更多 -->
+                        <div class="weui-panel__ft">
+                            <a href ="manage_details" class="weui-cell weui-cell_access weui-cell_link">
+                                <div class="weui-cell__bd">查看更多</div>
+                                <span class="weui-cell__ft"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  我的任务  -->
+                    <div id="tab2" class="weui-tab__bd-item weui-tab__bd-item--active">
+
+                        <!-- 我的任务名称 -->
+                        <div class="weui-panel__bd weui-panel">
+                            <volist name='tList' id='tList_v'>
+                                <div class="weui-media-box dd_dd weui-media-box_appmsg">
+                                    <a href="manage_detatitle?t_id=<{$tList_v.task_id}>" >
+                                        <div class="weui-media-box__hd">
+                                            <img class="weui-media-box__thumb" src="<{$tList_v.main_pic}>">
+                                        </div>
+                                    </a>
+                                    <div class="weui-media-box__bd">
+                                        <h4 class="cc-cccyc">
+                                            <!-- 商品标题 -->
+                                            <{$tList_v.title}>
+                                        </h4>
+                                        <div class="weuiaaa_con" style="position: relative;">
+
+                                            <div class="jg_con"> 任务奖励： <span class=""><{$tList_v.reward}></span> </div>
+
+                                            <div class="jg-time-con"> 结束时间： <span class="a-pt"><{$tList_v.end_time}></span></div> 
+                                            <!-- 完成状态 -->
+                                            <?php $date_c = strtotime(date('Y:m:d H:i:s'));  $time = strtotime($tList_v['end_time']);  
+                                            ?>
+                                            <if condition='$date_c egt $time'>
+                                                <div class="weui-media-jg am-F12 " style="top: -30%;" >
+                                                    已结束
+                                                </div>
+                                                <elseif condition='$tList_v.complete_state eq 0'/>
+                                                <div class="weui-media-jg am-F12 " style="top: -30%;" >
+                                                    <a href ="manage_details?t_id=<{$tList_v.task_id}>" >
+                                                        <div class="weui-cell__bd">我已完成</div>
+                                                    </a>
+                                                </div>
+                                                <elseif condition='$tList_v.complete_state eq 1'/>
+                                                <div class="weui-media-jg am-F12 " style="top: -30%;" >
+                                                    审核中
+                                                </div>
+                                                <elseif condition='$tList_v.complete_state eq 2'/>
+                                                <div class="weui-panel__ft">
+                                                    <a href ="manage_details?t_id=<{$tList_v.task_id}>" class="weui-cell weui-cell_access weui-cell_link">
+                                                        <div class="weui-cell__bd">审核被拒</div>
+                                                        <span class="weui-cell__ft"></span>
+                                                    </a>
+                                                </div>
+                                                <elseif condition='$tList_v.complete_state eq 3'/>
+                                                <div class="weui-media-jg am-F12 " style="top: -30%;" >
+                                                    已完成
+                                                </div>
+                                            </if>
+
+                                        </div>
+                                    </div> 
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="goTo_Home" class="goTo_Home"> 
+                <if condition='session("manager_info.seller_type") eq "32"'>
+                    <a href="/Supplier/index"> 返回首页 </a>
+                <elseif condition='session("manager_info.seller_type") eq "16"'/>
+                    <a href="/Distributor/index"> 返回首页 </a>                    
+                </if>
+            </div>
+        </div>
+        <script>
+            var basePath = "__PUBLIC__";
+        </script>
+        <script src="__PUBJS__/require.js"></script>
+        <script src="__PUBJS__/common.js"></script>
+        <script src="__PUBJS__/module/management/manage_con.js"></script>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-dark">
+<head>
+<meta charset="utf-8" />
+<title>{$_G['sitename']} - 管理后台</title>
+<meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<link rel="stylesheet" href="/static/admin/css/app.v2.css" type="text/css" />
+<link rel="stylesheet" href="static/css/font.css" type="text/css" cache="false" />
+<!--[if lt IE 9]>
+<script src="static/js/ie/html5shiv.js" cache="false"></script>
+<script src="static/js/ie/respond.min.js" cache="false"></script>
+<script src="static/js/ie/excanvas.js" cache="false"></script>
+<![endif]-->
+</head>
+<body>
+<section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+  <div class="container aside-xxl"> <a class="navbar-brand block" href="./">{$_G['sitename']}</a>
+    <section class="panel panel-default bg-white m-t-lg">
+      <header class="panel-heading text-center"> <strong>管理后台</strong> </header>
+      <form action="/admin/login/login" method="post" class="panel-body wrapper-lg" onSubmit="return userLogin()">
+        <div class="form-group">
+          <label class="control-label">用户名</label>
+          <input type="text" placeholder="用户名" id="username" name="info[username]" value="{$info['username']}" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+          <label class="control-label">密码</label>
+          <input type="password" id="pwd" name="info[pwd]" placeholder="密码" class="form-control input-lg">
+        </div>
+        <div class="checkbox" style="color:#F00">
+          {$msg}
+        </div>
+
+        <button type="submit" class="btn btn-facebook btn-block m-b-sm"><i class="fa fa-user pull-left"></i>登录</button>
+       
+  
+      </form>
+    </section>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="text-center padder">
+    <p> <small>{$_G['sitename']}<br>
+      &copy; <a href="app">2016-{$dateY}</a></small> </p>
+  </div>
+</footer>
+<script src="/static/admin/js/app.v2.js"></script>
+</body>
+<script>
+function userLogin(){
+	if($("#username").val()==''){
+		$("#username").focus();
+		return false;
+	}
+	if($("#pwd").val()==''){
+		$("#pwd").focus();
+		return false;
+	}	
+}
+</script>
+</html>

@@ -1,0 +1,302 @@
+
+.ct-list .good .title a:hover {
+    color: #e31436;
+    text-decoration: underline;
+}
+
+.ct-list {
+    width: 1185px;
+    padding-top: 30px;
+    margin-left: 15px;
+}
+.ct-list .good .delete {
+
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    background-color: #7f7f7f;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    text-align: center;
+    line-height: 32px;
+    font-size: 19px;
+}
+
+/*导航部分*/
+.mf-selector {
+    padding: 0 10px;
+}
+
+.mf-selector-line {
+    position: relative;
+    padding: 9px 51px 0 0;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.mf-selector-line .s-main {
+    width: 100%;
+    overflow: hidden;
+}
+
+#categoryFilter .mf-selector-list.up {
+    height: 36px;
+}
+
+.mf-selector-list li {
+    float: left;
+    height: 26px;
+    margin-right: 18px;
+    margin-bottom: 10px;
+}
+
+.mf-selector-list li.selected a {
+    color: #fff;
+    background: #e4393c;
+}
+
+.mf-selector-list li a {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 8px;
+    margin-top: 3px;
+    vertical-align: top;
+    color: #666;
+    text-decoration: none;
+}
+
+.mf-selector-line .s-main {
+    width: 100%;
+    overflow: hidden;
+}
+
+.mf-selector-list {
+    float: left;
+    width: 100%;
+    height: 36px;
+    overflow: hidden;
+}
+
+/*内容部分*/
+.ct-list .result {
+    margin-left: -20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ct-list .good {
+    float: left;
+    position: relative;
+    width: 172px;
+    height: 268px;
+    margin: 0 15px 15px 20px;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.ct-list .good .img {
+    position: relative;
+    overflow: hidden;
+}
+
+.ct-list .good .imgw {
+    display: block;
+    color: #333;
+    transition: opacity 0.2s ease;
+}
+
+.good .imgw {
+    display: block;
+    width: 172px;
+    height: 172px;
+}
+
+.ct-list .good .imgbarlst.z-hover {
+    bottom: -24px;
+    -webkit-transition: bottom 0.2s ease-in-out;
+    transition: bottom 0.2s ease-in-out;
+}
+
+.ct-list .good .imgbarlst {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #7f7f7f;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.ct-list .good .imgbarlst .l {
+    left: 0;
+}
+
+.ct-list .good .imgbarlst .add2cart {
+    background-color: #e31436;
+}
+.ct-list .good .imgbarlst .add2cart:hover,
+.ct-list .good .imgbarlst .r:hover
+{
+    text-decoration: underline;
+}
+
+.ct-list .good .imgbarlst .l, .ct-list .good .imgbarlst .r, .ct-list .good .imgbarlst .all {
+    position: absolute;
+    width: 50%;
+    border-left: 1px solid #fff;
+    margin-left: -1px;
+    color: #fff;
+}
+
+.ct-list .good .desc {
+    width: 152px;
+    padding: 2px 10px 0;
+}
+
+.ct-list .good .title {
+    line-height: 18px;
+    height: 36px;
+    overflow: hidden;
+    padding-bottom: 0;
+    border-bottom: none;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.ct-list .good .title a {
+    color: #333;
+}
+
+.ct-list .good .price {
+    height: 24px;
+    margin-top: 5px;
+    color: #e31436;
+}
+
+.ct-list .price .cur {
+    display: inline-block;
+    margin-right: 2px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    vertical-align: top;
+}
+
+.ct-list .combinedLabel {
+    display: inline-block;
+    margin-left: 3px;
+    padding: 0 4px;
+    border: 1px dotted #e31436;
+    font-size: 12px;
+    color: #e31436;
+    font-weight: bold;
+    line-height: 18px;
+}
+
+.ct-list .good del, .ct-list .good .comments {
+    float: left;
+    display: inline-block;
+    margin-right: 8px;
+    color: #999;
+    font-weight: 300;
+}
+
+.m-favrec {
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.newRecomWrap {
+    margin-top: 20px !important;
+}
+
+.newRecomTitle {
+    padding-right: 15px;
+    font-weight: bold;
+    height: 38px;
+    line-height: 38px;
+    color: #333;
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.newRecomTitle b {
+    padding-left: 12px;
+    font-size: 14px;
+    color: #999;
+}
+
+.m-reclst {
+    margin-left: -15px;
+}
+
+.newRecomItemWrap {
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    width: 204px;
+    height: 304px;
+    border: 1px solid #eaeaea;
+}
+
+.newRecomItemWrap .itemImg {
+    display: block;
+}
+
+.newRecomItemWrap .itemImg img {
+    width: 204px;
+    height: 204px;
+}
+
+.newRecomItemWrap .itemTitle {
+    margin-bottom: 9px;
+    padding: 0 15px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.newRecomItemWrap .itemTitle a {
+    line-height: 20px;
+    font-size: 12px;
+    color: #333;
+    font-weight: normal;
+    word-break: break-all;
+}
+
+.newRecomItemWrap .itemInfo {
+    padding: 0 15px;
+}
+
+.newRecomItemWrap .itemInfo .price {
+    line-height: 14px;
+    color: #e31436;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.newRecomItemWrap .itemInfo .price .marprice {
+    padding-left: 5px;
+    color: #999;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.newRecomItemWrap .itemInfo .comment {
+    display: block;
+    height: 24px;
+    line-height: 20px;
+    color: #999;
+    font-size: 12px;
+}
+

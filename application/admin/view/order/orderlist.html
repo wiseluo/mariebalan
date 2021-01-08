@@ -1,0 +1,213 @@
+
+<section class="scrollable padder">
+    <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+        <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a href="{:url('order/orderlist')}">订单管理</a></li>
+        <li><a >订单列表</a></li>
+    </ul>
+    <div class="m-b-md">
+        <h3 class="m-b-none">订单列表</h3>
+    </div>
+    <section class="panel panel-default">
+        <header class="panel-heading">删除将无法恢复，请谨慎你的操作！</header>
+        <div class="row text-sm wrapper">
+<!--            <div class="col-sm-3 m-b-xs">-->
+<!--                <select id="doval" class="input-sm form-control input-s-sm inline">-->
+<!--                    <option value="">操作类型</option>-->
+<!--                    <option value="dels">删除</option>-->
+<!--                    <option value="sure">确认</option>-->
+<!--                  -->
+<!--                </select>-->
+<!--                <button id="delusers" class="btn btn-sm btn-default">执行</button>-->
+<!--            </div>-->
+        <div class="col-sm-5">
+            <span class="input-group">
+            <select name="tid" id="tidone" style="width:120px;" class="input-sm form-control input-s-sm inline">
+                <option value="">订单状态</option>
+                <option value="1" {$state ==1 ? selected : '' }>待付款</option>
+                <option value="2" {$state ==2 ? selected : '' }>已付款,待发货</option>
+                <option value="3" {$state ==3 ? selected : '' }>待收货,已发货</option>
+                <option value="4" {$state ==4 ? selected : '' }>已收货,完成</option>
+                <option value="5" {$state ==5 ? selected : '' }>关闭</option>
+            </select>
+            <select name="tid" id="tidtwo" style="width:120px;" class="input-sm form-control input-s-sm inline">
+                <option value="">支付方式</option>
+                <option value="1" {$issure ==1 ? selected : '' }>支付宝</option>
+                <option value="2"{$issure ==2 ? selected : ''}>微信</option>
+            </select>
+            <input type="text" class="input-sm form-control" style="width:200px; margin-left:5px;" id="wk" value="{$wk}" placeholder="关键词">
+            <span class="input-group-btn">
+            <button class="btn btn-sm btn-default" id="searchs" onClick="window.document.location='/admin/order/orderlist?wk='+$('#wk').val()+'&issure='+$('#tidtwo').val()+'&state='+$('#tidone').val() " type="button">搜索</button>
+            </span>
+        </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light text-sm">
+                <thead>
+                <tr>
+                    <th width="20"><input type="checkbox"></th>
+                    <th class="th-sortable" data-toggle="class">订单编号 </th>
+                    <th>下单人昵称</th>
+                    <th>商家</th>
+                    <th>总金额</th>
+                    <th>应付金额</th>
+                    <th>物流费用</th>
+                    <th>优惠金额</th>
+                    <th>订单状态</th>
+                    <th>下单时间</th>
+                    <th width="120">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {foreach name="ordlist" key="k" item="v"}
+                <tr>
+                    <td width="20" ><input class="userid" type="checkbox" name="IDS[]" value="{$v.id}"></td>
+                    <td>{$v.number}</td>
+                    <td>{$v.nickname}</td>
+                    <td>浙江阿贝得工贸有限公司</td>
+                    <td>{$v.money}</td>
+                    <td>{$v.payment}</td>
+                    <td>{$v.logistics}</td>
+                    <td>{$v.discount}</td>
+                    <td>{$states[$v.state]}</td>
+                    <td>{:date('Y-m-d H:i:s',$v.addtime)}</td>
+                    <td width="120">
+                        <a onclick='$("#modal-form").modal("show");oid={$v.id};' class="btn btn-primary btn-xs">支付测试</a>
+                        <a href="/admin/order/orderdetails?id={$v.id}" class="btn btn-primary btn-xs edituser" title="编辑"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger btn-xs deluser" data-id="{$v.id}" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+                {/foreach} 
+               
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-sm-4 hidden-xs">
+                    
+                </div>
+                <div class="col-sm-4 text-center"> </div>
+                <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$page|raw}
+                    </ul>
+                  </div> 
+                <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </section>
+</section>
+
+
+<div class="modal fade" id="modal-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div style="padding:2px 20px;">
+                        <h3 class="m-t-none m-b">支付测试</h3>
+                        <form role="form" id="payinfo">
+                            <div class="form-group">
+                                <select class="form-control m-t parsley-validated" name="paytype">
+                                    <option value="1">支付宝</option>
+                                    <option value="2">微信</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>支付单号</label>
+                                <input type="text" name="payno" class="form-control">
+                            </div>
+                            <div style="text-align:center">
+                            <a class="btn btn-s-md btn-success" onclick="testpay()"><i class="fa fa-edit" style="margin-right:20px;"></i>确定</a>
+                            <a onClick="$('#modal-form').modal('hide');" class="btn btn-s-md btn-default">关闭</a>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script language="javascript">
+    var oid = 0;
+    $(function(){
+        $(".deluser").on("click",this,function(){
+            if(!confirm('你确定要删除吗？'))return false;
+            var id=$(this).attr("data-id");
+            $.ajax({
+                type:"get",
+                cache:false,
+                url:'/admin/order/deleteorder?id='+id,
+                success: function(data){
+                    if(data){
+                        layer.alert("删除成功");
+                    }
+                    window.location.reload();
+//                    if(data=='suss'){
+//                        $("#userlist"+id).hide();
+                }
+            })
+        })
+
+        $("#delusers").on("click",this,function(){
+            var doval=$("#doval").val();
+            if(doval==''){
+                layer.alert('请选择操作类型！');
+                return false;
+            }
+            if(doval=='dels'){
+                if(!confirm('你确定要批量删除吗？'))return false;
+            }
+            var IDS={};
+            var i=0;
+            $(".userid").each(function(index, element) {
+                if($(this).prop("checked")){
+                    i=i+1;
+                    IDS[i]=$(this).val();
+                }
+            });
+
+            if(i==0){
+                layer.alert("请选择用户后再操作！");return false;
+            }
+            $.ajax({
+                type:"POST",
+                cache:false,
+                url:'/admin/order/'+doval,
+                data:{IDS:IDS},
+                success: function(data){
+                    //console.log(data);
+                    window.location.reload();
+//                    if(data=='suss'){
+//                        $(".userid").each(function(index, element) {
+//                            if($(this).prop("checked")){
+//                                var id=$(this).val();
+//                                $("#userlist"+id).hide();
+//                            }
+//                        });
+//                    }
+                }
+            })
+        })
+
+    })
+function testpay(){
+    $.ajax({
+        type:'GET',
+        url:'/admin/order/testpay?id='+oid,
+        cache:false,
+        data:$('#payinfo').serialize(),
+        success: function(data){
+            $("#modal-form").modal("hide");
+        }
+    })
+}
+</script>

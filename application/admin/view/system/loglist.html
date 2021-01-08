@@ -1,0 +1,132 @@
+<script src="static/js/laydate.js"></script>
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a>系统设置</a></li>
+              <li><a >用户日志</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">用户日志</h3>
+              
+            </div>
+            <section class="panel panel-default">
+              <div class="row text-sm wrapper">
+
+<form class="form-inline" action="?mod=system&ac=loglist" method="post" style="padding:0 20px;">
+<div class="form-group">
+<input type="text" class="form-control" onclick="laydate()" id="sdate" name="sdate" placeholder="开始日期" value="{$sdate}">
+</div>
+<div class="form-group">
+<input type="text" class="form-control" id="edate" onclick="laydate()" name="edate" placeholder="结束日期" value="{$edate}">
+</div>
+<button type="submit" class="btn btn-default">搜索</button>
+                                        
+                </form>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                  <thead>
+                    <tr>
+                      <th width="20">NO</th>
+                      <th class="th-sortable" data-toggle="class" width="120">用户ID </th>
+                      
+                      <th>用户名</th>
+                      <th>访问</th>
+        
+                      <th width="140">日期</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+{foreach name="dbs" item="rs" key="k"}
+<tr id="grouplist{$rs['id']}">
+        <td>{$i=$page*$pagesize+$k+1}</td>
+        <td class="name">{$rs['uid']}</td>
+        <td>{$rs['username']}</td>
+        <td>{$rs['content']}</td>
+        <td>{$rs['addtime']=date('Y-m-d H:i',$rs['addtime'])}</td>
+</tr>
+{/foreach}
+
+</tbody>
+                </table>
+              </div>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm"></small> </div>
+                  <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$page|raw}
+                    </ul>
+                  </div>
+                </div>
+              </footer>
+            </section>
+</section>
+EOT;
+?>
+<script language="javascript">
+$(function(){
+	$(".delgroup").on("click",this,function(){
+		if(!confirm('你确定要删除吗？'))return false;
+		var id=$(this).attr("data-id");
+		$.ajax({
+			type:"GET",
+			cache:false,
+			url:"?mod=system&ac=grouplist&do=del&id="+id,
+			success: function(data){
+				if(data=='suss'){
+					$("#grouplist"+id).hide();
+				}
+			}
+		})
+	})
+	$("#delgroups").on("click",this,function(){
+		var doval=$("#doval").val();
+		if(doval==''){
+			alert('请选择操作类型！');
+			return false;
+		}
+		if(doval=='dels'){
+			if(!confirm('你确定要批量删除吗？'))return false;
+		}
+		var IDS={};
+		var i=0;
+		$(".groupid").each(function(index, element) {
+			if($(this).prop("checked")){
+				i=i+1;
+				IDS[i]=$(this).val();
+			}
+        });
+		if(i==0){
+			alert("请选择用户后再操作！");return false;
+		}
+		$.ajax({
+			type:"POST",
+			cache:false,
+			url:"?mod=system&ac=grouplist&do="+doval,
+			data:{IDS:IDS},
+			success: function(data){
+				alert(data);
+				window.location.reload();
+			}
+		})
+	})	
+	
+	$(".editgroup,#addgroups").on("click",this,function(){
+		var id=$(this).attr("data-id");
+		
+		$.ajax({
+			type:'GET',
+			url:'?mod=system&ac=groupadd&id='+id,
+			cache:false,
+			success: function(data){
+				$("#groupinfo").html(data);
+				$("#modal-form").modal("show");
+			}
+		})
+		
+	})
+})
+
+</script>

@@ -1,0 +1,160 @@
+
+.xian{
+    text-decoration: underline;
+}
+.h5{
+    font-weight: 400;
+}
+/* 缩进 */
+.indent{
+    text-indent: 20px;
+}
+.big_indent{
+    text-indent: 30px;
+}
+.ind_index h5{
+    font-size: 18px;
+    color: #444;
+
+}
+.ind_index p{
+
+    margin-left: 20px;
+}
+.ind_index a{
+    color: #333;
+    margin-left: 20px;
+}
+.ind_index a:hover{
+    text-decoration: none;
+    color: #333;
+}
+/* 左侧  */
+.mem_tit {
+    background: #ff3831;
+    padding-left: 15px;
+    padding-top: 6px;
+    height: 24px;
+}
+a {
+    color: #6c6c6c;
+    text-decoration: none;
+    cursor: pointer;
+}
+.fcff {
+    color: #fff;
+}
+
+.bold {
+    font-weight: bold;
+}
+.f14 {
+    font-size: 14px;
+}
+.bd {
+    border: 1px solid #D0D0D0;
+}
+.mt5 {
+    margin-top: 5px;
+}
+.bd_b {
+    border-bottom: 1px solid #D0D0D0;
+}
+.mem_tit1 {
+    background: #f1f1f1;
+    height: 26px;
+    border-top: 1px solid #fff;
+}
+
+.bd_fff {
+    padding-top: 8px;
+    font-size: 14px;
+}
+.mem_nav {
+  padding: 10px;
+}
+.mem_nav li {
+    min-height: 26px;
+    _height: 26px;
+    color: #666;
+    padding-left: 12px;
+    line-height: 26px;
+}
+.mem_nav li a {
+    color: #666;
+}
+
+/* 右侧 */
+.xy_right {
+    float: right;
+    width: 1030px;
+}
+.xy_conm_title {
+    color: #fd9c04;
+    text-indent: 12px;
+    line-height: 28px;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    margin-bottom: 12px;
+}
+
+.xy_conm_title {
+    height: 28px;
+    padding-top: 3px;
+    background: url(../../../images/help_title_bg.jpg) left top repeat-x;
+}
+.xy_help_tl {
+    color: #ff0000;
+    font-size: 12px;
+    line-height: 36px;
+    border-bottom: 1px dashed #e2e2e2;
+    text-indent: 12px;
+}
+.xy_help_txt {
+    width: 970px;
+    margin: 0px auto;
+}
+.xy_conm_txt {
+    width: 970px;
+    height: auto;
+    margin: 0px auto;
+    padding: 10px;
+    border: 1px solid #e2e2e2;
+    margin-bottom: 20px;
+}
+.xy_help_txt dl dt {
+    width: 35px;
+    height: 42px;
+    line-height: 42px;
+    float: left;
+    text-align: right;
+    font-size: 12px;
+    color: #ff0000;
+    margin-right: 10px;
+}
+.xy_help_txt dl dd {
+    float: left;
+    line-height: 42px;
+    width: 920px;
+    color: #8a8a8a;
+}
+select.hy_bido{
+    padding: 5px;
+}
+.hy_bido {
+    line-height: 40px;
+    border: #dbdbdb 1px solid;
+    height: 40px;
+}
+.f td{
+    padding: 10px 0;
+    text-align: center;
+    border: 1px solid #FFF;
+    border-bottom: 1px solid #e7e6e6 ;
+}
+.hytijiao{
+    color: #FFF;
+}
+#btnSubmit{
+    background-color: #CC0000;
+}

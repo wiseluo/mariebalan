@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>跨境洋货商城微信支付</title>
+    <script src="/static/index/plugins/jQuery/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+		#seconds{
+			color: red;
+		}
+		#content {
+			width: 1200px;
+			height: auto;
+			margin: 14px auto 0 auto;
+		}
+		#tipbox{
+			display:none;
+		}
+    </style>
+</head>
+<body>
+<div id="content" class=" ">
+<div class="" style="width: 100%;">
+    <section>
+        <div style="margin-top: 30px;display: flex;justify-content: space-between;">
+            <p style="font-size: 20px;">订单提交成功，请尽快付款!订单编号: <span id="number">{$orderlist['number']}</span>
+            </p><p>
+            应付金额<span style="font-size: 24px;color: #fe0b0b;" id="money">￥{$orderlist['payment']}</span>元
+        </p>
+        </div>
+        <p style="margin-top: 20px;" id="tip">二维码将在<span id="seconds">60</span>s后过期，过期后请重新刷新页面获取二维码</p>
+        <div style="height: 500px;margin-top: 30px; box-shadow: 4px 4px 8px 0px #e7e5e5;display: flex;justify-content: space-around;align-items: center;">
+            <p style="width: 390px;text-align: center;" id="paybox">
+                <img style="width: 100%;" src="/index/wxpay?id={$orderlist['id']}" alt="" id="qrcode"><br><span style="line-height:22px;">请用微信扫一扫二维码支付</span>
+            </p>
+            <p  style="width: 390px;text-align: center;" id="tipbox">
+            	<img src="/static/index/images/cg_password.png" /><span style="line-height:22px;font-size: 20px;font-weight: 600;">恭喜您，支付成功！</span>
+            </p>
+            <p style="width: 390px;text-align: center;">
+                <img src="/static/index/phone-bg.png" alt="">
+            </p>
+        </div>
+    </section>
+ </div>
+  </div>
+    <script>
+        var num=60;
+
+        var timeClock = setInterval(function(){
+            if (num > 0) {
+                num = num - 1;
+                $("#seconds").html(num)
+            }
+            else if (num == 0) {
+                $("#tip").html("二维码已失效,请刷新页面重新获取")
+                $("#qrcode").attr("src","/static/index/sxcode.png")
+                clearInterval(timeClock);
+            }
+        },1000)
+        var time = 0;
+        setInterval(function(){
+            time++;
+            if(time <= 60){
+                $.ajax({
+                    type: "POST",
+                    url: "/index/wxpay/wxpay_status", //+tab,
+                    dataType: "json",
+                    // order_sn:$("#order_sn").text()
+                    data:{number:$("#number").text()},
+                    success: function(data) {
+                        if(data.code == 2){
+							$("#tipbox").show();
+							$("#paybox").hide();
+							setTimeout(function(){
+								 window.open('/ucenter/order','_self')
+								},5000);
+                        }
+                        // if(data.code == -2){
+                        //     window.open('/','_self')
+                        // }
+                    }
+                });
+            }
+
+        },3000)
+    </script>
+
+</body>
+</html>

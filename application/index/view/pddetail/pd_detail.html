@@ -1,0 +1,748 @@
+<link rel="stylesheet" type="text/css" href="/static/index/css/module/shopCon/shopCon.css" />
+<style>
+	.ellipsis{width: auto;}
+    li.ellipsis img {
+        max-width: 100%;
+        height: auto;
+        float: left;
+    }
+	del{
+		text-decoration: line-through; 
+	}
+</style>
+<!-- 商品总容器 -->
+<div id="crumb-wrap" class="crumb-wrap">
+	<div class="w clearfix ">
+		<!-- 左部的 -->
+		<div class="crumb fl clearfix">
+			<div class="item first">
+				<a href="javascript:void(0)">{$Category['name']}</a>
+			</div>
+			<div class="item sep"> > </div>
+
+			<div class="item ellipsis">
+				<span>{$goods['title']}</span>
+			</div>
+		</div>
+		<!-- 右侧信息 -->
+
+	</div>
+
+	<div class="w">
+		<!-- 小商品图片 ##gu-pin 替换大商品 -->
+		<div class="product-intro clearfix">
+			<!-- 商品图片 -->
+			<div class=" preview-wrap">
+				<div class="preview" id="preview">
+					<div class="jqzoom main-img" style="width: 350px;height: 350px;">
+						{if $goods['pics']}
+						<img width="350" height="350" src="{$goods['pics'][0]}" class="getimg" jqimg="{$goods['pics'][0]}" alt="">
+						{else}
+						<img width="350" height="350" src="#" class="getimg" jqimg="" alt="该商品没有上传图片">
+						{/if}
+
+
+						<span></span>
+						<div class='the-big'><img src="" alt='大图'></div>
+					</div>
+					<!-- 底部的小图片 -->
+					<div class="spec-list">
+						<a href="javascript:void(0)" id="spec-forward" class="arrow-prev ad_go_ward disabled"><i class="iconfont  icon-zuoceyuanjian"></i></a>
+						<a href="javascript:void(0)" id="spec-backward" class="arrow-next ad_go_ward "><i class="iconfont icon-youceyuanjian"></i></a>
+						<div class="spec-items" id="spec-list " style="height: 60px;">
+							<ul class="lh clearfix">
+								{foreach name="goods.pics" item="pp" key="k"}
+								<li {if $k==0}class="img-hover" {/if}> <img width="50" height="50" src="{$pp}" data-img="{$pp}" jqimg="{$pp}"
+								 alt="">
+								</li>
+								{/foreach}
+
+
+							</ul>
+						</div>
+					</div>
+
+					<!--&lt;!&ndash; 底部关注 订阅 &ndash;&gt;-->
+					<!--<div class="preview-info">-->
+					<!--<div class="left-btns">-->
+					<!--<a href="javascript:void(0)" class="follow J-follow">-->
+					<!--<i class="iconfont icon-aixin1"></i>-->
+					<!--<span> 关注</span>-->
+					<!--</a>-->
+					<!--<a href="javascript:void(0)" class="follow J-follow">-->
+					<!--<i class="iconfont icon-fenxiang1 "></i>-->
+					<!--<span> 分享</span>-->
+					<!--</a>-->
+					<!--<a href="javascript:void(0)" class="follow J-follow ">-->
+					<!--<i class="iconfont icon-duibi"></i>-->
+					<!--&lt;!&ndash;<span> 对比</span>&ndash;&gt;-->
+					<!--</a>-->
+					<!--</div>-->
+					<!--<div class="right-btns">-->
+					<!--<a href="javascript:void(0)"> 举报  </a>-->
+					<!--</div>-->
+					<!--</div>-->
+				</div>
+			</div>
+			<!-- 中部的body -->
+			<div class="itemInfo-wrap">
+				<div class="sku-name" data-id="{$goods['id']}">
+					{$goods['title']}
+					<p>{$goods['title']}</p>
+				</div>
+				<div class="summary summary-first">
+					<div class="summary-price-wrap">
+						<div class="summary-price J-summary-price">
+							<div class="dt reprice">{$verdict_arr == 1 ? '促销价': '零 售 价'} </div>
+							<div class="dd">
+								<span class="p-price">
+									<span>￥</span>
+									<span style="color: #cc0000;" class="price retail_price" id="product_price" data-price="{$goods['minprice']}">{$interval_value}</span>
+								</span>
+								{if condition="$goods['price'] < $goods['original_price']"}
+								<del class="bx-price show reprice2" {$verdict_arr ==1 ? "style=''" : "style='display: none'"} >
+									<span>零 售 价</span>
+									<span>￥</span>
+									<span class="price original_price" data-minprice>{$goods['original_price']}</span>
+								</del>
+								{else /}
+								{/if}
+								<!--<del class="bx-price">-->
+									<!--<span>最高价</span>-->
+									<!--<span>￥</span>-->
+									<!--<span class="price maxprice" data-maxprice>{$goods['maxprice']}</span>-->
+								<!--</del>-->
+								<!-- 降价通知 -->
+								<a class="notice J-notify-sale" href="javascript:void(0)">降价通知</a>
+								<!-- 会员 -->
+							</div>
+						</div>
+<!--						<script>-->
+<!--							$(document).ready(function(){-->
+<!--								if ($('.retail_price').html() < $('.original_price').html()){-->
+<!--									alert(1);-->
+<!--								}else{-->
+<!--									alert(2);-->
+<!--								}-->
+<!--							});-->
+<!--						</script>-->
+						<div class="summary-info J-summary-info clearfix">
+							<div id="comment-count" class="comment-count item fl" clstag="shangpin|keycount|product|pingjiabtn_1">
+								<p class="comment">累计评价</p>
+								<a class="count J-comm-4690124" href="#none">{$goods['id']}</a>
+							</div>
+						</div>
+						<div id="summary-quan" class="li  clearfix p-choose hide">
+							<div class="dt">领　　券</div>
+							<div class="dd">
+								<dl>
+									<dt class="fl"></dt>
+									<dd class="lh">
+										<a class="J-open-tb" href="#none" title=" ">
+											<span class="quan-item"><s></s><b></b>
+												<span class="text">满120减10</span>
+											</span>
+										</a>
+									</dd>
+								</dl>
+							</div>
+						</div>
+						<!-- 促销信息 -->
+						<div id="J-summary-top" class="summary-top">
+							<div id="summary-promotion" class="summary-promotion" data-hook="hide" style="display: block;">
+								<div class="dt" style="line-height: 30px;">促 销</div>
+								<div class="dd J-prom-wrap p-promotions-wrap">
+									<div class="p-promotions">
+										<ins id="prom">
+											<div class="prom-item clearfix">
+												<em class="hl_red_bg">限制</em>
+												<em class="hl_red ">此价格不与套装优惠同时享受</em>
+											</div>
+										</ins>
+										<!-- <ins id="prom-one">
+                                            <div class="prom-item clearfix">
+                                                <em class="hl_red_bg">满减</em>
+                                                <em class="hl_red ">满499.00减50.00，满799.00减100.00</em>
+                                            </div>
+                                        </ins> -->
+										<div class=" view-all-promotions" style="visibility: hidden;display: none;">
+											<span class="prom-sum">展开促销</span>
+											<a href="#none" class="view-link"><i class="sprite-arr-close"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="summary-stock">
+					<div class="dt">保&nbsp;&nbsp;障</div>
+					<div class="dd clearfix">
+						<div class="store clearfix">
+							<div class="store-prompt " style="line-height: 22px;">
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="summary-stock">
+					<div class="dt">商&nbsp;&nbsp;家</div>
+					<div class="dd clearfix">
+						<div class="store clearfix">
+							<div style="line-height: 22px;">
+								浙江阿贝得工贸有限公司
+							</div>
+						</div>
+					</div>
+				</div>				<!-- 规格 颜色 -->
+				<div id="choose-attrs" class="">
+					<div id="choose-attr-8">
+						{foreach name="goods['attr']" item="attr" key="k1"}
+						<div class="li clearfix p-choose choose-attr-8">
+							<div class="dt">选择{$attr.spec_kind}</div>
+							<div class="dd">
+								{foreach name="attr['spec']" item="rs" key="k2"}
+								<div class="item selected" title="{$rs.avalue}" data-id="{$rs.id}">
+									<a href="#none">{$rs.avalue}</a>
+								</div>
+								{/foreach}
+							</div>
+						</div>
+						{/foreach}
+						<div id="pdprice" style="display: none;">
+
+						</div>
+					</div>
+					{if $goods.attr}
+					<div id="choose-results" class="li clearfix" style="display:block">
+						<div class="dt choosespec">请选择规格：</div>
+						<div class="dd" style="line-height: 22px;">
+
+						</div>
+					</div>
+					{/if}
+					<div id="choose-btns" class="choose-btns clearfix">
+						<div class="choose-amount">
+							<div class="wrap-input">
+								<input class="text buy-num" onkeyup='this.value=this.value.replace(/\D/gi,"")' id="buy-num" value="1">
+								<a class="btn-reduce disabled" href="#none">-</a>
+								<a class="btn-add" href="#none">+</a>
+							</div>
+						</div>
+						<div class="kucun">
+							库存：<em>{$stock}</em>
+						</div>
+						<a href="#none" id="btn-heyue" class="btn-special1 btn-lg" style="display:none;">选择号码和套餐</a>
+						<input type="hidden" value="" id="f_con">
+						<a id="InitCartUrl" href="javascript:void(0)" class="btn-special1 btn-lg">加入购物车</a>
+						<a href="#none" id="btn-onkeybuy" class="btn-special2 btn-lg" style="display:none;">一键购</a>
+						<a href="#none" id="btn-notify" class="J-notify-stock btn-special3 btn-lg notify-stock" style="display:none;">到货通知</a>
+						<div class=" contact fr clearfix">
+							<div class="J-hove-wrap EDropdown fr">
+								<div class="item gz_con_item">
+									<a href="javascript:void(0)" class="follow J-follow-shop">
+										{if $goods['favorite'] == 1}
+										<i class="fa fa-star "></i>
+										<span>取消收藏 </span>
+										{else}
+										<i class="fa fa-star-o "></i>
+										<span>收藏商品 </span>
+										{/if}
+
+									</a>
+								</div>
+								<!-- <div class="item">
+                                    <div class="name">
+                                        <a href="javascript:void(0)">
+                                            酒品类专营店
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="item this_shop_img">
+                                    <a  href="javascript:void(0)" class=" ">
+                                        <i class="iconfont ">&#xe611;</i>
+                                       <span>联系客服</span>
+                                    </a>
+                                </div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 右部的浏览记录 -->
+			<div class="track " id="track">
+				<div class="extra clearfix">
+					<div class="track-tit">
+						<h3>大家都在看</h3>
+						<span></span>
+					</div>
+					<div class="track-con">
+						<ul>
+							{foreach name="hotpd" item="rs" key="k"}
+							<li>
+								<a href="/index/pddetail?id={$rs['id']}">
+									<img height="100" src="{$rs['pics'][0]}" title="{$rs['title']}">
+									<p class=" "> &yen; {$rs['price']}</p>
+								</a>
+							</li>
+							{/foreach}
+
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 底部详情 -->
+	<div class="w clearfix">
+		<!--左侧栏-->
+		<div class="aside">
+			<div class="xq_cn_a ">
+				<div class="mt xq_cn_tile">
+					<h3>相关分类</h3>
+				</div>
+				<div class="xq_cn_n">
+					<ul id="ANovel">
+						{foreach name="hottype" item="rs" key="k"}
+						<li><a href="/index/pdlist?catid={$rs['id']}" target="_blank">{$rs['name']}</a></li>
+						{/foreach}
+
+					</ul>
+				</div>
+			</div>
+			<div class="xq_cn_a ">
+				<div class="mt xq_cn_tile">
+					<h3>同类推荐</h3>
+				</div>
+				<div class="xq_cn_n">
+					<ul id="OtherGoods">
+						{foreach name="simipds" item="rs" key="k"}
+						<li><a href="/index/pddetail?id={$rs['id']}" target="_blank">{$rs['title']|substr=0,18}</a></li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+			<div class="xq_cn_a">
+				<div class="mt xq_cn_tile">
+					<h3>一周热销</h3>
+				</div>
+				<div class="list_yi_n">
+					<div class="f-loading" id="WeekSales_loading" style="display: none;"></div>
+					<ul id="WeekSales">
+						{foreach name="weekpds" item="rs" key="k"}
+						<li class="listc">
+							<a href="/index/pddetail?id={$rs['id']}">
+								<dl class=" clearfix">
+									<dt><img src="{$rs['pics'][0]}"></dt>
+									<dd class="li_name">{$rs['title']}</dd>
+									<dd><b>¥{$rs['price']}</b></dd>
+								</dl>
+							</a>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--  -->
+
+
+		<!-- 右侧栏 -->
+		<div class="detail">
+			<div id="detail" class="ETab">
+				<div class="tab-main large clearfix">
+					<ul class="in_title_head ">
+						<li class="current">商品介绍</li>
+						<li>规格包装</li>
+						<li>售后保障</li>
+						<li>商品评价</li>
+					</ul>
+					<!-- 快捷购买 -->
+					<div class="extra">
+						<div class="item addcart-mini">
+							<div class="J-addcart-mini EDropdown">
+								<div class="inner">
+
+									<div class="content hide ">
+										<div class="mini-product-info">
+											<div class="p-img fl">
+												<img src="http://img11.360buyimg.com/n4/jfs/t3835/235/2119550387/408376/469ce48e/5850e518Nf3c250fd.jpg"
+												 data-img="1" height="100" width="100">
+											</div>
+											<div class="p-info lh">
+												<div class="p-name">【京东超市】哈尔滨（Harbin）冰爽啤酒 330ml*4*6听 整箱装</div>
+												<div class="p-price">
+													<strong class="J-p-1448361">￥49.00</strong> <span>X <span class="J-buy-num">1</span></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 主体内容 -->
+				<div class="tab-con">
+					<div class="pa_con">
+						<div class="p-parameter">
+
+						</div>
+						<!-- 品质保证 -->
+						<div id="quality-life" class="quality-life" style="display:none">
+							<div class="q-logo">
+								<img src="http://img20.360buyimg.com/da/jfs/t2077/314/2192172483/11044/f861504a/56ca6792N64e5eafc.png" alt="品质生活">
+							</div>
+							<ul class="quality-icon">
+								<li class="J-ql-iframe ql-ico-1" style="display:none" data-title="质量承诺">
+									<a href="#none"><i></i><span>质量承诺</span></a>
+								</li>
+								<li class="ql-ico-5" style="display:none">
+									<a href="#none"><i></i><span>耐久性标签</span></a>
+								</li>
+								<li class="ql-ico-3" style="display:none">
+									<a href="#none"><i></i><span>吊牌</span></a>
+								</li>
+								<li class="ql-ico-4" style="display:none">
+									<a href="#none"><i></i><span>质检报告</span></a>
+								</li>
+								<li class="ql-ico-2" style="display:none">
+									<a href="#none"><i></i><span>3C证书</span></a>
+								</li>
+								<li class="ql-ico-10" style="display:none">
+									<a href="#none"><i></i><span>商家资质</span></a>
+								</li>
+							</ul>
+						</div>
+						<div id="J-detail-banner"></div>
+						<div class="detail-content clearfix">
+							<div class="detail-content-wrap">
+								<div class="detail-content-item">
+									<div id="activity_header" clstag="shangpin|keycount|product|activityheader"></div>
+									<div id="J-detail-content">
+										<div class="content_tpl">
+											{$goods['content']}
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="clb"></div>
+					</div>
+					<!-- 评价 -->
+					<div class="pa_con ">
+						<div class="Ptable">
+							<div class="Ptable-item">
+								<h3></h3>
+								<dl>
+									<!-- <dt>品牌</dt><dd>哈尔滨</dd>
+                                        <dt>国别</dt><dd>中国</dd>
+                                        <dt>酒精度</dt><dd> 3.3%vol </dd>
+                                        <dt>原料</dt><dd>麦芽，小麦，糖，酵母，啤酒花和水</dd>
+                                        <dt>原麦汁浓度</dt><dd>9.0°P</dd>
+                                        <dt>保质期</dt><dd>一年</dd>
+                                        <dt>类别</dt><dd>黄啤</dd>
+                                        <dt>适用人群</dt><dd> 成年人 </dd>
+                                        <dt>储存方法</dt><dd>5°C~25°C，严防日晒、雨淋</dd>
+                                        <dt>包装</dt><dd>整箱</dd> -->
+								</dl>
+							</div>
+						</div>
+					</div>
+					<!--售后服务-->
+					<div class="pa_con ">
+
+						<!-- 售后的服务 -->
+						<div id="guarantee" class="m-content guarantee">
+							<div class="mt">
+								<h3>售后保障</h3>
+							</div>
+							<div class="mc">
+								<div class="item-detail item-detail-copyright">
+									<div class="serve-agree-bd">
+										<dl>
+											<dt>
+												<i class="goods"></i>
+												<strong>厂家服务</strong>
+											</dt>
+											<dd>
+												本产品全国联保，享受三包服务，质保期为：无质保 <br>
+											</dd>
+											<dt>
+												<i class="goods"></i>
+												<strong>正品行货</strong>
+											</dt>
+											<dd>
+												商城向您保证所售商品均为正品行货，本商城开具机打发票或电子发票。<br>
+											</dd>
+										</dl>
+									</div>
+									<!-- 权利说明 -->
+									<div class="state" id="state">
+										<strong>权利声明：</strong>
+										<br>
+										上的所有商品信息、客户评价、商品咨询、网友讨论等内容，是重要的经营资源，未经许可，禁止非法转载使用。
+										<p><b>注：</b>本站商品信息均来自于合作方，其真实性、准确性和合法性由信息拥有者（合作方）负责。本站不提供任何保证，并不承担任何法律责任。</p>
+										<br>
+										<strong>价格说明：</strong>
+										<br>
+										<p><b>聚达价：</b>聚达价为商品的销售价，是您最终决定是否购买商品的依据。</p>
+										<p><b>划线价：</b>商品展示的划横线价格为参考价，该价格可能是品牌专柜标价、商品吊牌价或由品牌供应商提供的正品零售价（如厂商指导价、建议零售价等）
+											或该商品在平台上曾经展示过的销售价；
+											由于地区、时间的差异性和市场行情波动，品牌专柜标价、商品吊牌价等可能会与您购物时展示的不一致，该价格仅供您参考。
+										</p>
+										<p><b>折扣：</b>如无特殊说明，折扣指销售商在原价、或划线价（如品牌专柜标价、商品吊牌价、厂商指导价、厂商建议零售价）
+											等某一价格基础上计算出的优惠比例或优惠金额；如有疑问，您可在购买前联系销售商进行咨询。
+										</p>
+										<p><b>异常问题：</b>商品促销信息以商品详情页“促销”栏中的信息为准；商品的具体售价以订单结算页价格为准；
+											如您发现活动商品售价或促销信息有异常，建议购买前先联系销售商咨询。
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--商品评价 家用电器展示一个图文的字段 -->
+					<div class="pa_con ">
+
+						<div id="comment" class="m m-content comment">
+							<!-- 头部 -->
+							<div class="mt">
+								<h3>商品评价</h3>
+								<div class="comment-percent-thader">
+									<strong class="percent-tit bean_all">好评度</strong>
+									<div class="percent-con bean_all">
+
+									</div>
+								</div>
+							</div>
+							<div class="mc">
+								<!-- &lt;!&ndash; 总评分 &ndash;&gt;-->
+								<!--<div class="comment-info clearfix">-->
+								<!--<div class="comment-percent">-->
+								<!--<strong class="percent-tit">好评度</strong>-->
+								<!--<div class="percent-con">-->
+								<!--5<span>%</span>-->
+								<!--</div>-->
+								<!--</div>-->
+								<!--&lt;!&ndash; 类别 &ndash;&gt;-->
+								<!--&lt;!&ndash; <div class="percent-info">-->
+								<!--<div class="tag-list">-->
+								<!--<span>泡沫丰富(6)</span>-->
+								<!--<span>麦香浓郁(5)</span>-->
+								<!--<span>不错的啤酒(5)</span>-->
+								<!--<span>酒精度高(4)</span>-->
+								<!--<span>麦芽味浓(4)</span>-->
+								<!--<span>麦芽香(4)</span>-->
+								<!--<span>德国啤酒好(3)</span>-->
+								<!--<span>味道不错(3)</span>-->
+								<!--<span>黑啤好喝(3)</span>-->
+								<!--<span>口味不错(2)</span>-->
+								<!--</div>-->
+								<!--</div> &ndash;&gt;-->
+								<!--</div> -->
+
+								<!-- 内容栏 -->
+								<div class="comments-list ETab">
+									<div class="tab-main small">
+										<ul class="filter-list" style="height: 28px;">
+											<li class="active" data-value="0" style="">
+												<a href="javascript:void(0)">
+													全部评价
+													<!--(<em>25</em>+)-->
+												</a>
+											</li>
+											<li class="" data-value="1">
+												<a href="javascript:void(0)">
+													好评
+												</a>
+											</li>
+											<li class="" data-value="2" style="">
+												<a href="javascript:void(0)">
+													晒图
+												</a>
+											</li>
+											<li class="" data-value="3">
+												<a href="javascript:void(0)">
+													追评
+												</a>
+											</li>
+											<li class="" data-value="4">
+												<a href="javascript:void(0)">
+													中评
+												</a>
+											</li>
+											<li class="" data-value="5">
+												<a href="javascript:void(0)">
+													差评
+												</a>
+											</li>
+										</ul>
+										<!-- <div class="extra">
+                                               <div class="sort-select">
+                                                   <div class="current">
+                                                    <span> 推荐排序 </span>
+                                                       <i class="iconfont icon-xia-copy "></i>
+                                                   </div>
+                                                   <div class="others">
+                                                       <div class="curr">
+                                                           <span>推荐排序</span>
+                                                           <i class="iconfont icon-shang "></i>
+                                                       </div>
+                                                       <ul>
+                                                           <li>推荐排序</li>
+                                                           <li>时间排序</li>
+                                                       </ul>
+                                                   </div>
+                                               </div>
+                                           </div> -->
+									</div>
+									<div class="tab-con">
+										<!-- 内容主题 -->
+										<div id="comment_1">
+											<div class="comment_List">
+
+											</div>
+											<!--  底部分页 -->
+											<div class="com-table-footer">
+												<div id="page_turn"></div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<!--商品评价-->
+							<div class="pa_con ">
+
+							</div>
+							<!--本店好评商品-->
+							<div class="pa_con ">
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- 图片放大后显示的内容 -->
+<div class="ui-dialog" id="ui-dialog" style="display: none;">
+	<div class="ui-dialog-title">
+		<h5> 大图 </h5>
+		<h5 style="float: right;cursor:pointer;" id="ckgclose"> 关闭</h5>
+		<span class="clear_all"> <i class="icon-cuowu iconfont"></i> </span>
+	</div>
+	<div class="ui-dialog-content">
+		<div class="preview-layer">
+			<div class="layer-con">
+				<div class="layer-img">
+					<span></span>
+					{if $goods['pics']}
+					<img src="{$goods['pics'][0]}" class="" alt="" id="popup-big-img">
+					{else}
+					<img src="#" alt="该商品没有上传图片">
+					{/if}
+					<!-- <img src="https://img14.360buyimg.com/n1/s546x546_jfs/t2635/301/2849875554/458209/97eb31df/5774efa8Nb8cdd1a9.jpg" class=""  alt="" id="popup-big-img" > -->
+				</div>
+				<div class="layer-side">
+					<h3 class="pro-name">{$goods['title']}</h3>
+					<div class="pro-price">
+						尽 情 价
+						<span class="">{$goods['price']}</span>
+					</div>
+					<div class="side-list" id="side-list">
+						<ul class="">
+							{foreach name="goods['pics']" item="pp" key="k"}
+							<li {if $k==0}class="img-hover" {/if}> <img src="{$pp}" data-img="{$pp}" data-big-img="{$pp}" alt="">
+							</li>
+							{/foreach}
+							<!-- <li class="img-hover"> 
+                            <img
+                                    src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                    data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                    data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt="">
+                        </li>
+                        <li>
+                            <img src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt="">
+                        </li>
+                        <li>
+                            <img src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt="">
+                        </li>
+                        <li>
+                            <img src="http://img11.360buyimg.com/n5/jfs/t4987/207/180565397/628327/8120a97a/58dc6578N2dbc9083.jpg"
+                                 data-img="http://img11.360buyimg.com/n1/jfs/t4987/207/180565397/628327/8120a97a/58dc6578N2dbc9083.jpg"
+                                 data-big-img="http://img11.360buyimg.com/n1/jfs/t4987/207/180565397/628327/8120a97a/58dc6578N2dbc9083.jpg"
+                                 alt=""></li>
+                        <li>
+                            <img src="http://img11.360buyimg.com/n5/jfs/t4759/286/178831760/257993/d079b197/58dc6576Necaab11c.jpg"
+                                 data-img="http://img11.360buyimg.com/n1/jfs/t4759/286/178831760/257993/d079b197/58dc6576Necaab11c.jpg"
+                                 alt=""></li>
+                        <li><img src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt=""></li>
+                        <li>
+                            <img src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt="">
+                        </li>
+                        <li><img src="http://img11.360buyimg.com/n5/jfs/t4903/305/183483214/321059/91bb38f9/58dc6576Nedff4597.jpg"
+                                 data-img="http://img11.360buyimg.com/n1/jfs/t4903/305/183483214/321059/91bb38f9/58dc6576Nedff4597.jpg"
+                                 alt=""></li>
+                        <li>
+                            <img src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt="">
+                        </li>
+                        <li>
+                            <img src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt="">
+                        </li>
+                        <li>
+                            <img src="https://img12.360buyimg.com/n5/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-img="https://img12.360buyimg.com/n1/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 data-big-img="http://img12.360buyimg.com//n0/jfs/t2980/224/1098086213/458686/99785fc3/5774efa2N720255ad.jpg"
+                                 alt="">
+                        </li> -->
+
+						</ul>
+						<div class="list-page">
+							<a href="javascript:void(0)" class="prev disabled"><i class="icon-xiaoyuhao iconfont "></i></a>
+							<a href="javascript:void(0)" class="next "><i class="icon-dayuhao  iconfont "></i></a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$('#ckgclose').click(function () {
+		$('#ui-dialog').attr('style','display: none;');
+	})
+</script>
+<script type="text/javascript" src="/static/index/plugins/jquery-zoom/jquery.zoom.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jquery-anoslide/jquery.anoslide.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jquery-lazyload/jquery.lazyload.js"></script>
+<script type="text/javascript" src="/static/index/js/module/shopCon/shopCon.js"></script>

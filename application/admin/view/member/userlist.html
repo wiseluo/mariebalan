@@ -1,0 +1,214 @@
+<section class="scrollable padder">
+    <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+        <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a href="{:url('member/userlist')}">会员管理</a></li>
+        <li><a >会员列表</a></li>
+    </ul>
+    <div class="m-b-md">
+        <h3 class="m-b-none">会员列表</h3>
+
+    </div>
+    <section class="panel panel-default">
+        <header class="panel-heading">删除将无法恢复，请谨慎你的操作！</header>
+        <div class="row text-sm wrapper">
+<!--            <div class="col-sm-3 m-b-xs">-->
+<!--                <select id="doval" class="input-sm form-control input-s-sm inline">-->
+<!--                    <option value="">操作类型</option>-->
+<!--                    <option value="dels">删除</option>-->
+<!--                    <option value="flag">审核</option>-->
+<!--                    <option value="canelflag">取消审核</option>-->
+<!--                </select>-->
+<!--                <button id="delusers" class="btn btn-sm btn-default">执行</button>-->
+<!--            </div>-->
+    <div class="col-sm-5">
+<span class="input-group">
+<select name="tid" id="vip" style="width:120px;" class="input-sm form-control input-s-sm inline">
+    <option value="">会员等级</option>
+    {volist name='vips' id='v' key='k'}
+    <option value="{$k}" {if($vip == $k)}selected="selected"{/if}>{$v}</option>
+    {/volist}
+</select>
+<input type="text" class="input-sm form-control" style="width:200px; margin-left:5px;" id="wk" value="{$wk}" placeholder="关键词">
+                    <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default" id="searchs" onClick="window.document.location='/admin/member/userlist?wk='+$('#wk').val()+'&vip='+$('#vip').val()" type="submit">搜索</button>
+                    </span>
+    </div>
+        </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light text-sm">
+                <thead>
+                <tr>
+<!--                    <th width="20"><input type="checkbox"></th>-->
+                    <th class="th-sortable" data-toggle="class">昵称 </th>
+                    <th>手机</th>
+                    <th>性别</th>
+                    <th>等级</th>
+                    <th>积分</th>
+                    <th>余额</th>
+                    <th>日期</th>
+                    <th width="120">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name='users' id='val' key='k'}
+                <tr id="{$val.id}" class="dbedituser" data-id="{$val.id}">
+<!--                    <td width="20" ><input class="userid" type="checkbox" name="IDS[]" value="{$val.id}"></td>-->
+                    <td class="payusername">{$val.nickname}</td>
+                    <td class="payname">{$val.phone}</td>
+                    <td>{if $val.sex === 1}男{else/}女{/if}</td>
+                    <td>{$vips[$val.vip_id]}</td>
+                    <td>{$val.integral}</td>
+                    <td>{$val.money}</td>
+                    <td>{$val.create_time}</td>
+                    <td width="120">
+<!--                        <a  class="btn btn-primary btn-xs edituser" data-id="{$val.id}"><i class="fa fa-edit"></i></a>-->
+                        <a data-id="{$val.id}" class="btn btn-danger btn-xs deluser"><i class="fa fa-trash-o"></i></a>
+
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+<!--                <div class="col-sm-4 hidden-xs">-->
+<!--                    <button class="btn btn-sm btn-danger" id="adduser" data-id="0">新增</button>-->
+<!--                </div>-->
+                <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                        {$users->render()|raw}
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </section>
+</section>
+
+<div class="modal fade" id="modal-form">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <form role="form" id="userinfo">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--查看图片 -->
+<div class="modal fade" id="modal-view" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div style="padding:2px 20px;">
+                        <div >
+                            <h4 class="m-t-none m-b">查看图片</h4>
+                            <a  style="position: absolute;cursor:pointer;top:15px;right:25px"><i title="关闭" onclick="closeView()" class="fa  fa-times fa-lg" style="color: #000"></i></a>
+                        </div>
+                    </div>
+                    <hr style="margin: 0;">
+                    <div style="padding:10px 20px;">
+                        <img id="viewpic" src="" style="width:100%">
+                    </div>
+                    <hr style="margin: 0;">
+                    <div style="text-align:right;padding-right: 20px">
+                        <a onclick="closeView()" class="btn btn-primary" style="margin-top: 10px">关闭</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script language="javascript">
+    $(function(){
+
+        $(".deluser").on("click",this,function(){
+            if(!confirm('你确定要删除吗？'))return false;
+            var id=$(this).attr("data-id");
+            $.ajax({
+                type:"get",
+                cache:false,
+                url:'/admin/member/userdelete?id='+id,
+                success: function(data){
+                    if(data){
+                        alert("删除成功");
+                    }
+                    window.location.reload();
+//                    if(data=='suss'){
+//                        $("#userlist"+id).hide();
+                }
+            })
+        })
+        $("#delusers").on("click",this,function(){
+            var doval=$("#doval").val();
+            if(doval==''){
+                alert('请选择操作类型！');
+                return false;
+            }
+            if(doval=='dels'){
+                if(!confirm('你确定要批量删除吗？'))return false;
+            }
+            var IDS={};
+            var i=0;
+            $(".userid").each(function(index, element) {
+                if($(this).prop("checked")){
+                    i=i+1;
+                    IDS[i]=$(this).val();
+                }
+            });
+            if(i==0){
+                alert("请选择用户后再操作！");return false;
+            }
+            $.ajax({
+                type:"POST",
+                cache:false,
+                url:'/admin/member/'+doval,
+                data:{IDS:IDS},
+                success: function(data){
+//                        alert(data);
+                        window.location.reload();
+//                    if(data=='suss'){
+//                        $(".userid").each(function(index, element) {
+//                            if($(this).prop("checked")){
+//                                var id=$(this).val();
+//                                $("#userlist"+id).hide();
+//                            }
+//                        });
+//                    }
+                }
+            })
+        })
+
+        $("#adduser,.edituser").on("click",this,function(){
+
+            var id=$(this).attr("data-id");
+            $.ajax({
+                type:'GET',
+                url:'/admin/member/useradd?id='+id,
+                cache:false,
+                success: function(data){
+                    $("#userinfo").html(data);
+                    $("#modal-form").modal("show");
+                }
+            })
+        })
+
+        $(".dbedituser").on("dblclick",this,function(){
+            $(this).find(".edituser").trigger("click");
+        })
+    })
+//    function seachUser(){
+//        if($('#wk').val()!='' || $('#tid').val()!=''){
+//            window.document.location='/admin/member/search&wk='+$('#wk').val()+'&tid='+$('#tid').val();
+//        }
+//    }
+</script>

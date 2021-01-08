@@ -1,0 +1,58 @@
+
+<div class="form-group" {if $info['id']!=''} style="display: none" {/if}>
+    <input type="hidden" name="id" value="{$info['id']}" id="uid"/>
+    <select class="form-control m-t parsley-validated validated" name="info[fid]" >
+<option value="0">选择省份</option>
+{if(is_array($dbs))}
+{foreach name='dbs' item='rs' key='k'}
+
+<option value="{$rs['id']}" {if($info['fid']==$rs['id'])}selected="selected"{/if}>{$rs['name']}</option>
+
+{/foreach}
+{/if}
+</select>
+</div>
+
+    <div class="form-group">
+        <label>名称</label>
+        <input type="text" name="info[name]" class="form-control" value="{$info['name']}" id="names">
+    </div>
+
+    <div class="form-group">
+        <label>排序</label>
+        <input type="text" name="info[sort]" class="form-control" value="{$info['sort']}" id="sorts">
+    </div>
+    <div style="text-align:center">
+<a class="btn btn-s-md btn-success" onclick="sumbitMenuInfo()"><i class="fa fa-edit" style="margin-right:20px;"></i>确定</a>
+<a onClick="$('#modal-form').modal('hide');" class="btn btn-s-md btn-default">关闭</a>
+</div>
+
+<script>
+function sumbitMenuInfo(){
+	var id = $("#uid").val();
+	var info = {};
+	info['fid']  = $(".validated").val();
+	info['name']  = $("#names").val();
+	info['sort']  = $("#sorts").val();
+	if($("#names").val() == ''){
+		alert("请填写名称");
+		return false;
+	}
+	$.ajax({
+		type:"POST",
+		url:"/admin/system/add?id"+id,
+		data:{
+			id : id,
+			info:info,
+		},
+		success: function(data){
+			window.location.reload();
+//			if(data=='suss'){
+//				window.location.reload();
+//			}else{
+//				alert(data);
+//			}
+		}
+	})
+}
+</script>

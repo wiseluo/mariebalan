@@ -1,0 +1,110 @@
+<link rel="stylesheet" type="text/css" href="/static/admin/css/order.css">
+<section class="scrollable padder">
+    <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+        <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a href="{:url('order/orderlist')}">订单管理</a></li>
+        <li><a >订单详情</a></li>
+    </ul>
+   
+    <section class="panel panel-default">
+     	<div class="orderdetail">
+     		<!-- <button onclick="javascript:window.location.href='/admin/order/addorupdate?id={$order.id}'" class="buttonorder">修改订单</button> -->
+     		<h2>基本信息</h2>
+     		<ul class="listone">
+                <li><label>名字:</label><span>{$order.user.name}</span></li>
+     			<li><label>电话:</label><span>{$order.user.phone}</span></li>
+     			<li><label>应付金额:</label><span>{$order.payment}元</span></li>
+     			<li><label>订单状态:</label><span>{$states[$order.state]}</span></li>
+     			<li><label>下单时间:</label><span>{:date('Y-m-d H:i:s',$order.addtime)}</span></li>
+     			<li><label>支付时间:</label></label><span>{:date('Y-m-d H:i:s',$order.paytime)}</span></li>
+     			<li><label>支付方式:</label><span>{if $order.paytype == 1}支付宝{else if $order.paytype == 2}微信{/if}</span></li>
+     		</ul>
+     		<h2>收货信息</h2>
+     		<ul class="listtwo">
+     			<li style="width: 30%;"><label>收货人:</label><span>{$order.address.consignee}</span></li>
+     			<li style="width: 33%;"><label>联系方式:</label><span>{$order.address.phone}</span></li>
+     			<li><label>收货地址:</label><span>{$order.address.province}{$order.address.city}{$order.address.town}{$order.address.address}</span></li>
+     			<li><label>邮编:</label><span>{$order.address.zipcode}</span></li>
+     			<li><label>配送方式:</label><span>{$order.address.psmode}</span></li>
+     			<li><label>备注:</label></label><span>{$order.address.remark}</span></li>
+     		</ul>
+     		<h2>商品信息</h2>
+     		<div class="table-responsive">
+	            <table class="table table-striped b-t b-light text-sm tableproduct">
+	                <thead>
+	                <tr>
+	                    <th width="40%">商品</th>
+	                    <th width="15%">规格属性</th>
+	                    <th width="10%">数量</th>
+	                    <th width="15%">单品价格</th>
+	                    <th width="10%">单品小计</th>
+	                </tr>
+	                </thead>
+	                <tbody>
+
+                    {foreach name="order.goods" key="k" item="v"}
+	                <tr>
+	                    <td><img src="{$v.pic}.thumb.jpg" width="40"><a href="">{$v.title}</a></td>
+	                    <td>{$v.attrs}</td>
+	                    <td>{$v.num}</td>
+	                    <td>{$v.price}</td>
+	                    <td class='order_money'>{:bcmul($v.price,$v.num,2)}</td>
+	                </tr>
+	               {/foreach}
+
+	                </tbody>
+	                <tfoot><td colspan="6" align="right" id='orderallmoney'>订单总额：{$order.money}</td></tfoot>
+	            </table>
+            </div>
+            <!-- <h2>费用信息<samp class="Modification" data-id='{$order.id}'><i class="fa fa-edit"></i>修改费用</samp></h2>
+            <ul class="listthree">
+     			<li><label>优惠:</label><span>{$order.discount}</span></li>
+     			<li><label>运费:</label><span>{$order.logistics}</span></li>
+                <li><label>订单总额:</label><span>{$order.money}</span></li>
+     			<li><label>应付:</label><span class="lightcolor">{$order.payment}</span></li>
+     		</ul> -->
+     	</div>
+    </section>
+</section>
+
+<div class="modal fade" id="modal-form">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-body">
+               
+                    <form role="form" id="priceOrder">
+                    </form>
+              
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type="text/javascript">
+$(function(){
+      $(".Modification").on("click",this,function(){
+        var orderid = $(this).data('id');
+
+        $.ajax({
+            type:'post',
+            url:"/admin/order/updateprice?id="+orderid,
+            cache:false,
+            success: function(data){
+                //console.log(data);
+                $("#priceOrder").html(data);
+                $("#modal-form").modal("show");
+            }
+        })
+    })
+
+    //订单商品总价格
+    /*var ordermoney = 0;
+    $('.order_money').each(function(){
+        ordermoney += parseInt($(this).text());
+    });*/
+    
+
+})
+</script>

@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="/static/index/css/module/help/help.css">
+<style>
+	div,td,b{list-style-type: none;margin: 0;padding: 0;}
+	input {
+    width: 74%;
+    box-sizing: border-box;
+    padding: 10px;
+    outline: none;
+    margin-bottom: 4px;
+    border-radius: 5px; }
+	input, textarea {
+    border: 1px solid #ddeafb; }
+</style>
+
+    <div class="wap clearfix" style="margin-top: 15px;">
+        <!-- 帮助中心左侧 -->
+        {include file="index/helpleft"/}
+        <!-- 帮助中心右侧 -->
+        <div class="xy_right">
+
+            <table width="1030" border="0" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="f16">
+                        <table width="1030" border="0" cellspacing="0" cellpadding="0">
+                            <tbody><tr>
+                                <td width="150" height="40"   align="center"><a href="complain.html"></a><b>发起投诉</b></td>
+                                <td width="150" align="center"><a href="complain_list.html"><b>投诉记录</b></a></td>
+                                <td width="730">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="150" height="2" bgcolor="#fc4501"></td>
+                                <td width="150" align="right" bgcolor="#e3e3e3"></td>
+                                <td width="730" bgcolor="#e3e3e3"></td>
+
+                            </tr>
+                            </tbody></table>
+                    </td>
+                </tr>
+                </tbody></table>
+            <table width="1028" border="0" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td></td>
+                </tr>
+                </tbody></table>
+            <table width="1030" border="0" cellspacing="0" cellpadding="0" style="border: #e3e3e3 1px solid; padding: 15px;border-collapse: inherit;">
+                <tbody><tr>
+                    <td class="f14" style="line-height: 22px; margin-top: 20px;">
+                        <table width="720" border="0" align="center" cellpadding="0" cellspacing="0" id="editForm" style="margin: 0 25px 0 150px;">
+                            <tbody><tr>
+                                <td height="30">&nbsp;</td>
+                                <td height="20">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="90" height="70">投诉主题*：</td>
+                                <td width="300" height="40">
+                                    <input class="hy_bido" name="comp_title" type="text" id="comp_title" size="57" required="true"></td>
+                                <td style="display: none;">请输入投诉主题</td>
+                            </tr>
+                            <tr>
+                                <td height="70">投诉对像*:</td>
+                                <td>
+                                    <input class="hy_bido" name="targetComplaint" type="text" id="targetComplaint" size="57" required="true"></td>
+                                <td class="f12" style="display: none;">请输入要投诉的对像，若针对对像投诉，对像必写</td>
+                            </tr>
+                            <tr>
+                                <td height="70">涉及订单：</td>
+                                <td>
+                                    <input class="hy_bido" name="orderCode" type="text" id="orderCode" size="57"></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="70">投诉类型：</td>
+                                <td>
+                                    <form id="form1" name="form1" method="post" action="">
+                                        <select name="type_1" id="type_1" class="hy_bido">
+                                            <option value="价格问题">价格问题</option>
+                                            <option value="物流问题">物流问题</option>
+                                            <option value="服务问题">服务问题</option>
+                                            <option value="商品问题">商品问题</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="70">投诉内容：</td>
+                                <td>
+                                    <label for="comp_content"></label>
+                                    <textarea class="hy_bidoo" name="comp_content" id="comp_content" cols="45" rows="5"></textarea></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td height="30">
+                                    <span id="submit_message" class="submit-error" style="position:relative;top:0;display:none;"></span></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td height="40">
+                                    <input class="hytijiao" type="button" name="btnSubmit" id="btnSubmit" value="提交投诉内容"></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                </tr>
+                </tbody></table>
+            <table width="1030" border="0" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td></td>
+                </tr>
+                </tbody></table>
+            <script src="/scripts/buyer/complain.js"></script>
+
+        </div>
+
+        <div class="clear" style="clear: both;">&nbsp;</div>
+    </div>
+
+<script type="text/javascript" src="/static/index/js/module/help/help.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jquery-lazyload/jquery.lazyload.js"></script>
+

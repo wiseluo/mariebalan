@@ -1,0 +1,74 @@
+
+
+<h2>订单价格修改<samp>(调整订单价格或运费)</samp></h2>
+
+        <div class="orderprice">
+           
+            <ul>
+                <li><label>商品总价:</label><span id="orderpay">{$order.money}</span></li>
+                <li><label>物流运费:</label><input type="text" name="" id='logistics' value="{$order.logistics}"></li>
+                <li><label>优惠价格:</label><input type="text" name="" id="discount" value="{$order.discount}"><samp>请直接输入要调整的价格，如果是正数价格上调，负数价格下调</samp></li>
+                <li><label>应付金额:</label></label><span id="order_yinfu"></span></li>
+                <input type="hidden" id="order_id" value="{$order.id}">
+            </ul>
+       
+        </div>
+
+
+
+  <div style="text-align:center">
+        <a class="btn btn-success">确定</a>
+        <a onclick="$('#modal-form').modal('hide');" class="btn btn-default">关闭</a>
+    </div>
+
+<script type="text/javascript">
+	$(function(){
+		//订单总额 = 小计+运费
+		var order_yinfu = parseFloat($('#orderpay').text()*100)+parseFloat($('#logistics').val()*100) + parseFloat($('#discount').val()*100);
+		if(order_yinfu >= 0)
+			$('#order_yinfu').text(order_yinfu/100);
+		else
+			$('#order_yinfu').text(0);
+
+		$('#logistics,#discount').keyup(function(){
+			//应付（减余额） = 订单总金额 - 用户余额 + 调整
+			var order_yinfu = parseFloat($('#orderpay').text()*100)+parseFloat($('#logistics').val()*100) + parseFloat($('#discount').val()*100);
+			if(order_yinfu >= 0)
+				$('#order_yinfu').text(order_yinfu/100);
+			else
+				$('#order_yinfu').text(0);
+		});
+
+		$('.btn-success').click(function(){
+			var data = {};
+			var orderid = $('#order_id').val();
+			//var new_usermoney;
+			//
+			data['logistics'] = $('#logistics').val();
+			data['discount'] = $('#discount').val();
+			//data['orderpay'] = 100 * $('#orderpay').text();		//商品总价   分
+			//data['logpay'] = 100 * $('#logistics').val();     //物流费用  分
+			//data['dispay'] = 100 * $('#discount').val();	//调整费用  分
+			data['payment'] = $('#order_yinfu').text();	//应付费用  分
+			//新余额，应付大于0，新余额为0
+			// var new_usermoney = parseFloat($('#order_yinfu').text()*100);   //应付
+			// if(new_usermoney >= 0) {
+			// 	new_usermoney = 0;
+			// }else{
+			// 	new_usermoney = parseFloat($('#user_money').text()*100) - parseFloat($('#order_money').text()*100);
+			// }
+			//alert(new_usermoney);return;
+			$.ajax({
+				type:'post',
+				url:'/admin/order/updatemoney?id='+orderid,
+				data:data,
+				success:function(data){
+					//console.log(data);
+					window.location.reload();
+				}
+			})
+		})
+	})
+</script>
+
+

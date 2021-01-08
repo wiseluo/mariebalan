@@ -1,0 +1,145 @@
+<link rel="stylesheet" href="/static/index/css/module/shopCon/shopCart.css">
+<link rel="stylesheet" href="/static/index/css/module/index/index.css">
+<link rel="stylesheet" href="/static/index/css/module/index/com.css">
+<link rel="stylesheet" href="/static/index/css/module/index/global.css">
+<link rel="stylesheet" href="/static/index/css/module/index/newindex.css">
+<link rel="stylesheet" href="/static/index/css/module/personalCenter/personalCenter.css">
+<link rel="stylesheet" href="/static/index/plugins/font-awesome/css/font-awesome.css">
+
+<script type="text/javascript" src="/static/index/plugins/jQuery/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jQuery/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jquery-anoslide/jquery.anoslide.js"></script>
+<div id="loading">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+<div class="wrapper-content " style="opacity: 0;">
+    <div id="top">
+        <div class="header" style="width: 1200px; margin: 0 auto;">
+            <p class="fl header_con">欢迎来到跨境洋货！<a href="/ucenter/login">登录</a> <span>&nbsp;|&nbsp;</span> <a
+                    href="/ucenter/register"><strong>注册</strong></a></p>
+            <input type="hidden" name="username" value="{$Think.session.user.username}">
+
+            <div class="topmenu fr">
+                <ul class="menu">
+                    <li style="background:none;position:relative; z-index:10;">
+                        <a href="/ucenter/order" class="arrow">我的账户</a>
+                        <!--<ul class="top_submenu">-->
+                        <!--<li><a href="personalCenter.html">订单中心</a></li>-->
+                        <!--<li><a href="#">物流跟踪</a></li>-->
+                        <!--&lt;!&ndash; <li><a href="#">我的优惠券</a></li> &ndash;&gt;-->
+                        <!--</ul>-->
+                    </li>
+                    <li class="phone">
+                        <a href="#">服务专线：</a>
+                        <font style="font-family:Arial; color:#c60000;"><strong>4008-579-288</strong></font>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="logobar">
+        <h1 class="fl"><a href="/index"><img src="/static/index/images/logo.png" alt=""/></a></h1>
+
+    </div>
+    <div class="shoppingbox">
+        <div class="mycart" id="gouwu_num">
+            <ul class="header_con clearfix">
+                <li class="fl" style="text-align: left; font-size: 14px; color: #000;">我的购物车 <b><em class="num">{$num}</em>件</b>
+                </li>
+                <li class="fr">
+                    <!--<samp>跨境洋货商品满88包邮，<a class="oncebuy">再购16.00元包邮</a> <a>去凑单>></a></samp>-->
+
+                    <div class="cart-store clearfix">
+                        <input id="hiddenLocationId" type="hidden">
+                        <input id="hiddenLocation" type="hidden">
+                        <div id="jdarea" class="ui-area-wrap">
+
+                            <!--<ul id="list1">
+                                <li id="summary-stock">
+                                    <div class="dt">配&nbsp;送&nbsp;至：</div>
+                                    <div class="dd">
+                                        <div id="store-selector">
+                                            <div class="text">
+                                                <div></div>
+                                                <b></b>
+                                            </div>
+                                        </div>
+                                        &lt;!&ndash;store-selector end&ndash;&gt;
+                                        <div id="store-prompt"><strong></strong></div>
+                                        &lt;!&ndash;store-prompt end-&ndash;&gt;
+                                    </div>
+                                </li>
+                            </ul>-->
+                        </div>
+                        <div class="clr"></div>
+                        <div class="w-line">
+                            <div class="floater" style="width: 79px; left: 0px;"></div>
+                        </div>
+                        <div class="tab-con ui-switchable-panel-selected" style="display: block;"></div>
+                        <div class="tab-con hide" style="display: none;"></div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div class="m-cartbox">
+            <div class="head cart-thead f-cb">
+                <div class="col col1"><input type="checkbox" class="u-chk t-checkbox" name="selectAll"><label
+                        for="selectAll" class="lab">全选</label></div>
+                <div class="col col2">商品信息</div>
+                <div class="col col3">单价(元)</div>
+                <div class="col col4">数量</div>
+                <div class="col col5">金额(元)</div>
+                <div class="col col6">操作</div>
+            </div>
+        </div>
+        <div class="car_con">
+            <div class="m-cart">
+            </div>
+        </div>
+        <div class="totalbox">
+            <div id="point"></div>
+            <div class="m-total f-cb" id="totalbar" style="position: relative;">
+                <!--Regular if164-->
+                <div class="ttbar">
+                    <div class="lt">
+                        <input type="checkbox" name="selectAll" id="selectAll" class="u-chk">
+                        <label for="selectAll" class="lab">全选</label><b class="opt">删除选中商品</b><!--Regular if165-->
+                    </div>
+                    <div class="rt">
+
+                        <p class="allgoods">已选商品 <span style="color: red"><em class="num b_number">0</em></span> 件 </p>
+                        <p class="allmoney"><span class="itm"></span>&nbsp;&nbsp;<span class="itm  ">商品应付总计：<span
+                                style="color: red">￥</span><em
+                                class="num w_sum" style="color: red">0.00</em></span></p>
+
+                        <a href="javascript:void(0);" data-href="/ucenter/pay/logpay"
+                        class="gobuy ">去结算</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/index/js/module/shopCon/shopCart.js"></script>
+<!--<script type="text/javascript" src="/static/index/plugins/location/location.js"></script>-->
+<script type="text/javascript" src="/static/index/plugins/layer/layer.js"></script>
+<script type="text/javascript" src="/static/index/js/module/personalCenter/personalCenter.js"></script>
+<script type="text/javascript" src="/static/index/js/module/index/index.js"></script>
+<script type="text/javascript" src="/static/index/js/ready.js"></script>
+
+
+
+
+
+

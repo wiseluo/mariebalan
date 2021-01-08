@@ -1,0 +1,95 @@
+<h2>选择商品</h2>
+<div class="searchbar">
+ <h3>商品列表</h3>
+ <div class="searchbtn">
+    <select><option>所有分类</option></select>
+    <input type="text" id="keyword" name="">
+    <input type="button" id='sousuo' value="搜索">
+</div>   
+</div>
+
+
+<div class="table-responsive">
+        <table class="table b-t b-light ">
+            <thead>
+            <tr>
+                <th><input type="checkbox" name=""></th>
+                <th width="40%">商品名称 </th>
+                <th width="15%">价格</th>
+                <th width="10%">库存</th>
+                <th width="15%">操作</th>
+               
+            </tr>
+            </thead>
+            <tbody>
+            {foreach name="prolist" key="k" item="v"}
+            <tr>
+                <td><input type="checkbox" name="prosname" value="{$v.id}"></td>
+                <td>{$v.title}</td>
+                <td>{$v.price}</td>
+                <td>{$v.stock}</td>
+                <td><span class="btn btn-warning btn-xs" title="删除"><i class="fa fa-trash-o"></i></span></td>
+            </tr>
+            {/foreach}  
+            </tbody>
+             
+                    
+        </table>
+</div>
+  <div class="col-sm-0 text-right text-center-xs">
+    <ul class="pagination pagination-sm m-t-none m-b-none">
+      {$page}
+    </ul>
+  </div>
+
+  <div style="text-align:center">
+        <a class="btn btn-success">确定</a>
+        <a onclick="$('#modal-form').modal('hide');" class="btn btn-default">关闭</a>
+    </div>
+    <style type="text/css">
+        .b-light th{ background: #eaeaea; }
+    </style>
+<input type='hidden' id='hideid' value='{$orderid}'>
+
+<script>
+$(function(){
+    //确认后，商品直接加入到订单商品表
+    $('.btn-success').click(function(){ //
+        var orderid = $('#hideid').val();
+         //alert(orderid);  return;   //订单id
+        var prosid_arr = '';
+        var aa = $("input:checkbox[name='prosname']:checked").each(function() { // 遍历name=test的多选框
+          prosid_arr += $(this).val()+","
+        });
+        prosid_arr=(prosid_arr.substring(prosid_arr.length-1)==',')?prosid_arr.substring(0,prosid_arr.length-1):prosid_arr;
+        //console.log(prosid_arr); 
+        //选中的商品显示到订单商品列表
+        $.ajax({
+            type:'post',
+            url:'/admin/order/addtoorderpro?id='+orderid,
+            data:{
+                prosid_arr:prosid_arr
+            },
+            success:function(data){
+                //console.log(data);
+                window.location.reload();
+            }
+        });
+        //$("#modal-form").modal("hide");
+    });
+
+    //搜索
+    $('#sousuo').click(function(){
+        var orderid = $('#hideid').val();
+        var keyword = $('#keyword').val();
+        $.ajax({
+            type:'get',
+            url:'/admin/order/ssproducts?id='+orderid+'&kw='+keyword,
+            success:function(data){
+                $("#productinfo").html(data);
+                $("#modal-form").modal("show");
+            }
+        });
+    })
+});
+</script>

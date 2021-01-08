@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>{$_G['sitename']}商城</title>
+	<meta name="keywords" content="跨境洋货商城，商翔，网购，购物"/>
+	<meta name="description" content="跨境洋货商城，中国进口网购网站"/>
+	<meta content="all" name="robots"/>
+	<meta name="googlebot" content="all"/>
+	<meta name="baiduspider" content="all"/>
+</head>
+<link rel="stylesheet" href="/static/index/css/module/index/index.css">
+<link rel="stylesheet" href="/static/index/css/module/index/com.css">
+<link rel="stylesheet" href="/static/index/css/module/index/global.css">
+<link rel="stylesheet" href="/static/index/css/module/index/newindex.css">
+<link rel="stylesheet" href="/static/index/css/module/personalCenter/personalCenter.css">
+<link rel="stylesheet" href="/static/index/plugins/font-awesome/css/font-awesome.css">
+<script type="text/javascript" src="/static/index/plugins/jQuery/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jQuery/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jquery-anoslide/jquery.anoslide.js"></script>
+<script type="text/javascript" src="/static/index/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="/static/index/plugins/layer/layer.js"></script>
+<link rel="stylesheet" href="/static/index/plugins/layui/css/layui.css">
+<link rel="stylesheet" href="/static/index/plugins/layui/css/modules/layer/default/layer.css">
+<body>
+<div id="loading">
+	<div id="loading-center"></div>
+</div>
+<div class="wrapper-content " style="opacity: 0;">
+	{include file="index/header"/}
+
+	{__REPLACE__}
+
+	{include file="index/footer"/}
+
+	<!--QQ滚动广告-->
+	<div id="buttonFloat">
+		<a href="#" title="返回主页" class="back"><i class="iconback"></i><samp>主页</samp></a>
+		<a href="/ucenter/collect" title="收藏"
+		   class="Collection"><i class="iconcoll"></i><samp>收藏</samp></a>
+		<a href="/index/shopcar" title="购物车" class="cash"><i
+				class="iconshopping"></i><samp>购物车</samp><span class="num">{$num}</span></a>
+		<a target="_blank"
+		   href="http://amos.im.alisoft.com/msg.aw?v=2&uid=51add&site=cntaobao&s=2&charset=utf-8"
+		   class="kefu"><i class="iconkefu"></i><samp>客服</samp></a>
+		<a href="#top" title="返回头部" class="toTop"><i class="up"></i><samp>TOP</samp></a>
+	</div>
+	<script type="text/javascript" src="/static/index/plugins/parsley/parsley.js"></script>
+	<script type="text/javascript" src="/static/index/plugins/laydate/laydate.js"></script>
+	<script type="text/javascript" src="/static/index/js/module/personalCenter/personalCenter.js"></script>
+	<script type="text/javascript" src="/static/index/js/module/index/index.js"></script>
+	<script type="text/javascript" src="/static/index/plugins/parert.js"></script>
+	<script type="text/javascript" src="/static/index/js/ready.js"></script>
+
+
+</div>
+</body>
+</html>

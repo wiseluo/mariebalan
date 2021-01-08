@@ -1,0 +1,196 @@
+<style>
+ .panel .table-striped>tbody>tr.upt>td, tr.upt{background-color:#FF3;}
+</style>
+<section class="scrollable padder">
+    <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+        <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a href="{:url('order/orderlist')}">订单管理</a></li>
+        <li><a >订单列表</a></li>
+    </ul>
+    <div class="m-b-md">
+        <h3 class="m-b-none">发货列表</h3>
+    </div>
+    <section class="panel panel-default">
+        <header class="panel-heading">删除将无法恢复，请谨慎你的操作！</header>
+        <div class="row text-sm wrapper">
+            <!-- <div class="col-sm-3 m-b-xs">
+                <select id="doval" class="input-sm form-control input-s-sm inline">
+                    <option value="">操作类型</option>
+                    <option value="dels">删除</option>
+                    <option value="sure">确认</option>
+                  
+                </select>
+                <button id="delusers" class="btn btn-sm btn-default">执行</button>
+            </div> -->
+            <div class="col-sm-5">
+                <span class="input-group">
+                <input type="text" class="input-sm form-control" style="width:200px; margin-left:5px;" id="wk" value="{$wk}" placeholder="关键词">
+                <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" id="searchs" onClick="window.document.location='/admin/order/search?wk='+$('#wk').val()+'&issure='+$('#tidtwo').val()+'&state='+$('#tidone').val() " type="button">搜索</button>
+                </span>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light text-sm">
+                <thead>
+                <tr>
+                    <th width="20"><input type="checkbox"></th>
+                    <th class="th-sortable" data-toggle="class">订单编号 </th>
+                    <th>收件人</th>
+                    <th>联系电话</th>
+                    <th>省</th>
+                    <th>市</th>
+                    <th>县</th>
+                    <th>详细地址</th>
+                    <th>物流费用</th>
+                    <th>订单状态</th>
+                    <th>下单时间</th>
+                    <th>催单时间</th>
+                    <th width="120">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {foreach name="ordlist" key="k" item="v"}
+                <tr {if $v.reminder eq 2} class="upt"{/if}>
+                    <td width="20" ><input class="userid" type="checkbox" name="IDS[]" value="{$v.id}"></td>
+                    <td>{$v.number}</td>
+                    <td>{$v.consignee}</td>
+                    <td>{$v.phone}</td>
+                    <td>{$v.province}</td>
+                    <td>{$v.city}</td>
+                    <td>{$v.town}</td>
+                    <td>{$v.address}</td>
+                    <td>{$v.logistics}</td>
+                    <td>{$states[$v.state]}</td>
+                    <td>{$v.create_time}</td>
+                    <td>{if $v.reminder eq 2}{$v.update_time}{/if}</td>
+                    <td width="120">
+                        <a data-id="{$v.id}" class="btn btn-primary btn-xs sendorder"><i class="fa fa-download"></i></a>
+                        <a href="/admin/order/orderdetails?id={$v.id}" class="btn btn-primary btn-xs edituser" title="编辑"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger btn-xs deluser" data-id="{$v.id}" title="删除"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+                {/foreach} 
+               
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-sm-4 hidden-xs">
+                    
+                </div>
+                <div class="col-sm-4 text-center"> </div>
+                <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$page|raw}
+                    </ul>
+                  </div> 
+                <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </section>
+</section>
+
+
+<div class="modal fade" id="modal-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div style="padding:2px 20px;">
+                        <h3 class="m-t-none m-b">发货</h3>
+                        <form role="form" id="sendinfo">
+                        
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+<script language="javascript">
+    $(function(){
+
+        $(".deluser").on("click",this,function(){
+            if(!confirm('你确定要删除吗？'))return false;
+            var id=$(this).attr("data-id");
+            $.ajax({
+                type:"get",
+                cache:false,
+                url:'/admin/order/deleteorder?id='+id,
+                success: function(data){
+                    console.log(data);
+                    if(data == 1){
+                        layer.alert("删除成功");
+                        window.location.reload();
+                    }else{
+                        layer.alert("删除失败");
+                    }
+                }
+            })
+        })
+
+        $("#delusers").on("click",this,function(){
+            var doval=$("#doval").val();
+            if(doval==''){
+                layer.alert('请选择操作类型！');
+                return false;
+            }
+            if(doval=='dels'){
+                if(!confirm('你确定要批量删除吗？'))return false;
+            }
+            var IDS={};
+            var i=0;
+            $(".userid").each(function(index, element) {
+                if($(this).prop("checked")){
+                    i=i+1;
+                    IDS[i]=$(this).val();
+                }
+            });
+
+            if(i==0){
+                layer.alert("请选择用户后再操作！");return false;
+            }
+            $.ajax({
+                type:"POST",
+                cache:false,
+                url:'/admin/order/'+doval,
+                data:{IDS:IDS},
+                success: function(data){
+                    //console.log(data);
+                    window.location.reload();
+//                    if(data=='suss'){
+//                        $(".userid").each(function(index, element) {
+//                            if($(this).prop("checked")){
+//                                var id=$(this).val();
+//                                $("#userlist"+id).hide();
+//                            }
+//                        });
+//                    }
+                }
+            })
+        })
+
+    })
+$(".sendorder").on("click",this,function(){
+        var id=$(this).attr("data-id");
+        $.ajax({
+            type:'GET',
+            url:'/admin/order/send?id='+id,
+            cache:false,
+            success: function(data){
+                $("#sendinfo").html(data);
+                $("#modal-form").modal("show");
+            }
+        })
+    })
+</script>

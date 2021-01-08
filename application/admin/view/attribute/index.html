@@ -1,0 +1,211 @@
+<style>
+.title-b a:hover{ color:#F63;}
+</style>
+
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="/admin"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a >店铺管理</a></li>
+              <li><a >产品属性</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">属性列表</h3>
+        
+  </div>
+            <section class="panel panel-default">
+              <header class="panel-heading">删除将无法恢复，请谨慎你的操作！</header>
+              <div class="row text-sm wrapper">
+                <div class="col-sm-5 m-b-xs">
+                  <select id="doval" class="input-sm form-control input-s-sm inline">
+                  <option value="">操作类型</option>
+                  <option value="deletes">删除</option>
+                    <!-- <option value="makeflag">审核</option>
+                    
+                    <option value="canelflag">取消审核</option> -->
+                     </select>
+                  <button id="delpds" class="btn btn-sm btn-default">执行</button>
+                </div>
+                
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input type="text" class="input-sm form-control" id="wk" value='{$wk}' placeholder="关键词">
+                    <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default" onClick="search()" type="button">搜索</button>
+                    </span> </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                  <thead>
+                    <tr>
+                      <th width="20"><input type="checkbox"></th>
+                      <th width="100">属性名称 </th>
+                      <th width="80">产品类型</th>
+                      <th width="80">属性值的录入方式</th>
+                      <th width="200">可选值列表</th>
+                      <th width="60">排序</th>
+                      <th width="60">日期</th>
+                      <th width="80">操作</th>
+                    </tr>
+                  </thead>
+<tbody> 
+{foreach name="dbs" item="rs" key="k"}
+  <tr id="attrlist{$rs['id']}">
+      <td><input class="attrid" type="checkbox" name="IDS[]" value="{$rs['id']}"></td>
+      <td>{$rs['attr_name']}</td>
+      <td>{$rs['type_name']}</td> 
+      <td>
+        {switch name="$rs['attr_input_type']"}
+          {case value="0"}单行文本{/case}
+          {case value="1"}下拉列表{/case}
+          {case value="2"}多行文本{/case}
+        {/switch}
+      </td> 
+      <td>{$rs['attr_value']}</td> 
+      <td>{$rs['sort']}</td> 
+      <td>{$rs['addtime']}</td>
+      <td>
+        <a data-id="{$rs['id']}" class="btn btn-primary btn-xs editattr"><i class="fa fa-edit"></i></a>
+        <a data-id="{$rs['id']}" class="btn btn-danger btn-xs delpd"><i class="fa fa-trash-o"></i></a>
+      </td> 
+  </tr>
+{/foreach}
+  
+</tbody>
+                </table>
+              </div>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 hidden-xs">
+                    <button class="btn btn-sm btn-success" data-id="0" id="addattr">新增</button>
+                  </div>
+                   <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm">第{$page}页 每页{$listRows}条 共{$rowsall}条</small> </div>
+                  <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$dbs->render()}
+                    </ul>
+                  </div>
+                </div>
+              </footer>
+            </section>
+</section>
+
+<div class="modal fade" id="modal-form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" onclick="closeView()">
+          <span aria-hidden="true">&times</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="modal-title">属性管理</h4><span id="num"></span>
+      </div>      
+      <div class="modal-body">
+        <div id="modal_message">
+          <form role="form" id="typeinfo">
+
+          </form>
+        </div>
+      </div>      
+      <div class="modal-footer" id="modal-footer">
+        <button type="button" class="btn btn-primary" id="attr_submit">提交</button> 
+        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#modal-form').modal('hide');">关闭</button>   
+      </div>   
+    </div>
+  </div>
+</div>
+
+
+<script language="javascript">
+
+
+function search() {
+  var wk = $('#wk').val();
+  window.document.location='/admin/attribute/search?wk='+wk;
+}
+
+$(function(){
+
+  $(".editattr,#addattr").on("click",this,function(){
+    var id=$(this).attr("data-id");
+    
+    $.ajax({
+      type:'GET',
+      url:'/admin/attribute/readattr?id='+id,
+      cache:false,
+      success: function(data){
+        $("#typeinfo").html(data);
+        $("#modal-form").modal("show");
+      }
+    })
+  })
+
+	$(".delpd").on("click",this,function(){
+		if(!confirm('你确定要删除吗？删除该属性后，请修改相应具有该属性的产品信息!!!'))return false;
+		var id = $(this).attr("data-id");
+		$.ajax({
+			type:"GET",
+			cache:false,
+			url:"/admin/attribute/delete?id="+id,
+			success: function(data){
+				if(data.status == 0){
+          layer.msg("删除成功",{
+                          icon:6,
+                          time:1000,
+                      });
+					$("#attrlist"+id).hide();
+				} else {
+            layer.msg("删除失败",{
+                            icon:5,
+                            time:1000,
+                        });
+        }
+			}
+		})
+	})
+	$("#delpds").on("click",this,function(){
+		var doval = $("#doval").val();
+		if(doval == ''){
+			alert('请选择操作类型！');
+			return false;
+		}
+		if(doval == 'deletes'){
+			if(!confirm('你确定要批量删除吗？删除这些属性后，请修改相应具有这些属性的产品信息!'))return false;
+		}
+		var IDS = {};
+		var i = 0;
+		$(".attrid").each(function(index, element) {
+			if($(this).prop("checked")){
+				i=i+1;
+				IDS[i]=$(this).val();
+			}
+    });
+		if(i==0){
+			alert("请选择数据后再操作！");return false;
+		}
+		$.ajax({
+			type:"POST",
+			cache:false,
+			url:"/admin/attribute/"+doval,
+			data:{IDS:IDS},
+			success: function(data){
+				if (data.status == 0){
+          layer.msg(data.msg,{
+                          icon:6,
+                          time:1000,
+                      });
+          setTimeout(function(){
+              window.location.reload(); 
+            },1000);
+				} else {
+            layer.msg("操作失败",{
+                            icon:5,
+                            time:1000,
+                        });
+        }
+			}
+		})
+	})	
+	
+})
+
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>哇哦！连老董都去送货了 --泰泰快购</title>
+    <link href="/css/quan.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript">setTimeout(function () { this.location.href = "/index.htm" }, 5000);</script>
+    <script>
+        var start = 5;
+        var array = new Array();
+        array[4] = "5";
+        array[3] = "4";
+        array[2] = "3";
+        array[1] = "2";
+        array[0] = "1";
+var step = 1; function count() { document.getElementById("div1").innerHTML = array[(start - 1)] + "秒自动跳转"; if (start == 5 || start == 0) step *= -1; start += step; setTimeout("count()", 1000); } window.onload = count;</script>
+</head>
+
+<body style="background-color:#ff8c6a;">
+    <div class="navcuo bai">
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="#">福泰隆</a></li>
+            <li><a href="#">恒大城</a></li>
+            <li><a href="#">电器城</a></li>
+            <li><a href="#">水果城</a></li>
+            <li><a href="#">土特产</a></li>
+            <li><a href="#">外卖美食</a></li>
+            <li><a href="#">特价</a></li>
+            <li><a href="#">团购</a></li>
+        </ul>
+    </div>
+    <div class="cuotu">
+        <img src="/images/404.gif" width="722" height="371" />
+    </div>
+    <div class="cuotud">哇哦！连老董都去送货了</div>
+    <div class="cuotud"><a href="/index.htm" target="_self">返回首页</a></div>
+    <div class="cuotdd" id="div1">5</div>
+</body>
+</html>

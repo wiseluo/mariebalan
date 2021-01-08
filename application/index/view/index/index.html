@@ -1,0 +1,250 @@
+<style>
+	del{
+		text-decoration: line-through;
+		float: right;
+	}
+	.dell{
+		padding: 2px;
+		margin-right: 23%;
+	}
+</style>
+<div id="box">
+            <ul class="t_con">
+                <li class="active" data-from="content">
+                    <a class="word">新品上市
+                    </a>
+                </li>
+                <li data-from="clearance">
+                    <a class="word" >今日限时购
+                    </a>
+                </li>
+                {foreach name="typegoods" item="pt" key="k"}
+                <li data-from="pdtype{$k}">
+                    <a class="word" >{$pt['name']}
+                    </a>
+                </li>
+                {/foreach}
+
+                <li>
+                    <a href="javascript:void(0)" id="goTop" class="iconfont"> &#xe619; </a>
+                </li>
+            </ul>
+</div>
+
+<!--banner-->
+<div class="bannerContainer">
+    <div id="playBox">
+        <div class="pre"></div>
+        <div class="next"></div>
+        <ul class="rightPic2 fr">
+            {foreach name="ads1002" item="rs" key="k"}
+            {if($k<=2)}
+                <li><a href="{$rs['url']}"><img src="/uploads/ad/{$rs['pic']}" /></a></li>
+            {/if}
+			{/foreach}
+        </ul>
+        <ul class="rightPic fl">
+            {foreach name="ads1002" item="rs" key="k"}
+            {if($k>2)}
+                <li><a href="{$rs['url']}"><img src="/uploads/ad/{$rs['pic']}" /></a></li>
+             {/if}
+			{/foreach}
+        </ul>
+        <div class="otplay">
+            <ul class="oUlplay">
+			{foreach name="ads1001" item="rs" key="k"}
+                <li><a href="{$rs['url']}"><img src="/uploads/ad/{$rs['pic']}" /></a></li>
+			{/foreach}
+            </ul>
+        </div>
+    </div>
+</div>
+    <!--第一屏开始-->
+    <div id="content" class="ftl-coc-list w clearfix ">
+        <div class="newproduct fl">
+            <div class="publictitle">
+                <h2>新品上市</h2>
+            </div>
+            <div class="promc">
+                <div class="mc">
+                    <ul>
+                    {foreach name="newProducts" item="np" key="k"}
+                        <li>
+                            <a href="/index/pddetail?id={$np['id']}" target="_blank"><img src="{$np['pics'][0]}" width="160" height="157" /></a>
+                            <p class="proname"><a href="/index/pddetail?id={$np['id']}" target="_blank">{$np['title']}</a></p>
+                            <p class="price"><strong>￥{$np['price']}</strong><del>
+                                {if condition="$np['price'] < $np['original_price']"} 原价:￥{$np['original_price']}
+                                {else /}
+                                {/if}
+                            </del></p>
+                        </li>
+                    {/foreach}
+                        <!-- <li>
+                            <img src="/static/index/images/1.jpg" width="160" height="157" />
+                            <p class="proname"><a href="#">印尼进口丽芝士nabati纳宝帝奶酪威化饼干200g零食</a></p>
+                            <p class="price">热卖价:<strong>￥69.00</strong></p>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="notic fr">
+            <div class="mart">
+
+                <p class="noticetitle">
+                    <a id="one1" href="javascript:void(0)" class="hover1">商城公告</a>
+                    <a id="one2" href="javascript:void(0)" >促销信息</a>
+                </p>
+                <img src="/static/index/images/notice.jpg" alt="" />
+                <ul class="onsales" id="con_one_1">
+                    {foreach name="notice" item="nt" key="k"}
+                        <li><a data-id="{$nt['id']}" class="wc" href="/index/notice/notice?id={$nt['id']}" title="{$nt['title']}">{$nt['title']}</a></li>
+                    {/foreach}
+
+                </ul>
+                <ul id="con_one_2" class="onsales dis">
+                    {foreach name="promotion" item="pt" key="k"}
+                        <li><a data-id="{$pt['id']}" class="wc" href="/index/notice/notice?id={$pt['id']}" title="{$pt['title']}">{$pt['title']}</a></li>
+                    {/foreach}
+
+                </ul>
+
+            </div>
+            {foreach name="ads1003" item="rs" key="k"}
+            {if $k < 2}
+            <div class="imgpicone" id="smallscroll">
+                    <a href="{$rs['url']}"><img src="/uploads/ad/{$rs['pic']}" alt="" /></a>
+            </div>
+            {/if}
+            {/foreach}
+        </div>
+    </div>
+
+    <!--第二屏开始-->
+
+
+    <!--adbanner开始-->
+    <div class="adbanner">
+        <ul>
+            {foreach name="ads1003" item="rs" key="k"}
+                {if $k > 1}
+                    <li class="color{$k}"><a href="{$rs['url']}" target="_blank"><img src="/uploads/ad/{$rs['pic']}"></a></li>
+                {/if}
+            {/foreach}
+        </ul>
+    </div>
+    <!-- 清仓 -->
+    <div id="clearance" class="ftl-coc-list  w clearfix">
+        <div class="drinkproduct fl">
+            <div class="cleartitle">
+                <h2>今日限时购</h2>
+                 <span class="fr">
+                     <a href="javascript:void(0);">
+                        <samp >今日限时购</samp>
+                    </a>
+                </span>
+                <div class="ff-menus-con fr">
+                    <em>热 搜 词 :</em>
+                    <a href="#">电热壶满50减20</a>
+                    <a href="#">自然水满100减20</a>
+                    <a href="#">天然盐满40减20</a>
+                    <a href="#">格鲁吉亚</a>
+                </div>
+            </div>
+            <div class="proclear">
+                <div class="proclearance">
+                {foreach name="limitProducts" item="np" key="k"}
+                    <dl>
+                        <dt><a href="/index/pddetail?id={$np['id']}" target="_blank"><img src="{$np['pics'][0]}" width="160" height="157" /></a></dt>
+                        <dd  class="title"><a href="/index/pddetail?id={$np['id']}" target="_blank">{$np['title']}</a></dd>
+                        <dd class="wc_2"><a href="/index/pddetail?id={$np['id']}" target="_blank">{$np['content']|substr=0,200}</a></dd>
+                        <dd class="price">
+							<strong>¥{$np['price']}</strong>
+							<span class="fr">剩余：{$np['stock']}件</span>
+							<del class="dell">
+							    {if condition="$np['price'] < $np['original_price']"} ¥{$np['original_price']}
+							    {else /}
+							    {/if}
+							</del>
+						</dd>
+                        <dd><a href="/index/pddetail?id={$np['id']}" target="_blank"><samp>立即抢购</samp></a></dd>
+                    </dl>
+                {/foreach}
+                </div>
+                <div class="rightclear">
+                {foreach name="ads1004" item="rs" key="k"}
+                {if $k < 3}
+                        <a href="{$rs['url']}"><img src="/uploads/ad/{$rs['pic']}" alt="" /></a>
+                {/if}
+                {/foreach}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--adbanner开始-->
+    <div class="adbanner">
+        <ul>
+            {foreach name="ads1004" item="rs" key="k"}
+                {if $k > 2}
+                <li class="color{$k}"><a href="{$rs['url']}" target="_blank"><img src="/uploads/ad/{$rs['pic']}"></a></li>
+                {/if}
+            {/foreach}
+        </ul>
+    </div>
+{foreach name="typegoods" item="pt" key="k"}
+    <div id="pdtype{$k}" class="ftl-coc-list w clearfix">
+        <div class="drinkproduct fl">
+            <div class="">
+                <h2><i class="lou_c">{$k+1}F</i> {$pt['name']}</h2>
+               
+                <span class="fr">
+                     <a data-id="{$pt['id']}" href="/index/pdlist?catid={$pt['id']}">
+                        <samp>查看更多</samp>
+                    </a>
+                </span>
+            </div>
+            <div class="prodrink">
+                <div class="leftdrink">
+                {if (!empty($ads1005))}
+                    {foreach name="ads1005" item="ad" key="ak"}
+                        {if (($ak+1)/4 > $k && ($ak+1)/4 <= ($k+1))}
+                            <a href="/index/pdlist?catid={$pt['id']}" target="_blank"><img src="/uploads/ad/{$ad['pic']}"></a>
+                        {/if}
+                    {/foreach}
+                 {/if}
+                </div>
+                <div class="pro">
+                    <ul>
+                    {foreach name="$pt['products']" item="pd" key="kd"}
+                        <li>
+                            <a href="/index/pddetail?id={$pd['id']}" target="_blank"><img src="{$pd['pics'][0]}" width="160" height="157"/></a>
+                            <p class="proname"><a href="/index/pddetail?id={$pd['id']}" target="_blank">{$pd['title']}</a></p>
+                            <p class="price"><strong>￥{$pd['price']}</strong><del>
+                                {if condition="$pd['price'] < $pd['original_price']"} 原价:￥{$pd['original_price']}
+                                {else /}
+                                {/if}
+                            </del></p>
+                        </li>
+                    {/foreach}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="clear"></div> -->
+    {if (!empty($ads1005))}
+    <div class="adbanner">
+        <ul class="t_con">
+            {foreach name="ads1005" item="ad" key="ka"}
+                
+             <li class="color{$ka}"><a href="{$ad['url']}" target="_blank"><img src="/uploads/ad/{$ad['pic']}"></a></li>
+                
+            {/foreach}
+        </ul>
+    </div>
+    {/if}
+{/foreach}
+
+<script type="text/javascript" src="/static/index/plugins/LiftEffect.js"></script>

@@ -1,0 +1,81 @@
+.us_con{ line-height:30px;text-align: left;}
+.us_con p{
+    color:#333333;font-family:tahoma, arial, 宋体;
+    line-height: 35px;
+}
+.link-con{
+    margin:0 auto; text-align:center; width:980px; padding-top:50px;
+}
+.margin20{
+    margin: 20px 0;
+}
+.head_titile{
+    margin-bottom:30px;
+    font-weight:normal;
+}
+.xian{
+    text-decoration: underline;
+}
+.h5{
+    font-weight: 400;
+}
+/* 缩进 */
+.indent{
+    text-indent: 20px;
+}
+.big_indent{
+    text-indent: 30px;
+}
+.ind_index h5{
+    font-size: 18px;
+    color: #444;
+
+}
+.ind_index p{
+
+    margin-left: 20px;
+}
+.ind_index a{
+    color: #333;
+    margin-left: 20px;
+}
+.ind_index a:hover{
+    text-decoration: none;
+    color: #333;
+}
+/* 招聘 */
+.join_1 {
+    width: 100%;
+    text-align: left;
+}
+.join_news {
+    margin-top: 25px;
+}
+.join_ask:before{
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+    width: 0;
+}
+.join_title {
+    width: 100%;
+    padding-bottom: 15px;
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+}
+.join_thing p {
+    float: left;
+}
+
+.join_place {
+    margin-left: 120px;
+}
+.join_ask {
+    line-height: 25px;
+    font-size: 15px;
+}
+.pg-about-rules h5{
+    font-size: 16px;
+}

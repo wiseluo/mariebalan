@@ -1,0 +1,192 @@
+<style>
+.editcity{ color:#06F; cursor:pointer;}
+.cityls span{  border:#ccc solid 1px; text-align:center; margin-right:10px; padding:5px 11px;}
+
+</style>
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a>系统设置</a></li>
+              <li><a >地区城市管理</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">地区城市管理</h3>
+              
+            </div>
+            <section class="panel panel-default">
+              <header class="panel-heading">删除城市将无法恢复，请谨慎你的操作！</header>
+              <div class="row text-sm wrapper">
+                <div class="col-sm-5 m-b-xs">
+                  <select id="doval" class="input-sm form-control input-s-sm inline">
+                    
+                    <option value="">操作类型</option>
+                    <option value="delss">删除</option>
+                    <option value="flags">显示</option>
+                    <option value="canelflags">不显示</option>
+                     </select>
+                  <button id="delcitys" class="btn btn-sm btn-default">执行</button>
+                </div>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input type="text" class="input-sm form-control" id="wk" value="{$wk}" placeholder="关键词">
+                    <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default" onClick="window.document.location='/admin/system/citylist?wk='+$('#wk').val()" type="button">搜索</button>
+                    </span> </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                  <thead>
+                    <tr>
+                      <th width="20"><input type="checkbox"></th>
+                      <th width="80">省份</th>
+                      <th>地区城市</th>
+              
+                  
+                      <th width="60">显示</th>
+                      <th width="60">排序</th>
+        
+                      <th width="120">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+{foreach name='dbs' item='rs' key='k'}
+{if($rs['fid']==0)}
+<tr id="citylist{$rs['id']}" class="dbeditcity">
+                      <td><input class="cityid" type="checkbox" value="{$rs['id']}"></td>
+                      <td class="name">{$rs['name']}</td>
+                      <td class="cityls">
+                          {foreach name='citys' item='rs2' key='k2'}
+                          {if($rs2['fid']==$rs['id'])}
+                          <span>
+                              <a class="editcity" data-id="{$rs2['id']}">{$rs2['name']}</a>
+                              <a data-id="{$rs2['id']}" class="delcity">
+                                  <i class="fa fa-trash-o"></i>
+                              </a> </span>
+                          {/if}
+                          {/foreach}
+                      </td>
+                      <td>{if $rs['flag']==0 }不显示{else}显示{/if}</td>
+                      <td>{$rs['sort']}</td>
+                      <td>
+                      <a data-id="{$rs['id']}"  class="btn btn-primary btn-xs editcity"><i class="fa fa-edit"></i></a>
+                      <a data-id="{$rs['id']}" class="btn btn-danger btn-xs delcity"><i class="fa fa-trash-o"></i></a>
+                      
+                      </td>
+</tr>
+{/if}
+{/foreach}
+</tbody>
+                </table>
+              </div>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 hidden-xs">
+<button class="btn btn-sm btn-success" data-id="0" id="addcitys">新增</button>
+                  </div>
+                  <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm">第{$currentPage}页 每页{$listRows}条 共{$page}条</small> </div>
+                  <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$dbs->render()}
+                    </ul>
+                  </div>
+                </div>
+              </footer>
+            </section>
+</section>
+
+<div class="modal fade" id="modal-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+<div style="padding:2px 20px;">
+<h3 class="m-t-none m-b">城市管理</h3>
+<p>请认真比对分类信息.</p>
+<form role="form" id="cityinfo">
+
+</form>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script language="javascript">
+$(function(){
+	$(".delcity").on("click",this,function(){
+		if(!confirm('你确定要删除吗？'))return false;
+		var id=$(this).attr("data-id");
+		$.ajax({
+			type:"GET",
+			cache:false,
+			url:"/admin/system/del?id="+id,
+			success: function(data){
+                if(data){
+                    alert("删除成功");
+                    window.location.reload();
+                }else{
+                    alert("删除失败");
+                }
+//				if(data=='suss'){
+//					$("#citylist"+id).hide();
+//				}
+			}
+		})
+	})
+	$("#delcitys").on("click",this,function(){
+		var doval=$("#doval").val();
+		if(doval==''){
+			alert('请选择操作类型！');
+			return false;
+		}
+		if(doval=='delss'){
+			if(!confirm('你确定要批量删除吗？'))return false;
+		}
+		var IDS={};
+		var i=0;
+		$(".cityid").each(function(index, element) {
+			if($(this).prop("checked")){
+				i=i+1;
+				IDS[i]=$(this).val();
+			}
+        });
+		if(i==0){
+			alert("请选择用户后再操作！");return false;
+		}
+		$.ajax({
+			type:"POST",
+			cache:false,
+			url:"/admin/system/"+doval,
+			data:{IDS:IDS},
+			success: function(data){
+//                alert(data);
+                window.location.reload();
+//				if(data=='suss'){
+//					window.location.reload();
+//				}else{
+//					alert(data);
+//				}
+			}
+		})
+	})	
+	
+	$(".editcity,#addcitys").on("click",this,function(){
+		var id=$(this).attr("data-id");
+		$.ajax({
+			type:'GET',
+			url:'/admin/system/cityadd?id='+id,
+			cache:false,
+			success: function(data){
+				$("#cityinfo").html(data);
+				$("#modal-form").modal("show");
+			}
+		})
+	})
+	$(".dbeditcity").on("dblclick",this,function(){
+		$(this).find(".editcity").trigger("click");
+	})
+})
+
+</script>

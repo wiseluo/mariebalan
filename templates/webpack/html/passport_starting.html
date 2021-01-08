@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>跨境洋货</title>
+        <meta name="keywords" content="跨境洋货，网购，购物" />
+        <meta name="description" content="跨境洋货，中国进口网购网站" />
+        <meta content="all" name="robots" />
+        <meta name="googlebot" content="all" />
+        <meta name="baiduspider" content="all" />
+    </head>
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center"></div>
+</div>
+<div class="wrapper-content" style="opacity: 0;">
+
+    <div class="login-header ">
+        <div class="login-con" style="margin: 20px auto;">
+            <div class="logo_H1"><img src="../images/logo.jpg" alt=""></div>
+            <div class="login-block"><span class="">已有跨境洋货账号？</span><a href="enter.html">登录</a></div>
+        </div>
+    </div>
+    <!-- 步骤 -->
+    <div class="content">
+        <h3 class="headline">
+            <span class="headline__content">找回登录密码</span>
+        </h3>
+        <ul class="steps-bar steps-bar--dark cf">
+            <li class="step step--first step--current" style="z-index:3">
+                <span class="step__num">1.</span>
+                <span>确认账号</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+            <li class="step step--post" style="z-index:2">
+                <span class="step__num">2.</span>
+                <span>选择验证方式</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+            <li class="step step--post" style="z-index:1">
+                <span class="step__num">3.</span>
+                <span>验证/修改</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+            <li class="step step--last step--post" style="z-index:0">
+                <span class="step__num">4.</span>
+                <span>完成</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+        </ul>
+        <!--  验证 -->
+        <div class="form__wrapper">
+            <form class="form__content page1  form_active" method="POST" action="" onsubmit=" return page1_yanz()" >
+                <div class="form-field-login">
+                    <label>尽情购账户</label>
+                    <input class="f-text account page1_username"  name="userid" placeholder="手机号/用户名/邮箱" type="text">
+                    <span class="tip" style="display:none;">
+                    <i class="icon"></i>
+                    <span></span>
+                </span>
+                </div>
+                <div class="form-field-login captcha cf">
+                    <label>验证码</label>
+                    <input class="f-text verify-code " name="captcha" maxlength="4"  placeholder="请输入验证码"type="text">
+                    <div class="f-text-img">
+                        <img id="signup-captcha-img" class="signup-captcha-img" src="../images/captcha.jpg" width="72px" height="36px">
+                        <a class="captcha-refresh J-captcha-refresh" tabindex="-1" href="javascript:void(0)">看不清楚？换一张</a>
+                    </div>
+
+                </div>
+                <div class="form-field-login ">
+                    <input name="csrf" value="" type="hidden">
+                    <!-- 提交按钮 -->
+                    <input class="btn passport_sub" id="passport_sub" value="下一步" type="submit">
+                    <!--  测试  要删除 -->
+                    <a href="passport_select.html" style="float: left;">测试 确定下一步</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <footer>
+        <div class="footer">
+
+            <div id="bottom">
+
+                <div class="footnav">
+                    <a href="#">关于跨境洋货</a><span>|</span>
+
+                    <a href="#">服务条款</a><span>|</span>
+                    <a href="#">广告服务</a><span>|</span>
+                    <a href="#">企业招聘</a><span>|</span>
+                    <a href="#">客服中心</a><span>|</span>
+                    <a href="#">网站导航</a>
+                    <p>Copyright © 1998 - 2010 legou.com. All Rights Reserved</p>
+                    <p>跨境洋货版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script type="text/javascript" src="../js/require.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/module/passport/passport.js"></script>
+<script>
+
+    function dx_sub(){
+//        判断如果li列表中有选中的项目（id值） 跳转
+
+        window.location.href="passport_verify.html";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<link rel="stylesheet" href="/static/admin/editor/themes/default/default.css" />
+<script charset="utf-8" src="/static/admin/editor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="/static/admin/editor/lang/zh_CN.js"></script>
+<style>
+ul.listfour {border-bottom: 1px dashed #eaeaea;list-style-type:none}
+ul.listfour li{width: 100%; line-height: 32px;list-style-type:none}
+ul.listfour li input{ width: 200px; height: 26px; line-height: 26px; border:1px solid #e0e0e0; border-radius: 4px; padding-left: 5px; margin-left: 10px;}
+ul.listfour li select{ width: 100px; height: 26px; line-height: 26px; border:1px solid #e0e0e0; border-radius: 4px; margin-left: 10px;}
+ul.listfour li:last-child{ border: none;}
+ul.listfour li span {line-height: 32px;}
+ul.listfour li span input{width:100px;}
+ul.listfour li a{color: #ff0000;}
+</style>
+<script>
+var editor;
+KindEditor.ready(function(K) {
+
+	editor = K.create('#ncontent', {
+		resizeType : 1,
+		urlType : 'relative',
+		allowPreviewEmoticons : false,
+		allowImageUpload : true,
+		items : ['source', '|','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist','insertunorderedlist', '|', 'emoticons', 'image','multiimage', 'link','upload']
+	});
+});
+</script>
+<style type="text/css">
+  .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{ color: #fff; background: #89cc97; }
+  .panel.panel-default{ border-top: none; border-right: none; }
+  #myTabContent .form-group{ margin-right: 80px; }
+</style>
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="/admin"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a >店铺管理</a></li>
+              <li><a >产品管理</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">产品信息</h3>
+              
+  </div>
+ <!--   <header class="panel-heading bg-light">
+        <ul class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#basic" data-toggle="tab">基本信息</a></li>
+          <li><a href="#profile" data-toggle="tab">商品属性</a></li>
+       
+        </ul>
+   </header> 
+   <ul id="myTab" class="nav nav-tabs">
+      <li class="active">
+        <a href="#home" data-toggle="tab">
+           基本信息
+        </a>
+      </li>
+      <li><a href="#profile" data-toggle="tab">产品属性</a></li>
+     
+  </ul>-->
+<section class="panel panel-default" style="max-width:1100px;">
+  <div class="panel-body" >
+     <div id="myTabContent" class="tab-content">
+            <!-- 基本信息 -->
+            <div class="tab-pane fade in active" id="home">      
+                <form class="form-horizontal" method="post" id="pdinfo">
+                    <input type="hidden" name="id" value="{$info['id']}" />
+                    <input type="hidden" name="info[uid]" value="{$uid}" />
+                    <input type="hidden" name="info[addusersname]" value="{$uname}" />
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称</label>
+                        <div class="col-sm-10">
+                          <input type="text" placeholder="名称" name="info[title]" value="{$info['title']}" class="form-control" id="title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">类型</label>
+                        <div class="col-sm-10">
+                            <select name="info[tid]" id="tid" style="color:#999" class="form-control parsley-validated">
+                            <option value="0">选择类型</option>
+                            {foreach name='types' item="rs" key="k"}
+                            <option value="{$rs['id']}" data-key="{$k}" {if($info['tid']==$rs['id'])}selected="selected"{/if}>{$rs['name']}</option>
+                            {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">购物区间</label>
+                        <div class="col-sm-10">
+                            <select name="info[region]" id="region" style="color:#999" class="form-control parsley-validated">
+                              <option value="A" {if($info['region']=='A')}selected="selected"{/if}>A</option>
+                              <option value="B" {if($info['region']=='B')}selected="selected"{/if}>B</option>
+                              <option value="C" {if($info['region']=='C')}selected="selected"{/if}>C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">支持单独购买</label>
+                        <div class="col-sm-10">
+                            <label><input type="radio" name="info[is_separate_buy]" value="1" {if($info['is_separate_buy']==1)}checked="checked"{/if}>是</label>
+                            <label><input type="radio" name="info[is_separate_buy]" value="2" {if($info['is_separate_buy']==2)}checked="checked"{/if}>否</label>
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">规格设置</label>
+                      <div class="col-sm-10 attrinfo"></div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">价格设置</label>
+                      <div class="col-sm-10">
+                        <table id="attr_price" class="table table-striped b-t b-light text-sm">
+                          <thead>
+                            <tr>
+                              <th width="35%">商品规格</th>
+                              <th width="25%">商品SKU</th>
+                              <th width="20%">商品价格</th>
+                              <th width="20%">商品库存</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>     
+                    </div>
+
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">产品售价</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="产品售价" name="info[original_price]" value="{$info['original_price']}" class="form-control" id="original_price">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">促销价</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="促销价" name="info[price]" value="{$info['price']}" class="form-control" id="price">
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label class="col-sm-2 control-label">税率</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="税率" name="info[tariff]" value="{$info['tariff']}" class="form-control" id="tariff">
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">重量</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="重量" name="info[weight]" value="{$info['weight']}" class="form-control" id="weight">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">总销量</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="总销量" name="info[sales]" value="{$info['sales']}" class="form-control" id="sales">
+                        </div>
+                    </div>
+                    <div class="line line-dashed line-lg pull-in"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图 片</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="info[pics]" id="pdpic" value="{$pics}" class="form-control" placeholder="选择图片" readonly="">
+                            <div class="over-flow" id="picarea" style="position: relative; margin-top: 10px;">
+                                {if condition = "$info['pics']"}
+                                  {foreach name="info['pics']" item="fp" key="k"}
+                                    <div class="tabbox" style="width:50px; height:50px">
+                                          <img id="img{$k}" src="{$fp}" width="50" height="50">
+                                          <div class="imgbg" style="width:50px; height:50px">
+                                            <a style="position: absolute;cursor:pointer;left:3px;top:15px"><i title="查看" onclick="view({$k})" class="fa fa-eye" style="color: #fff"></i></a>
+                                            <a style="position: absolute;cursor:pointer;right:3px;top:15px"><i title="删除" onClick="delFile1({$k},'pdpic')" class="fa fa-trash-o" style="color: #fff"></i></a>
+                                          </div>
+                                    </div>
+                                  {/foreach}
+                                {else}
+                                    <div class="tabbox" style="width:50px; height:50px">
+                                          <img src="/static/admin/images/thumb.jpg" width="50" height="50">
+                                    </div>
+                                {/if}
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed line-lg pull-in"></div>
+                <div class="form-group">
+                <label class="col-sm-2 control-label">内 容</label>
+                <div class="col-sm-10">
+                  <textarea name="info[content]" style="width:100%;height:300px;visibility:hidden;" class="form-control" id="ncontent" placeholder="资讯内容">{$info['content']}</textarea>
+                </div>
+                </div>
+                </form>
+                            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2" style="text-align:center; width:76%;">
+                    <button type="button" class="btn btn-primary pd_submit" > 提 交 </button>
+                    <button type="button" class="btn btn-reset"> 重 置 </button>
+                    
+            </div>
+            </div> 
+            </div>
+
+       </div>
+   </div>
+ </section>
+
+</section>
+<iframe id="iframuserlogo" src="/admin/upload?updir=products&picarea=picarea&inpic=pdpic&isshow=true&shownum=more&pw=50&ph=50&style=1" name="iframuserlogo" style="display:none"></iframe>
+
+
+<!--查看图片 -->
+<div class="modal fade" id="modal-view" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                      <div style="padding:2px 20px;">
+                        <div >
+                          <h4 class="m-t-none m-b">查看图片</h4>
+                          <a  style="position: absolute;cursor:pointer;top:15px;right:25px"><i title="关闭" onclick="closeView()" class="fa  fa-times fa-lg" style="color: #000"></i></a>
+                        </div>
+                      </div>
+                        <hr style="margin: 0;">
+                        <div style="padding:10px 20px;">
+                          <img id="viewpic" src="" style="width:100%">
+                        </div>
+                      <hr style="margin: 0;">
+                      <div style="text-align:right;padding-right: 20px">
+                        <a onclick="closeView()" class="btn btn-primary" style="margin-top: 10px">关闭</a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<script src="/static/admin/js/dispose_attribute.js"></script>
+<script type="text/javascript">
+  var attr = {:json_encode($attr)};
+  var attr_price = {:json_encode($attr_price)};
+  var tablehtml = '';
+  var attrhtml = '';
+  attr_table();
+
+  function attr_table(){
+    if(attr.length == 0){
+      attr = [{"spec_kind":"规格","spec":[{"akey":"规格","avalue":"默认"}]}];
+    }
+    attrhtml = '';
+    tablehtml = '';
+    var key = 0;
+    for (var a = 0; a < attr.length; a++) {
+       attrhtml += `
+        <ul class="listfour">
+          <li data-key="`+a+`">
+            <label>键名:</label>
+            <input type="text" class="addakey" value="`+attr[a].spec_kind+`" placeholder="请输入类型.."> 
+            <a href="javascript:;" class="delakey"><i class="fa fa-trash-o"></i></a>
+          </li>
+          <li data-key="`+a+`">
+            <label>键值:</label>`;
+      for (var s = 0; s < attr[a].spec.length; s++) {
+        attrhtml += `
+          <span data-key="`+s+`">
+            <input type="hidden" name="attr[`+key+`][id]" value="`+((attr[a].spec[s] && attr[a].spec[s].id) ? attr[a].spec[s].id : '')+`">
+            <input type="hidden" name="attr[`+key+`][akey]" value="`+((attr[a].spec[s] && attr[a].spec_kind) ? attr[a].spec_kind : '')+`">
+            <input class="btn btn-info editavalue" type="text" name="attr[`+key+`][avalue]" value="`+attr[a].spec[s].avalue+`"> 
+            <a href="javascript:;" class="delavalue"><i class="fa fa-trash-o"></i></a>
+          </span>`;
+        key++;
+      }
+      attrhtml += `
+          <span data-key="`+attr[a].spec.length+`">
+              <input type="text" class="addavalue" placeholder="请输入.."> 
+            </span>
+          </li>
+        </ul>`;
+    }
+    $(".attrinfo").html(attrhtml + '<a href="javascript:;" class="btn btn-primary addattr"> 新 增 </a>');
+    if(attr.length == 1){
+      tables = attr2price(attr)[0];
+    }else{
+      //console.log(attr2price(attr));
+      tables = CartesianProduct(attr2price(attr));
+    }
+    for (var i = 0 ; i < tables.length; i++) {
+      tablehtml += `
+      <tr data-key="`+i+`">
+        <input type="hidden" name="attr_price[`+i+`][id]" value="`+((attr_price[i] && attr_price[i].id) ? attr_price[i].id : '')+`">
+        <td><input type="hidden" name="attr_price[`+i+`][values]" value="`+tables[i]+`">`+tables[i]+`</td>
+        <td><input type="text" name="attr_price[`+i+`][sku]" class="form-control editsku" value="`+((attr_price[i] && attr_price[i].sku) ? attr_price[i].sku : '0')+`"></td>
+        <td><input type="text" name="attr_price[`+i+`][price]" class="form-control editprice" value="`+((attr_price[i] && attr_price[i].price) ? attr_price[i].price : '0')+`"></td>
+        <td><input type="text" name="attr_price[`+i+`][stock]" class="form-control editstock" value="`+((attr_price[i] && attr_price[i].stock) ? attr_price[i].stock : '0')+`"></td>
+      </tr>`;
+    }
+    $("#attr_price tbody").html(tablehtml);
+  }
+
+  function attr2price(array){
+    var prices = [];
+    for (var i = 0; i < array.length; i++) {
+      if(array[i].spec.length > 0){
+        var returns = [];
+        for (var s = 0; s < array[i].spec.length; s++) {
+          returns.push(array[i].spec[s].avalue);
+        }
+        prices.push(returns);
+      }
+    }
+    return prices;
+  }
+
+  function CartesianProduct(arrs){
+    result = [];
+    for(i=0 ; i < arrs.length-1; i++){
+      if(i==0){
+          result = arrs[i];
+      }
+      tmp = [];
+      result.forEach(function(res,ri){
+        arrs[i+1].forEach(function(set,si){
+          tmp.push(res + ',' + set);
+        });
+      });
+      result = tmp;
+    }
+    return result;
+  }
+</script>
+<script language="javascript">
+$(function(){
+	$("#pdpic").on("click",this,function(){
+		$(window.frames["iframuserlogo"].document).find("#pic").trigger("click");
+	})
+
+  $(".attrinfo").on("click",".addattr",function(){
+    attr.push({'spec_kind':'','spec':[]});
+    attr_table();
+  });
+
+  $(".attrinfo").on("click",".delavalue",function(){
+    attr[$(this).parent().parent().data('key')].spec.splice($(this).parent().data('key'), 1);
+    attr_table();
+  });
+
+  $(".attrinfo").on("click",".delakey",function(){
+    attr.splice($(this).parent().data('key'), 1);
+    attr_table();
+  });
+
+  $(".attrinfo").on("blur",".addakey",function(){
+    if($(this).val().length > 0){
+      attr[$(this).parent().data('key')].spec_kind = $(this).val();
+    }
+    attr_table();
+  });
+
+  $(".attrinfo").on("blur",".addavalue",function(){
+    if($(this).val().length > 0){
+      attr[$(this).parent().parent().data('key')].spec.push({'avalue':$(this).val()});
+    }
+    attr_table();
+  });
+
+  $(".attrinfo").on("blur",".editavalue",function(){
+    if($(this).val().length > 0){
+      attr[$(this).parent().parent().data('key')].spec[$(this).parent().data('key')].avalue = $(this).val();
+    }
+    attr_table();
+  });
+
+  $("#attr_price").on("blur",".editsku",function(){
+    if($(this).val().length > 0 && attr_price[$(this).parent().parent().data('key')]){
+      attr_price[$(this).parent().parent().data('key')].price = $(this).val();
+    }
+  });
+
+  $("#attr_price").on("blur",".editprice",function(){
+    if($(this).val().length > 0 && attr_price[$(this).parent().parent().data('key')]){
+      attr_price[$(this).parent().parent().data('key')].price = $(this).val();
+    }
+  });
+  
+  $("#attr_price").on("blur",".editstock",function(){
+    if($(this).val().length > 0 && attr_price[$(this).parent().parent().data('key')]){
+      attr_price[$(this).parent().parent().data('key')].stock = $(this).val();
+    }
+  });
+
+  //提交
+  $(".pd_submit").on("click",function(){
+      $('#ncontent').val(editor.html());
+      /*alert(editor.html());
+      return;*/
+      $(this).prop("disabled",true);
+      var id = {$info['id']?$info['id']:0};
+      $.ajax({
+        type:'post',
+        url:"/admin/shoppds/savePd?id={$info['id']}",
+        data:$('#pdinfo').serialize(),
+        cache:false,
+        success: function(data){
+          console.log(data);
+          //成功
+          if (data.status == 0) {
+            layer.msg(data.msg,{
+                          icon:6,
+                          time:1000,
+                      });
+
+            setTimeout(function(){
+                location.href="/admin/shoppds";
+            },1000);
+          }
+          //报错
+          if (data.status == 1) {
+            layer.msg(data.msg,{
+                          icon:5,
+                          time:2000,
+                      });
+            $(".btn-primary").prop("disabled",false);
+          }        
+        }
+      })
+  })
+  //重置
+  $(".btn-reset").click(function(){
+       editor.html("");
+       $("#pdinfo .form-control").val("");
+       $("#pdattrinfo #type_id").val("");
+       $("#profile .attr-float").remove();
+       $("#picarea i.fa-trash-o").each(function(){ 
+          $(this).trigger('click');
+          //alert("sdn");
+       })    
+   });
+
+  $("#tid").on("change",this,function(){
+	  $("#type_id").val($(this).val());
+	  $("#type_id").trigger("change");
+	  
+  })
+
+})
+
+</script>

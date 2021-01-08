@@ -1,0 +1,20 @@
+.paybox{ width: 1158px;margin:0 auto 20px auto; border:1px solid #eaeaea; padding:20px; font-size: 14px; color: #999; }
+.paybox h2{ font-size: 18px; color: #333; margin: 0 0 5px 0; font-weight: normal;}
+.paybox h2 span{ font-size: 18px; color: #d60000; font-weight: bold;}
+.paybox h2 img{ margin: 0 5px 3px 0; vertical-align: middle;}
+.paybox h3 {font-size: 14px; font-weight: normal;}
+.paybox h3 span{ color: #d60000; }
+.paybox hr{ margin: 20px 0; }
+.paybox h4{width: 100%; font-size: 12px; font-weight: normal; margin-bottom: 5px;}
+.paybox h4 a{ float: right; cursor: pointer;}
+
+.paymethod{ width: 100%;}
+.paymethod ul li{ width: 100%; line-height: 60px;}
+.paymethod ul li input[type="radio"]{ width: 16px; height: 16px; vertical-align: text-bottom;}
+.paymethod ul li img{ margin: 0 35px; vertical-align: middle;}
+.paymethod ul li b{ margin-left: 34px;}
+.paymethod ul li b span{ color: #d60000;}
+.paymethod button{ background: #d60000; padding: 11px 46px; border-radius:4px; color: #fff; font-size: 16px; cursor: pointer; border: none; margin: 20px 0;}
+
+.payedbutton{ width: 100%; margin: 10px 0;}
+.payedbutton input{ width: 250px; line-height: 28px; line-height: 28px; border: 1px solid #e0e0e0; border-radius: 4px; padding-left: 5px; outline: none;}

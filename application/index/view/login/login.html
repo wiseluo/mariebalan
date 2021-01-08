@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登入</title>
+</head>
+<body>
+<link rel="stylesheet" href="/static/index/css/module/index/global.css">
+<link rel="stylesheet" href="/static/index/css/module/login/login.css">
+<script type="text/javascript" src="/static/index/plugins/jQuery/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/static/index/plugins/jQuery/jquery.cookie.js"></script>
+
+<div id="loading">
+    <div id="loading-center"></div>
+</div>
+<div class="wrapper-content " style="opacity: 0;">
+    <div class="common-header">
+        <div class="logo_H1"><a href="/index"><img src="/static/index/images/logo.png" alt=""></a></div>
+    </div>
+    <div class="common-boby red-bg">
+        <div class="login_con clearfix">
+            <div class="loaion_banner">
+                <a href="/index"></a>
+            </div>
+            <div class="login_cont">
+                <div class="login_nav">
+                    <span class="signin ">账号登录</span>
+                    <!-- <span class="signup "><a href="javascript:void(0)">手机动态登录</a></span>
+                    <span class="putoup "><a href="javascript:void(0)">切换至普通登入</a></span> -->
+                </div>
+                <!--onSubmit="return userLogin()"-->
+
+                <form  id="login_form" class="panel-body wrapper-lg" autocomplete="off" data-parsley-validate >
+                    <div class="input_signin active">
+                        <div class="form-field this_user_name">
+                            <input class="input" id="login_user_name" data-parsley-required="true"  name="info[username]"  type="text" aria-label="用户名" placeholder="用户名" value="">
+                            <!--<div class="hint">请输入用户名</div>-->
+                        </div>
+                        <div class="form-field this_user_password">
+                            <input class="input" id="login_password" data-parsley-required="true"   data-parsley-type="number"   type="password"name="info[password]" aria-label="密码" placeholder="密码" value="">
+                            <!--<div class="hint" style="display: none;">请填写手机号</div>-->
+                        </div>
+                        <div class="form-field this_signup_phone">cookie
+                            <i></i>
+                            <input class="input account" id="phone" type="text" aria-label="手机号（仅支持中国大陆）" placeholder="手机号（仅支持中国大陆）">
+                            <!--<div class="hint">请填写手机号</div>-->
+                        </div>
+                        <div class="form-field this_signup_yzm">
+                            <i></i>
+                            <input class="input" id="yzm" type="text" aria-label="验证码" maxlength="4" placeholder="动态码">
+                            <!--<div class="yzm_button" >获取动态码</div>-->
+                            <input class="yzm_button" type="button" id="yzm_button"  value="免费获取验证码"  >
+
+                        </div>
+                        <!-- 七天自动登录 -->
+                        <div class="form-field form-field--auto-login cf">
+                            <a href="#" class="forget-password"> 忘记密码？</a>
+                            <input id="autologin" class="f-check ui-checkbox" value="1" name="auto_login" type="checkbox">
+                            <label class="normal" for="autologin">7天内自动登录</label>
+                        </div>
+                        <div class="form-field">
+                            <span class="show_login"> 还没有账号？ <a href="/ucenter/register">免费注册</a> </span>
+                        </div>
+                        <input type="button" id="button" class="button" name="button" value="登录">
+                        <div class="form-field treaty_title">
+                            <p class=" treaty-block" style="">
+                                提示： 未注册尽情购账号的手机号，登录时将自动注册尽情购账号，且代表您已同意
+                                <a href="###" target="_blank">《尽情购用户协议》</a>
+                            </p>
+                        </div>
+                        <div class="oauth-wrapper">
+                            <h3 class="title-wrapper">
+                                <span class="title">用合作网站账号登录</span>
+                            </h3>
+                            <div class="oauth ">
+                                <a class="oauth__link oauth__link--qq" href="##"  target="_blank"></a>
+                                <a class="oauth__link oauth__link--weibo" href="##"  target="_blank"></a>
+                                <a class="oauth__link oauth__link--weixin" href="##"  target="_blank"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+
+        <div class="copyright">
+            <div id="bottom" style="margin-top:10px;">
+                <a href="/index/link/contact_us">联系我们</a><span>|</span>
+                <a href="/index/link/service_us">服务协议</a><span>|</span>
+                <a href="/join/join/joinIndex">商家入驻</a><span>|</span>
+                <a href="/index/link/zhao_us">企业招聘</a><span>|</span>
+                <a href="/index/link/dz_us">电子公告服务规则</a><span>|</span>
+                <a href="/index/help/process">帮助中心</a>
+                <p>Copyright © 1998 - 2010 legou.com. All Rights Reserved</p>
+                <p>跨境洋货版权所有</p>
+            </div>
+
+        </div>
+    </footer>
+</div>
+<style>
+    input{ width:100%;}
+</style>
+<script type="text/javascript" src="/static/index/plugins/layer/layer.js"></script>
+
+<script type="text/javascript" src="/static/index/js/module/login/login.js"></script>
+<script type="text/javascript" src="/static/index/plugins/parsley/parsley.js"></script>
+
+
+</body>
+</html>

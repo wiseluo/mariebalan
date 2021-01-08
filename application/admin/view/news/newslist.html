@@ -1,0 +1,149 @@
+<style>
+.title-b a:hover{ color:#F63;}
+</style>
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a >资讯案例</a></li>
+              <li><a >资讯信息</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">资讯信息</h3>
+              
+            </div>
+            <section class="panel panel-default">
+              <header class="panel-heading">删除将无法恢复，请谨慎你的操作！</header>
+              <div class="row text-sm wrapper">
+                <div class="col-sm-5 m-b-xs">
+                  <select id="doval" class="input-sm form-control input-s-sm inline">
+                    <option value="">操作类型</option>
+                    <option value="dels">删除</option>
+                    <option value="flag">审核</option>
+                    <option value="canelflag">取消审核</option>
+                  </select>
+                  <button id="delnewss" class="btn btn-sm btn-default">执行</button>
+                </div>
+                <div class="col-sm-4 m-b-xs" style="display:none">
+                  <div class="btn-group" data-toggle="buttons">
+
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input type="text" class="input-sm form-control" id="wk" value="{$wk}" placeholder="关键词">
+                    <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default" onClick="window.document.location='/admin/news/search?wk='+$('#wk').val()" type="button">搜索</button>
+                    </span> </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                  <thead>
+                    <tr>
+                      <th width="20"><input type="checkbox"></th>
+                      <th width="80">图片 </th>
+                      <th>标题</th>
+                      <th width="6%">状态</th>
+                      <th width="8%">类型</th>
+                      <th width="10%">日期</th>
+                      <th width="10%">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+             
+              {foreach name="dbs.data" item="rs" key="k"}
+              <tr id="newslist{$rs['id']}">
+                  <td><input class="newsid" type="checkbox" name="IDS[]" value="{$rs['id']}"></td>
+                  <td>
+                    {if condition="isset($rs['ext'])"}
+                         <img src="/uploads/news/{$rs['pic']}.thumb.jpg" width="30" onclick="" />
+                      {else}
+                         <img src="" width="30" onclick="" />
+                    {/if}
+                  </td>
+                  <td class="title-b"><a href="/admin/news/newsadd?id={$rs['id']}" >{$rs['title']}</a></td>
+                  <td>{if($rs['flag'])}已审{else}<font color="#FF0000">未审</font>{/if}</td>
+                  <td>
+                    {$rs['tid_str']}
+                  </td>
+
+                  <td>{$rs['addtime']}</td>
+                  <td>
+                    <a  class="btn btn-primary btn-xs " href="/admin/news/newsadd?id={$rs['id']}&wk={$wk}"><i class="fa fa-edit"></i></a>
+                    <a data-id="{$rs['id']}" class="btn btn-danger btn-xs delnews"><i class="fa fa-trash-o"></i></a>
+                  </td>
+              </tr>
+              {/foreach}
+              
+</tbody>
+                </table>
+              </div>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 hidden-xs">
+<a class="btn btn-sm btn-danger" href="/admin/news/newsadd?id=0">新增</a>
+                  </div>
+                  <div class="col-sm-4 text-center"></div>
+                  <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                     {$page|raw}
+                    </ul>
+                  </div>
+                </div>
+              </footer>
+            </section>
+</section>
+<script language="javascript">
+$(function(){
+  $(".delnews").on("click",this,function(){
+    if(!confirm('你确定要删除吗？'))
+      return false;
+    var id=$(this).attr("data-id");
+    //console.log(id);
+    $.ajax({
+      type:"GET",
+      cache:false,
+      url:"/admin/news/delete?id="+id,
+      success: function(data){
+        //if(data=='suss'){
+          $("#newslist"+id).hide();
+        //}
+      }
+    })
+  })
+  $("#delnewss").on("click",this,function(){
+    var doval=$("#doval").val();
+    if(doval==''){
+      alert('请选择操作类型！');
+      return false;
+    }
+    if(doval=='dels'){
+      if(!confirm('你确定要批量删除吗？'))return false;
+    }
+    var IDS={};
+    var i=0;
+    $(".newsid").each(function(index, element) {
+      if($(this).prop("checked")){
+        i=i+1;
+        IDS[i]=$(this).val();
+      }
+        });
+    if(i==0){
+      alert("请选择咨询信息后再操作！");return false;
+    }
+    $.ajax({
+      type:"POST",
+      cache:false,
+      url:"/admin/news/"+doval,
+      data:{IDS:IDS},
+      success: function(data){
+        //if(data=='suss'){
+          window.location.reload();
+        //}
+      }
+    })
+  })  
+  
+})
+
+</script>

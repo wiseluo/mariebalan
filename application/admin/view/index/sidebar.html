@@ -1,0 +1,103 @@
+<style>
+.subNavBox span {
+    background-color: #f00;
+    border-radius: 10px;
+    padding: 2px 2px;
+    position: absolute;
+    right: 85px;
+    top: 3px;
+    line-height: 1;
+    font-size: 12px;
+    color: #fff;
+}
+</style>
+<div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333"> <!-- nav -->
+              <nav class="nav-primary hidden-xs">
+                <ul class="nav">
+                  <li data-id="0" class="menuoneload {$_C[0]}"> <a href="/admin" class="{$_C[0]}"> <i class="fa fa-home icon"> <b class="bg-danger"></b> </i> <span>首页</span> </a> </li>
+{foreach name="sidebar" item="rs1" key="k"}
+	{if($rs1['fid']==0)}
+		{php}if(empty($_C[$rs1['id']]))$_C[$rs1['id']]='';{/php}
+		{if(empty($marr[$rs1['id']]))}
+		
+		<li data-id="{$rs1['id']}" class="menuoneload {$_C[$rs1['id']]}"> <a href="{$rs1['mod']}" class="{$_C[$rs1['id']]}">  <i class="fa {$rs1['cssico']} icon"> <b class="bg-success"></b> </i> <span>{$rs1['name']}</span> </a> </li>
+		{else}
+		<li  data-id="{$rs1['id']}" class="menuone {$_C[$rs1['id']]}"> <a href="{$rs1['mod']}" class="{$_C[$rs1['id']]}"> <i class="fa {$rs1['cssico']} icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span class="subNavBox">{$rs1['name']}{if $rs1['name'] == "订单管理"}<span>{$orderSum}</span>{/if}</span> </a>
+			<ul class="nav lt" {if($_C[$rs1['id']])}style="display: block;"{/if}>
+			{foreach name="sidebar" item="rs2" key="k2"}
+			{if($rs2['fid']==$rs1['id'])}
+			{php}if(empty($_C[$rs2['id']]))$_C[$rs2['id']]='';{/php}
+			{if(empty($marr[$rs2['id']]))}
+			<li data-id="{$rs2['id']}" class="menutwoload {$_C[$rs2['id']]}"> <a href="{$rs2['mod']}" class="{$_C[$rs2['id']]}"> <i class="fa {$rs2['cssico']} icon"></i> <span class="subNavBox">{$rs2['name']}{if $rs2['name'] == "待发货订单"}<span>{$orderSum}</span>{/if}</span> </a> </li>
+			{else}
+			<li data-id="{$rs2['id']}" class="menutwo {$_C[$rs2['id']]}"> <a href="{$rs2['mod']}" class="{$_C[$rs2['id']]}"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> <span style="font-weight:bold">{$rs2['name']}</span> </a>
+				<ul class="nav bg" {if($_C[$rs2['id']])}style="display: block;"{/if}>
+				{foreach name="sidebar" item="rs3" key="k3"}
+				{php}if(empty($_C[$rs3['id']]))$_C[$rs3['id']]='';{/php}
+				{if($rs3['fid']==$rs2['id'])}
+				print <<<EOT
+				<li data-id="{$rs3['id']}" class="menuthree {$_C[$rs3['id']]}"> <a href="{$rs3['mod']}" class="{$_C[$rs3['id']]}"> <i class="fa {$rs3['cssico']}"></i> <span>{$rs3['name']} </span> </a> </li>
+				{/if}
+				{/foreach}
+				</ul>
+			{/if}
+			</li>
+			{/if}
+			{/foreach}
+			</ul>
+		{/if}
+		</li>
+	{/if}
+{/foreach}
+</ul>
+</nav>
+</div>
+
+<script>
+{php}if(empty($_COOKIE['menuone']))$_COOKIE['menuone']='';{/php}
+var menuone='{$_COOKIE['menuone']}';
+{php}if(empty($_COOKIE['menutwo']))$_COOKIE['menutwo']='';{/php}
+var menutwo='{$_COOKIE['menutwo']}';
+{php}if(empty($_COOKIE['menuthree']))$_COOKIE['menuthree']='';{/php}
+var menuthree='{$_COOKIE['menuthree']}';
+$(function(){
+	
+	$(".menuone").on("click",this,function(){
+		menuone=$(this).attr("data-id"); 
+		console.log(menuone);
+	});
+	
+	$(".menuoneload").on("click",this,function(){
+		menuone=$(this).attr("data-id"); 
+		menutwo=menuthree='';
+		setMenuCookie();
+	});	
+	$(".menutwo").on("click",this,function(){
+		menutwo=$(this).attr("data-id");
+		console.log(menutwo); 
+	});
+	
+	$(".menutwoload").on("click",this,function(){
+		menutwo=$(this).attr("data-id");
+		menuthree='';
+		setMenuCookie(); 
+	});
+	$(".menuthree").on("click",this,function(){
+		menuthree=$(this).attr("data-id");
+		setMenuCookie();
+	});
+});
+function setMenuCookie(){
+	console.log(menuone);
+	console.log(menutwo);
+	$.cookie('menuone', menuone,{path:'/'}); 
+	$.cookie('menutwo', menutwo,{path:'/'}); 
+	$.cookie('menuthree', menuthree,{path:'/'});
+	console.log($.cookie('menuone'));
+	console.log($.cookie('menutwo'));
+	{if $_U['id']==2}
+	//alert(menuone+'--'+menutwo);
+	{/if}
+
+}
+</script>

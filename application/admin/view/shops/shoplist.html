@@ -1,0 +1,172 @@
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a>系统设置</a></li>
+              <li><a >店铺管理</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">店铺列表</h3>
+              
+            </div>
+            <section class="panel panel-default">
+              <header class="panel-heading">删除店铺将无法恢复，请谨慎你的操作！</header>
+              <div class="row text-sm wrapper">
+                <div class="col-sm-5 m-b-xs">
+                  <select id="doval" class="input-sm form-control input-s-sm inline">
+                    
+                    <option value="">操作类型</option>
+                    <option value="dels">删除</option>
+                    <option value="flag">显示</option>
+                    <option value="canelflag">不显示</option>
+                     </select>
+                  <button id="delshops" class="btn btn-sm btn-default">执行</button>
+                </div>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input type="text" class="input-sm form-control" id="wk" value="{$wk}" placeholder="关键词">
+                    <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default" onClick="if($('#wk').val()!='')window.document.location='?mod=shop&ac=shoplist&wk='+$('#wk').val()" type="button">搜索</button>
+                    </span> </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                  <thead>
+                    <tr>
+                      <th width="20"><input type="checkbox"></th>
+                      <th width="60">图片</th>
+                      <th>名称</th>
+                      <th>地址</th>
+                     
+                      
+                      <th>服务期限</th>
+                      <th>注册日期</th>
+        
+                      <th width="120">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+{if(is_array($dbs))}
+{foreach from=$dbs item=rs key=k}
+<tr id="shoplist{$rs[id]}" class="dbeditshop">
+                      <td><input class="shopid" type="checkbox" value="{$rs[id]}"></td>
+                      <td><img src="{$_G[uploadfile]}/{$rs[pic]}.120x100.jpg" {if($rs[pic])}onclick="window.open('{$_G[uploadfile]}/{$rs[pic]}')"{/if} width="30"></i></td>
+                      <td class="name">{$rs[title]}</td>
+                      <td>{$rs[adds]}</td>
+                
+                      
+                      <td>{if($rs[vipsdate] and $rs[vipedate])}{$rs[vipsdate]=date('Y-m-d',$rs[vipsdate])}-{$rs[vipedate]=date('Y-m-d',$rs[vipedate])}{/if}</td>
+                      <td>{$rs[addtime]=date('Y-m-d',$rs[addtime])}</td>
+                      <td>
+                      <a data-id="{$rs[id]}"  class="btn btn-primary btn-xs editshop"><i class="fa fa-edit"></i></a>
+                      
+                      
+                      </td>
+</tr>
+{/if}
+{/foreach}
+
+</tbody>
+                </table>
+              </div>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm">第{$page}页 每页{$_G[pagesize]}条 共{$rowsall}条</small> </div>
+                  <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$pagestr}
+                    </ul>
+                  </div>
+                </div>
+              </footer>
+            </section>
+</section>
+
+<div class="modal fade" id="modal-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+<div style="padding:2px 20px;">
+<h3 class="m-t-none m-b">店铺修改</h3>
+<p>请认真比对店铺信息.</p>
+<form role="form" id="shopinfo">
+
+</form>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script language="javascript">
+$(function(){
+	$(".delshop").on("click",this,function(){
+		if(!confirm('你确定要删除吗？'))return false;
+		var id=$(this).attr("data-id");
+		$.ajax({
+			type:"GET",
+			cache:false,
+			url:"?mod=shop&ac=shoplist&do=del&id="+id,
+			success: function(data){
+				if(data=='suss'){
+					$("#shoplist"+id).hide();
+				}
+			}
+		})
+	})
+	$("#delshops").on("click",this,function(){
+		var doval=$("#doval").val();
+		if(doval==''){
+			alert('请选择操作类型！');
+			return false;
+		}
+		if(doval=='dels'){
+			if(!confirm('你确定要批量删除吗？'))return false;
+		}
+		var IDS={};
+		var i=0;
+		$(".shopid").each(function(index, element) {
+			if($(this).prop("checked")){
+				i=i+1;
+				IDS[i]=$(this).val();
+			}
+        });
+		if(i==0){
+			alert("请选择用户后再操作！");return false;
+		}
+		$.ajax({
+			type:"POST",
+			cache:false,
+			url:"?mod=shop&ac=shoplist&do="+doval,
+			data:{IDS:IDS},
+			success: function(data){
+				if(data=='suss'){
+					window.location.reload();
+				}else{
+					alert(data);
+				}
+			}
+		})
+	})	
+	
+	$(".editshop,#addshops").on("click",this,function(){
+		var id=$(this).attr("data-id");
+		
+		$.ajax({
+			type:'GET',
+			url:'?mod=shop&ac=shopadd&id='+id,
+			cache:false,
+			success: function(data){
+				$("#shopinfo").html(data);
+				$("#modal-form").modal("show");
+			}
+		})
+	})
+	$(".dbeditshop").on("dblclick",this,function(){
+		$(this).find(".editshop").trigger("click");
+	})
+})
+
+</script>

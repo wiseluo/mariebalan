@@ -1,0 +1,223 @@
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="/admin"><i class="fa fa-home"></i> 首页</a></li>
+              <li><a>店铺管理</a></li>
+              <li><a >商家入驻</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">商家管理</h3>
+              
+            </div>
+            <section class="panel panel-default">
+              <header class="panel-heading">删除商家将无法恢复，请谨慎你的操作！</header>
+              <div class="row text-sm wrapper">
+                <div class="col-sm-5 m-b-xs">
+                  <select id="doval" class="input-sm form-control input-s-sm inline">
+                    
+                    <option value="">操作类型</option>
+                    <option value="deletes">删除</option>
+                    <option value="makeflags">开通商家</option>
+                    <!-- <option value="canelflag">不显示</option> -->
+                     </select>
+                  <button id="delshops" class="btn btn-sm btn-default">执行</button>
+                </div>
+                <div class="col-sm-3">
+                  <div class="input-group">
+                    <input type="text" class="input-sm form-control" id="wk" value="{$wk}" placeholder="关键词">
+                    <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default" onClick="window.document.location='/admin/business/search?wk='+$('#wk').val()" type="button">搜索</button>
+                    </span> </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                  <thead>
+                    <tr>
+                      <th width="20"><input type="checkbox"></th>
+                      <th width="60">图片</th>
+                      <th>名称</th>
+                      <th>地址</th>
+                     
+                      
+                      <th>电话</th>
+                      <th>注册日期</th>
+        
+                      <th width="120">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+{foreach name="dbs" item="rs" key="k"}
+<tr id="shoplist{$rs['id']}" class="dbeditshop">
+                      <td><input class="shopid" type="checkbox" value="{$rs['id']}"></td>
+                      <td><img src="{$_G['uploadfile']}/shop/{$rs['pic']}.thumb.jpg" width="30"></td>
+                      <td class="name">{$rs['title']}</td>
+                      <td>{$rs['adds']}</td>
+                      <td>{$rs['tel']}</td>
+                      <td>{$rs['addtime']}</td>
+                      <td>
+                      <a data-id="{$rs['id']}" href="/admin/business/addbusiness?id={$rs['id']}"  class="btn btn-primary btn-xs editshop"><i class="fa fa-edit"></i></a>
+                      <a data-id="{$rs['id']}" class="btn btn-danger btn-xs delshop"><i class="fa fa-trash-o"></i></a>
+                      <a data-id="{$rs['id']}" class="btn btn-info btn-xs flagshop" title="开通商家"><i class="fa fa-check-square"></i></a>
+                      </td>
+</tr>
+{/foreach}
+
+</tbody>
+                </table>
+              </div>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 hidden-xs">
+<!-- <button class="btn btn-sm btn-success" data-id="0" id="addshops">新增</button> -->
+                    <a class="btn btn-sm btn-danger"  href="/admin/business/addbusiness">新增</a>
+                  </div>
+                  <div class="col-sm-4 text-center"> <small class="text-muted inline m-t-sm m-b-sm">第{$page}页 每页{$listRows}条 共{$rowsall}条</small> </div>
+                  <div class="col-sm-4 text-right text-center-xs">
+                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                      {$pagestr}
+                    </ul>
+                  </div>
+                </div>
+              </footer>
+            </section>
+</section>
+
+<div class="modal fade" id="modal-form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+<div style="padding:2px 20px;">
+<h3 class="m-t-none m-b">商家信息</h3>
+<form role="form" id="shopinfo">
+
+</form>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<script language="javascript">
+$(function(){
+	$(".delshop").on("click",this,function(){
+		if(!confirm('你确定要删除吗？'))return false;
+		var id=$(this).attr("data-id");
+		$.ajax({
+			type:"GET",
+			cache:false,
+			url:"/admin/business/delete?id="+id,
+			success: function(data){
+				if(data.status == 0){
+          layer.msg("删除成功",{
+                          icon:6,
+                          time:1000,
+                      });
+          $("#shoplist"+id).hide();
+        } else {
+            layer.msg("删除失败",{
+                            icon:5,
+                            time:1000,
+                        });
+        }
+			}
+		})
+	})
+  //开通商家
+  $("a.flagshop").on("click",this,function(){
+    var id=$(this).attr("data-id");
+    $.ajax({
+      type:"GET",
+      cache:false,
+      url:"/admin/business/makeflag?id="+id,
+      success: function(data){
+        if(data.status == 0){
+          layer.msg("操作成功",{
+                          icon:6,
+                          time:1000,
+                      });
+          setTimeout(function(){
+              window.location.reload(); 
+            },1000);
+        } else {
+            layer.msg("操作失败",{
+                            icon:5,
+                            time:1000,
+                        });
+        }
+      }
+    })
+
+  });
+
+	$("#delshops").on("click",this,function(){
+		var doval=$("#doval").val();
+		if(doval==''){
+			alert('请选择操作类型！');
+			return false;
+		}
+		if(doval=='delete'){
+			if(!confirm('你确定要批量删除吗？'))return false;
+		}
+		var IDS={};
+		var i=0;
+		$(".shopid").each(function(index, element) {
+			if($(this).prop("checked")){
+				i=i+1;
+				IDS[i]=$(this).val();
+			}
+        });
+		if(i==0){
+			alert("请选择商家后再操作！");return false;
+		}
+		$.ajax({
+			type:"POST",
+			cache:false,
+			url:"/admin/business/"+doval,
+			data:{IDS:IDS},
+			success: function(data){
+				if (data.status == 0){
+          layer.msg("操作成功",{
+                          icon:6,
+                          time:1000,
+                      });
+          setTimeout(function(){
+              window.location.reload(); 
+            },1000);
+        } else {
+            layer.msg("操作失败",{
+                            icon:5,
+                            time:1000,
+                        });
+        }
+			}
+		})
+	})	
+	
+	/*$(".editshop,#addshops").on("click",this,function(){
+		var id=$(this).attr("data-id");
+
+		$.ajax({
+			type:'GET',
+			url:'/admin/business/readbus?id='+id,
+			cache:false,
+			success: function(data){
+				$("#shopinfo").html(data);
+				$("#modal-form").modal("show");
+        //$("div.modal-backdrop").hide();
+			}
+		})
+
+	})*/
+
+
+	$(".dbeditshop").on("dblclick",this,function(){
+		$(this).find(".editshop").trigger("click");
+	})
+})
+
+</script>

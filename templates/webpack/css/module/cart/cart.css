@@ -1,0 +1,358 @@
+*{
+	font-family: "Microsoft YaHei";
+}
+a{
+	color: #000;
+}
+a:active, a:visited, a:hover{
+	color: #000;
+	text-decoration: none;
+}
+.head_item{
+	line-height: 32px;
+    padding: 5px 10px;
+}
+.products_list{
+	margin: 0;
+	padding: 0; 
+}
+.products_list .list_item{
+	position: relative;
+	padding: 10px 0;
+}
+.products_list .list_item .select{
+	width:24px;  
+	height:24px;
+	position:absolute;  
+	left:2%;  
+	top:50%;  
+	margin:-12px 0 0 -1px;
+}
+.products_list .list_item .select .am-checkbox{
+	margin: 0;
+}
+.products_list .list_item .information{
+	padding-left: 20px;
+}
+.products_list .list_item .information .am-u-sm-4{
+	padding-right: 0;
+}
+.products_list .list_item .information img{
+	height: 85px;
+}
+.products_list .list_item .information .title{
+	line-height: 15px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.products_list .list_item .information .delete_item{
+    width: 100%;
+    text-align: center;
+}
+.products_list .list_item .information .delete_item button{
+	width: 80%;
+}
+.edit_product_detail{
+	display: none;
+}
+.am-navbar .all_check{
+	margin: 0;
+    height: 49px;
+    line-height: 49px;
+}
+.am-navbar .all_check .am-ucheck-icons{
+	top: 15px;
+}
+.am-navbar .am-btn-success{
+	height: 49px;
+	padding: 0 15px;
+}
+
+.an_addredd_content{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1011;
+	display: none;
+	background-color: #EEE;
+}
+.mark_con{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.3);
+	position: absolute;
+	z-index: -1;
+}
+#am_add_fo{
+
+}
+.an_add_con{
+	padding: 20px;
+	background-color: #FFF;
+}
+.an_head{
+	padding: 10px 0;
+	font-size: 14px;
+}
+.an_add_content{
+
+}
+.an_add_content ul{
+	width: 95%;
+	margin: 0 auto;
+	padding-left: 0;
+}
+.an_add_content li{
+	border-bottom: 1px solid #EEE;
+	font-size: 14px;
+}
+.an_add_content li label{
+	line-height: 25px;
+	padding: 5px 0;
+	font-weight: normal;
+	width: 22%;
+	color: #666;
+	margin-bottom: 0;
+}
+.an_add_content li input{
+	float: right;
+	width: 77%;
+	line-height: 25px;
+	padding: 5px 0;
+}
+#doc_tipinput{
+	padding: 10px;
+	width: 90%;
+}
+.btn_submie{
+	height: 30px;
+	margin-top: 20px;
+}
+.btn_submie div{
+	display: inline-block;
+	width:40%;
+}
+#btnorder.an_sub_btn{
+	float: right;
+	margin-right: 1rem;
+}
+.an_head .fa{
+	float: right;
+	margin-right: 5%;
+	font-size: 20px;
+	color: #666;
+}
+.an_add_content  #container{
+	height: 200px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+.am-text-trash{
+	position: absolute;
+	right: 5%;
+	top: 0;
+	width: auto!important;
+
+}
+.am-text-trash .fa{
+	color: #666;
+}
+/* 购物车 修改*/
+	.am-ucheck-icons{left: 5px;}
+
+	.information.am-g > .am-u-sm-4{
+		padding-left:2rem;
+	}
+	.fa.fa-trash{
+		font-size: 1.5rem;
+	}
+	.am-text-sm.title,.am-text-xs.plat-gray_color,.am-text-xs.am-cf{
+		padding-bottom: 0.5rem;
+	}
+/* +— */
+.am-ax-default{
+	position: absolute;
+	right: 2%;
+	border: 1px solid #eee;
+	font-size: 0;
+	top: 0;
+}
+.am-ax-deval{
+	border: none;
+	float: left;
+	width: 30px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 12px;
+
+}
+
+.am-ax-default .am-axtive{
+	background-color: #F2F2F2;
+
+}
+.am-ax-jcler{
+	border-right: 1px solid #eee;
+}
+.am-ax-add{
+	border-left: 1px solid #eee;
+}
+.am-ax-btn{
+	line-height: 20px;
+	width: 28px;
+	background-color: #fff;
+	text-align: center;
+	float: left;
+	font-size: 14px;
+	color: #666;
+}
+/* page_2 */
+.page_2 .an_add_con{
+	POSITION: relative;
+	TOP: 10%;
+	padding: 30px 0;
+}
+.page_2  .page_2_head{
+	color: #ff0000;
+	text-align: center;
+	font-size: 16px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+.page_2 .an_add_content li {
+	text-align: center;
+	font-size: 14px;
+	border-bottom:0;
+}
+.page_2 .an_head .fa{
+	position: absolute;
+	right: 5%;
+}
+.page_2 .an_add_content li img{
+	max-width: 220px;
+	min-width: 220px;
+	height: auto;
+}
+/* 弹窗口 */
+	.layui-m-con{
+		position: relative;
+		z-index: 1999999;
+	}
+	.layui-m-layershade {
+	background-color: rgba(0,0,0,.6);
+	pointer-events: auto;
+}
+
+	.layui-m-layermain {
+		display: table;
+		font-family: Helvetica,arial,sans-serif;
+		pointer-events: none;
+	}
+
+	.layui-m-layermain, .layui-m-layershade {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+	.layui-m-layermain .layui-m-layersection {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+	.layui-m-layerchild {
+		width: 90%;
+		max-width: 640px;
+		position: relative;
+		display: inline-block;
+		text-align: left;
+		background-color: #fff;
+		font-size: 14px;
+		border-radius: 5px;
+		box-shadow: 0 0 8px rgba(0,0,0,.1);
+		pointer-events: auto;
+		-webkit-overflow-scrolling: touch;
+		-webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+		-webkit-animation-duration: .2s;
+		animation-duration: .2s;
+	}
+	.layui-m-layercont {
+		padding: 50px 30px;
+		line-height: 22px;
+		text-align: center;
+	}
+	.layui-m-layerbtn {
+		display: box;
+		display: -moz-box;
+		display: -webkit-box;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		font-size: 0;
+		border-top: 1px solid #D0D0D0;
+		background-color: #F2F2F2;
+	}
+
+	.layui-m-layerbtn, .layui-m-layerbtn span {
+		position: relative;
+		text-align: center;
+		border-radius: 0 0 5px 5px;
+	}
+	.layui-m-layerbtn span[no] {
+		border-right: 1px solid #D0D0D0;
+		border-radius: 0 0 0 5px;
+	}
+	.layui-m-layerbtn span {
+		display: block;
+		-moz-box-flex: 1;
+		box-flex: 1;
+		-webkit-box-flex: 1;
+		font-size: 14px;
+		cursor: pointer;
+	}
+	.layui-m-layerbtn span[no] {
+		border-right: 1px solid #D0D0D0;
+		border-radius: 0 0 0 5px;
+	}
+	.layui-m-layerbtn span[yes] {
+		color: #40AFFE;
+	}
+	.am-padd{
+		padding: 0.5rem 0;
+	}
+	.am-padd-bot{
+		padding: 0.2rem 0 0.5rem 0;
+	}
+	.am-padd-bot .am-shuax-new{
+		border: 1px solid #5eb95e;
+		background-color: transparent;
+		padding: 4px 8px;
+		font-size: 1.2rem;
+		border-radius: 0.5rem;
+		color: #5eb95e;
+	}
+.layui-m-layerbtn span{
+	cursor: pointer;
+}
+.am-text-xs.plat-gray_color{
+	position: relative;
+}
+
+@media screen and (max-width: 325px) {
+	.btn_submie div{
+		padding: 0 2rem;
+		margin: 0 1rem;
+	}
+	.an_add_content li label{
+		width:25%;
+	}
+	.an_add_content li input{
+		width: 75%;
+	}
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>跨境洋货</title>
+        <meta name="keywords" content="跨境洋货，网购，购物" />
+        <meta name="description" content="跨境洋货，中国进口网购网站" />
+        <meta content="all" name="robots" />
+        <meta name="googlebot" content="all" />
+        <meta name="baiduspider" content="all" />
+    </head>
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center"></div>
+</div>
+<div class="wrapper-content" style="opacity: 0;">
+
+    <div class="login-header ">
+        <div class="login-con" style="margin: 20px auto;">
+            <div class="logo_H1"><img src="../images/logo.jpg" alt=""></div>
+            <div class="login-block"><span class="">已有跨境洋货账号？</span><a href="enter.html">登录</a></div>
+        </div>
+    </div>
+    <!-- 步骤 -->
+    <div class="content">
+        <h3 class="headline">
+            <span class="headline__content">找回登录密码</span>
+        </h3>
+        <ul class="steps-bar steps-bar--dark cf">
+            <li class="step step--first " style="z-index:3">
+                <span class="step__num">1.</span>
+                <span>确认账号</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+            <li class="step step--post" style="z-index:2">
+                <span class="step__num">2.</span>
+                <span>选择验证方式</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+            <li class="step step--post step--current" style="z-index:1">
+                <span class="step__num">3.</span>
+                <span>验证/修改</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+            <li class="step step--last step--post" style="z-index:0">
+                <span class="step__num">4.</span>
+                <span>完成</span>
+                <span class="arrow__background"></span>
+                <span class="arrow__foreground"></span>
+            </li>
+        </ul>
+        <!--  验证 -->
+        <div class="form__wrapper">
+
+            <!-- 验证/修改 -->
+            <form class="form__content page3 form_active" method="POST" action="" >
+                <div class="content_page3">
+                    <p class="ad_title">您正在通过“ <b>绑定的手机</b>”方式进行验证/修改</p>
+                    <div class="show_d_title"> 为了您的账户安全，请先验证手机号码</div>
+                    <div class="verify—ipone">您绑定的手机号为： <b>133****1231</b> </div>
+                    <div class="verify_number">
+                        <label>请输入验证码</label>
+                        <input type="text" maxlength="4" placeholder="请输入验证码">
+                    </div>
+                    <div class="verify_btn">
+                        <input type="button" value="免费获取验证码" onclick="settime(this)">
+                        <a href="javascript:void(0)" onclick="all_title()"> 没有收到短信验证码？ </a>
+                        <div class="triangle-left" >
+                            <ul class="resend-message-tip">
+                                <li> 网络通讯异常可能会造成短信丢失，请重新发送短信 </li>
+                                <li> 请核实手机是否已欠费停机，或者屏蔽了系统短信</li>
+                                <li> 如果手机 <b>1111****1111</b> 已丢失或停用，请选择选择其它验证方式</li>
+                            </ul>
+                            <div class="triangle-left_clear">X</div>
+                        </div>
+                    </div>
+                    <div class="verify-footer">
+                        <!-- 提交判断 -->
+                        <!--<input type="submit" value="下一步" class="">-->
+                        <!-- 测试跳转 要删除 -->
+                        <input type="button" value="下一步" onclick="dx_sub()">
+
+                        <a href="passport_select.html" class="verify_aga">上一步</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+    <footer>
+        <div class="footer">
+
+            <div id="bottom">
+
+                <div class="footnav">
+                    <a href="#">关于跨境洋货</a><span>|</span>
+
+                    <a href="#">服务条款</a><span>|</span>
+                    <a href="#">广告服务</a><span>|</span>
+                    <a href="#">企业招聘</a><span>|</span>
+                    <a href="#">客服中心</a><span>|</span>
+                    <a href="#">网站导航</a>
+                    <p>Copyright © 1998 - 2010 legou.com. All Rights Reserved</p>
+                    <p>跨境洋货版权所有</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script type="text/javascript" src="../js/require.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/module/passport/passport.js"></script>
+<script>
+
+    function dx_sub(){
+
+        window.location.href="passport_alter.html";
+    }
+</script>
+</body>
+</html>
+

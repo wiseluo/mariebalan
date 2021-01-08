@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="keywords" content="移动电商服务微分销平台">
+	<meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>注册</title>
+
+	<!-- Set render engine for 360 browser -->
+	<meta name="renderer" content="webkit">
+	<!-- No Baidu Siteapp-->
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	<!-- Icon-->
+	<link rel="icon" type="image/png" href="__PUBIMG__/favicon.png">
+	<!-- Add to homescreen for Chrome on Android -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="icon" sizes="192x192" href="__PUBIMG__/app-icon72x72@2x.png">
+	<!-- Add to homescreen for Safari on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+	<link rel="apple-touch-icon-precomposed" href="__PUBIMG__/app-icon72x72@2x.png">
+
+	<!-- Tile icon for Win8 (144x144 + tile color) -->
+	<meta name="msapplication-TileImage" content="__PUBIMG__/app-icon72x72@2x.png">
+	<meta name="msapplication-TileColor" content="#0e90d2">
+</head>
+<body>
+	<div id="loading">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<div class="wrapper-content" style="opacity: 0;">
+		<!-- 表单登录 -->
+		<div class="account-form am-margin-top-lg">
+			<form class="am-form am-form-horizontal" method="POST" id="form-with-tooltip">
+				<h2 class="form-title am-text-center">
+					<span class="am-text-lg">注册</span>
+				</h2>
+		        <div class="am-form-group am-form-group-sm">
+<!--		        	<div class="am-form-group am-margin-bottom-0 plat-border_bottom">
+						<label for="doc-ipt" class="am-u-sm-3 am-form-label">角色：</label>
+						<div class="am-u-sm-9" style="height: 48px;line-height: 40px;">
+							<label class="am-radio-inline am-success">
+                                                            <input type="radio" name="role" value="16" <eq name="type" value="16">checked</eq>  data-am-ucheck> 品牌经理人
+							</label>
+							<label class="am-radio-inline am-success">
+								<input type="radio" name="role" value="32" <eq name="type" value="32">checked</eq> data-am-ucheck> 品牌直营店
+							</label>
+						</div>
+					</div>-->
+		        	<div class="am-form-group am-margin-bottom-0 plat-border_bottom">
+						<label for="doc-ipt-3" class="am-u-sm-3 am-form-label">手机号：</label>
+						<div class="am-u-sm-9">
+							<input type="text" name="phone" maxlength="11" class="js-txt-telphone" autocomplete="off" id="doc-ipt-3" placeholder="请输入您的手机号" value=""/>
+						</div>
+					</div>
+					<div class="am-form-group am-margin-bottom-0 plat-border_bottom">
+						<label for="doc-ipt-3" class="am-u-sm-3 am-form-label">验证码：</label>
+						<div class="am-u-sm-9">
+							<input type="text" name="code" class="js-txt-auth" maxlength="4" placeholder="请输入短信验证码" />
+							<button type="button" class="am-text-sm am-btn am-btn-success am-radius get_code" data-text="获取验证码">获取验证码</button>
+						</div>
+					</div>
+					<div class="am-form-group am-margin-bottom-0 plat-border_bottom">
+						<label for="doc-ipt-3" class="am-u-sm-3 am-form-label">密码：</label>
+						<div class="am-u-sm-9">
+							<input type="password" name="password" class="js-txt-password" placeholder="请输入密码" />
+						</div>
+					</div>
+					<div class="am-form-group am-margin-bottom-0">
+						<label for="doc-ipt-3" class="am-u-sm-3 am-form-label">推荐人：</label>
+						<div class="am-u-sm-9">
+                                                    <if condition="isset($identify_code)">
+                                                        <input type="text" name="recomd" class="js-txt-recomd" value="<{$identify_code}>" placeholder="推荐人条码"  readonly="readonly" />							
+                                                        <else/>
+                                                        <input type="text" name="recomd" class="js-txt-recomd" placeholder="推荐人条码"  />
+                                                        <img src="__PUBIMG__/scan.png" alt="" class="scan" id="scanQRCode" >
+                                                    </if>
+						</div>
+					</div>
+		        </div>
+		        <div class="am-g">
+			        <div class="am-u-sm-12 am-margin-top-lg">
+	                  	<button type="button" class="am-btn am-btn-success am-radius am-btn-block login_btn">确认提交</button>
+	                 	<p class="help-info c-gray-dark am-text-xs">注册后，请使用新手机号登录其他应用，如微商城，买家版，批发和收银。</p>
+					</div>
+				</div>
+				<div class="am-g">
+					<div class="am-u-sm-12 am-text-right">
+	                  	<a href="/login" class="am-btn am-btn-secondary am-round" role="button">去登录</a>
+					</div>
+				</div>
+			</form>
+			<div class="motify"><div class="motify-inner">请填写11位手机号码</div></div>
+       		<input type="hidden" id="code" class="js-txt-auth" maxlength="4" />
+		</div>
+	</div>
+	<script>
+        var basePath = "__PUBLIC__";
+    </script>
+	<script src="__PUBJS__/require.js"></script>
+	<script src="__PUBJS__/common.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="__PUBLIC__/plugins/jQuery/jquery-2.1.1.min.js"></script>
+	<script  type="text/javascript">
+		wx.config({
+	        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	        appId: '<{$package.appId}>', // 必填，公众号的唯一标识
+	        timestamp: '<{$package.timestamp}>', // 必填，生成签名的时间戳
+	        nonceStr: '<{$package.nonceStr}>', // 必填，生成签名的随机串
+	        signature: '<{$package.signature}>', // 必填，签名，见附录1
+	        jsApiList: ["checkJsApi","scanQRCode"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	    });
+
+	    wx.error(function(res) {
+	       alert("出错了：" + res.errMsg);
+	    }); 
+
+	    wx.ready(function() {
+	        $('#scanQRCode').click(function() {
+	            wx.scanQRCode({  
+	                needResult : 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，  
+	                scanType : [ "qrCode", "barCode" ], // 可以指定扫二维码还是一维码，默认二者都有
+	                success : function(res) {
+	                    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果  
+	                    result = result.split(",")[1];
+	                    $('.js-txt-recomd').val(result);
+	                }
+	            }); 
+	        });
+	    });
+	</script>
+	<script src="__PUBJS__/module/registe/registe.js"></script>
+</body>
+</html>

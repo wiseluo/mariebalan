@@ -1,0 +1,79 @@
+<style type="text/css">
+    .msg-headimg{float: left;height: 60px;}
+    .msg-info {float: left;margin-left: 20px;}
+    .msg-content{color: #8c8c8c;margin-top: 3px;}
+    .msg_total{padding: 0px 5px;
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    margin-left: 5px;
+    background: rgb(255, 63, 25) none repeat scroll 0% 0%;
+    border-radius: 10px;
+    }
+</style>
+
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="./"><i class="fa fa-home"></i> 微信公众号</a></li>
+              <li><a >消息管理</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">消息管理</h3>
+              
+            </div>
+<section class="panel panel-default" style="max-width:1140px;">
+  <div class="panel-body">
+
+<div class="btn-group btn-group-justified">
+        <a href="{:url('wechat/index',['status'=>'0'])}" class="btn btn-{if $status=='0'}success{else}default{/if}">未读消息</a>
+        <a href="{:url('wechat/index',['status'=>'1'])}" class="btn btn-{if $status=='1'}success{else}default{/if}">已读消息</a>
+    </div>
+
+<div class="line line-dashed line-lg pull-in"></div>
+<div class="form-group">
+	<div class="table-responsive">
+            <table class="table table-striped b-t b-light text-sm">
+                <thead>
+                <tr>
+                    <th width="20"><input type="checkbox"></th>
+                    <th>粉丝 </th>
+                    <th width="150">消息时间</th>
+                    <th width="120">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {foreach name="msgList" key="k" item="v"}
+                <tr>
+                    <td width="20" ><input class="userid" type="checkbox" name="IDS[]" value="{$v.id}"></td>
+                    <td>
+                    	<div class="mp-msg">
+                            <div class="msg-headimg"><img src="{$v.headimgurl}"></div>
+                            <div class="msg-info" style="overflow: hidden;height: 60px;">
+                                <p>
+                                    <span style="padding: 0px 0px 0px 5px;">{$v.nickname}</span>
+                                    {eq name="$status" value ="0"}
+                                    <span class="msg_total show">{$v.msg_total}</span>
+                                    {else/}
+                                    <span style="font-size: 10px;">共有{$v.msg_total}条记录</span>
+                                    {/eq}</p>
+                                <p class="msg-content">{$v.content}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{$v.create_time}</td>
+                    <td width="120">
+                        <a href="{:url('wechat/replymsg',['openid'=>$v.openid])}" class="btn btn-primary btn-xs edituser" title="回复消息">回复消息</a>
+                    </td>
+                </tr>
+                {/foreach} 
+               
+                </tbody>
+            </table>
+        </div>
+</div>
+
+    </div>
+  </section>
+</section>

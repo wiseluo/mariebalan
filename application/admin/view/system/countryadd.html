@@ -1,0 +1,90 @@
+
+<div class="form-group" {if $info['id']!=''} style="display: none" {/if}>
+<input type="hidden" name="id" value="{$info['id']}" id="uid"/>
+</div>
+
+<div class="form-group">
+    <label>国家名称</label>
+    <input type="text" name="info[name]" class="form-control" value="{$info['name']}" id="names">
+</div>
+
+<div class="form-group">
+    <label>图片</label>
+    <input type="text" name="info['pic']" id="pdpic" class="form-control" value="{$info['pic']}" placeholder="选择图片" readonly>
+</div>
+<div class="form-group over-flow" id="picarea" style="position: relative">
+    {if condition = "$files"}
+    {foreach name='files' item="fp" key="k"}
+    {if condition = "$fp['type'] == 'p'"}
+    <div class="tabbox" style="width:50px; height:50px">
+        <img id="img{$k}" src="/uploads/country/{$fp['pic']}.thumb.jpg" width="50" height="50">
+        <div class="imgbg" style="width:50px; height:50px">
+            <a style="position: absolute;cursor:pointer;left:3px;top:15px"><i title="查看" onclick="view({$k})" class="fa fa-eye" style="color: #fff"></i></a>
+            <a style="position: absolute;cursor:pointer;right:3px;top:15px"><i title="删除" onClick="delFile1({$k},'pdpic')" class="fa fa-trash-o deltitle" style="color: #fff"></i></a>
+        </div>
+    </div>
+    {else}
+    <div class="tabbox" style="width:50px; height:50px">
+        <img id="img{$k}" src="/static/admin/images/file.jpg" width="50" height="50">
+        <div class="imgbg" style="width:50px; height:50px">
+            <a style="position: absolute;cursor:pointer;right:0"><i title="删除" onClick="delFile1({$k},'pdpic')"  class="fa fa-trash-o deltitle" style="color: #fff"></i></a>
+        </div>
+    </div>
+    {/if}
+    {/foreach}
+    {else}
+    <div class="tabbox" style="width:50px; height:50px">
+        <img src="/static/admin/images/thumb.jpg" width="50" height="50">
+    </div>
+    {/if}
+</div>
+<iframe id="iframuserlogo" src="/admin/upload?updir=country&picarea=picarea&inpic=pdpic&isshow=true&shownum=single&pw=50&ph=50&style=1" name="iframuserlogo" style="display:none"></iframe>
+
+
+<div class="form-group">
+    <label>排序</label>
+    <input type="text" name="info[sort]" class="form-control" value="{$info['sort']}" id="sorts">
+</div>
+<div style="text-align:center">
+    <a class="btn btn-s-md btn-success" onclick="sumbitMenuInfo()"><i class="fa fa-edit" style="margin-right:20px;"></i>确定</a>
+    <a onClick="$('#modal-form').modal('hide');" class="btn btn-s-md btn-default">关闭</a>
+</div>
+
+<script>
+    function sumbitMenuInfo(){
+        var id = $("#uid").val();
+        var info = {};
+        info['name']  = $("#names").val();
+        info['sort']  = $("#sorts").val();
+        info['pic']  = $("#pdpic").val();
+        if($("#names").val() == ''){
+            alert("请填写名称");
+            return false;
+        }
+        if($("#pdpic").val() == ''){
+            alert("图标不能为空");
+            return false;
+        }
+        $.ajax({
+            type:"POST",
+            url:"/admin/system/countryaddlist?id"+id,
+            data:{
+                id : id,
+                info:info,
+            },
+            success: function(data){
+                window.location.reload();
+//			if(data=='suss'){
+//				window.location.reload();
+//			}else{
+//				alert(data);
+//			}
+            }
+        })
+    }
+    $(function(){
+        $("#pdpic,#userlogo").on("click",this,function(){
+            $(window.frames["iframuserlogo"].document).find("#pic").trigger("click");
+        })
+    })
+</script>

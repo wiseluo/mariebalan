@@ -1,0 +1,260 @@
+<section class="scrollable padder">
+            <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+              <li><a href="./"><i class="fa fa-home"></i> 微信公众号</a></li>
+              <li><a >素材管理</a></li>
+             </ul>
+  <div class="m-b-md">
+              <h3 class="m-b-none">素材管理</h3>
+              
+            </div>
+<section class="panel panel-default" style="max-width:1140px;">
+  <div class="panel-body">
+    <div style="margin-bottom:10px;" id="btnlist">
+        <button type="button" class="btn m-b-xs w-xs btn-default"><i class="fa fa-undo"></i>同步图片</button>
+        <button type="button" class="btn m-b-xs w-xs btn-default"><i class="fa fa-undo"></i>同步图文</button>
+        <button type="button" class="btn m-b-xs w-xs btn-default"><i class="fa fa-undo"></i>同步语音</button>
+        <button type="button" class="btn m-b-xs w-xs btn-default"><i class="fa fa-undo"></i>同步视频</button>
+    </div>
+
+    <div class="btn-group btn-group-justified">
+        <a href="{:url('wechat/Materials',['type'=>'image','from_type'=>1])}" class="btn btn-{if $type=='image'}success{else}default{/if}">图片</a>
+        <a href="{:url('wechat/Materials',['type'=>'news','from_type'=>1])}" class="btn btn-{if $type=='news'}success{else}default{/if}">图文</a>
+        <a href="{:url('wechat/Materials',['type'=>'voice','from_type'=>1])}" class="btn btn-{if $type=='voice'}success{else}default{/if}">语音</a>
+        <a href="{:url('wechat/Materials',['type'=>'video','from_type'=>1])}" class="btn btn-{if $type=='video'}success{else}default{/if}">视频</a>
+    </div>
+
+
+</div>
+
+        <div class="layui-tab-content">
+            {switch name="type"}
+            {case value="news"}
+            <ul class="type_image">
+                {volist name="data" id="v"}
+                <li class="material_li">
+                    <div class="material_li_box">
+                        {volist name="v.news_item" id="news"}
+                        {if condition="$key eq '0'"}
+                        <div class="material_li_t">
+                            <p>{$news.title}</p>
+                            <img width="169" height="140" src="{$news.thumb_url}">
+                        </div>
+                        {else /}
+                        <div class="material_li_b">
+                            <div class="layui-row">
+                                <div class="layui-col-xs9">
+                                    <p>{$news.title}</p>
+                                </div>
+                                <div class="layui-col-xs3">
+                                    <img width="30" height="30" src="{$news.thumb_url}">
+                                </div>
+                            </div>
+                        </div>
+                        {/if}
+                        {/volist}
+                    </div>
+                    <div>
+                        <div class="layui-btn-group">
+                            <button onclick="sendMaterial('{$v.media_id}','image')" style="width: 50%" class="layui-btn layui-btn-primary layui-btn-sm">
+                                <i class="layui-icon">&#xe609;</i>群发
+                            </button>
+                            <button onclick="delMaterial('{$v.media_id}','image')" style="width: 50%;" class="layui-btn layui-btn-primary layui-btn-sm">
+                                <i class="layui-icon">&#xe640;</i>删除
+                            </button>
+                        </div>
+                    </div>
+                </li>
+                {/volist}
+            </ul>
+            {$page}
+            {/case}
+            {case value="voice"}
+            <table class="layui-table" lay-skin="line">
+                <thead>
+                <tr>
+                    <th>语音名称</th>
+                    <th>媒体 ID</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="data" id="vo"}
+                <tr>
+                    <td>{$vo.title}</td>
+                    <td>{$vo.media_id}</td>
+                    <td>{$vo.create_time}</td>
+                    <td>
+                        <div class="">
+                            <button onclick="delMaterial('{$vo.media_id}','voice')" class="layui-btn layui-btn-xs layui-btn-danger">
+                                <i class="layui-icon">&#xe640;删除</i>
+                            </button>
+                        </div>
+
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            {$data->render()}
+            {/case}
+            {case value="image"}
+            <ul class="type_image">
+                {volist name="data" id="v"}
+                <li class="material_li">
+                    <span><img src="{$v.url}" width="169" height="169"></span>
+                    <span>
+                                <div class="layui-btn-group">
+                                  <button onclick="sendMaterial('{$v.media_id}','image')" style="width: 50%" class="layui-btn layui-btn-primary layui-btn-sm">
+                                    <i class="layui-icon">&#xe609;</i>群发
+                                  </button>
+                                  <button onclick="delMaterial('{$v.media_id}','image')" style="width: 50%;" class="layui-btn layui-btn-primary layui-btn-sm">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                  </button>
+                                </div>
+                            </span>
+                </li>
+
+                {/volist}
+            </ul>
+            {$data->render()}
+            {/case}
+            {case value="video"}
+            <table class="layui-table" lay-skin="line">
+                <thead>
+                <tr>
+                    <th>视频名称</th>
+                    <th>媒体 ID</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="data" id="vo"}
+                <tr>
+                    <td>{$vo.title}</td>
+                    <td>{$vo.media_id}</td>
+                    <td>{$vo.create_time}</td>
+                    <td>
+                        <div class="">
+                            <button onclick="delMaterial('{$vo.media_id}','video')" class="layui-btn layui-btn-xs layui-btn-danger">
+                                <i class="layui-icon">&#xe640;删除</i>
+                            </button>
+                        </div>
+
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+            {$data->render()}
+            {/case}
+            {/switch}
+        </div>
+    </div>
+
+</div>
+<div class="layui-tab-item {eq name="fron_type" value="0"}layui-show{/eq}"><!--内容2--></div>
+</div>
+<script>
+    function sendMaterial(media_id,type) {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.confirm('你确定需要群发吗？认证号可用、订阅号一天1条，服务号一个月四条。', {
+                btn: ['是','不'] //按钮
+            }, function(){
+                $.post("{:url('wechat/Materials/sendMaterial')}",{'media_id':media_id,'type':type},function (res) {
+                    if(res.status==1){
+                        layer.alert(res.msg);
+                    }else{
+                        layer.alert(res.msg);
+                    }
+
+                })
+            }, function(){
+
+            });
+        });
+
+    }
+    function delMaterial(media_id,type) {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.confirm('你确定需要删除吗？', {
+                btn: ['是','不'] //按钮
+            }, function(){
+                $.post("{:url('wechat/Materials/delMaterial')}",{'media_id':media_id,'type':type},function (res) {
+                    if(res.status==1){
+                        layer.alert(res.msg)
+                    }else{
+                        layer.alert(res.msg)
+                    }
+                })
+            }, function(){
+
+            });
+        });
+
+    }
+    function sycMaterial(type) {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                title: '正在同步',
+                shadeClose: true,
+                shade: 0.5,
+                area: ['680px', '200px'],
+                content: '{:url("wechat/Materials/sycMaterial","","")}/type/'+type+'/offset/0',
+                cancel: function(index, layero){
+                    window.location.reload();
+                }
+            })
+        });
+
+    }
+</script>
+
+<style>
+
+.content li.material_li{height:auto}
+
+.content .type_image li{float:left;}
+
+li.material_li .material_li_box .material_li_t{
+    position: relative;
+}
+
+li.material_li .material_li_box .material_li_t img{
+    display: block;
+}
+
+li.material_li .material_li_box .material_li_t p{
+    color: #fff;
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 4px;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.type_image .layui-btn-group{
+    width: 100%;
+}
+
+.material_li_b{
+    border-top: 1px solid #eee;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.material_li_b img{float: right; margin: 5px;}
+.material_li_b p{
+    padding-left: 5px;
+    font-size: 12px;
+}
+
+</style>

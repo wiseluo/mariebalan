@@ -1,0 +1,275 @@
+/* 颜色 */
+.color {
+    border: 1px solid #ccc;
+    display: inline-block;
+    height: 30px;
+    margin: auto;
+    margin-right: 5px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    text-indent: -9999px;
+    /*top: 4px;*/
+    width: 30px;
+    vertical-align: top;
+}
+/* 米色 */
+.color.color-771 {
+    background-color: #f8f7e7;
+}
+/* 黑色 */
+.color.color-193 {
+    background-color: #000;
+}
+/* 蓝色，蓝色激光 */
+.color.color-173 {
+    background-color: #0080ff;
+}
+/* 天蓝色,天蓝 */
+.color.color-1254 {
+    background-color: #1eddff;
+}
+/* 褐色 */
+.color.color-365458 {
+    background-color: #8d6468;
+}
+/* 金色，金发/亚麻色，黄金色 */
+.color.color-350850 {
+    background-color: #ffd700;
+}
+/* 灰色 */
+.color.color-691 {
+    background-color: #999;
+}
+/* 深灰色 */
+.color.color-200004890 {
+    background-color: #666;
+}
+/* 绿色，绿色激光 */
+.color.color-175 {
+    background-color: #007000;
+}
+/* 军绿色 */
+.color.color-200004889 {
+    background-color: #7c8c30;
+}
+/* 象牙白 */
+.color.color-200002130 {
+    background-color: #fdfde8;
+}
+/* 卡其色 */
+.color.color-200001438 {
+    background-color: #dac9b9;
+}
+/* 橙色 */
+.color.color-350852 {
+    background-color: #ffa500;
+}
+/* 粉色 */
+.color.color-1052 {
+    background-color: #ffc0cb;
+}
+/* 紫色 */
+.color.color-496 {
+    background-color: #6c3365;
+}
+/* 紫罗兰 */
+.color.color-200004891 {
+    background-color: #dda0dd;
+}
+/* 红色，红色激光 */
+.color.color-10 {
+    background-color: red;
+}
+/* 银色 ，鎳色*/
+.color.color-350853 {
+    background-color: #ccc;
+}
+/* 白色,乳白色，激光亮，無鎳白，白，纯白色,象牙 */
+.color.color-29 {
+    background-color: #fff;
+}
+/* 黄色 */
+.color.color-366 {
+    background-color: #ff0;
+}
+/* 深卡其布色，深卡布其色，深拉伸 */
+.color.color-200006154{
+	background-color: #877710;
+}
+/* 酒红色 */
+.color.color-200006158{
+	background-color: #A35568;
+}
+/* 深蓝色 */
+.color.color-1063{
+	background-color: #12126E;
+}
+/* 浅绿色 */
+.color.color-200006152{
+	background-color: #CCE099;
+}
+/* 浅黄色，浅黄 */
+.color.color-200006153{
+	background-color: #ffff99;
+}
+/* 深紫色 */
+.color.color-200141872{
+	background-color: #8A2BE2;
+}
+/* 巧克力色 */
+.color.color-200000195{
+	background-color: #D2691E;
+}
+/* 浅灰色 */
+.color.color-200100195{
+	background-color: #9C9EA1;
+}
+/* 桔色 */
+.color.color-200200195{
+	background-color: #EDAF1F;
+}
+/* 粉红色,粉红 */
+.color.color-200300195{
+	background-color: #FF69B4;
+}
+/* 香槟色 */
+.color.color-200400195{
+	background-color: #F2EBA7;
+}
+/* 中棕 */
+.color.color-200600195{
+	background-color: #7A4917;
+}
+/* 原木色 */
+.color.color-200700195{
+	background-color: #deb887;
+}
+/* 古銀,古鋅,哑光 */
+.color.color-200800195{
+	background-color: #eaeaea;
+}
+/* 古铜色,紅古铜,红铜，青古铜，黄铜 */
+.color.color-200900195{
+	background-color: #B87333 ;
+}
+/* 咖啡色 */
+.color.color-201000195{
+	background-color: #733C12 ;
+}
+/* 宝蓝色 */
+.color.color-201100195{
+	background-color: #005687 ;
+}
+/* 暖白色 */
+.color.color-201200195{
+	background-color: #fffbf0 ;
+}
+/* 暖黄色,米黄色，米白色 */
+.color.color-201300195{
+	background-color: #fffaf0 ;
+}
+/* 枪黑色 */
+.color.color-201400195{
+	background-color: #333 ;
+}
+/* 栗色 */
+.color.color-201500195{
+	background-color: #8C585F ;
+}
+/* 桔黄色,橘黄色，橙黄色 */
+.color.color-201600195{
+	background-color: #F29500 ;
+}
+/* 棕色,棕 */
+.color.color-201700195{
+	background-color: #8C5119 ;
+}
+/* 棕红色 */
+.color.color-201800195{
+	background-color: #8E1E20 ;
+}
+/* 洋红色 */
+.color.color-201900195{
+	background-color: #FF00FF ;
+}
+/* 浅棕色,浅棕 */
+.color.color-202000195{
+	background-color: #804000 ;
+}
+/* 洋红色 */
+.color.color-202100195{
+	background-color: #FF00FF ;
+}
+/* 浅蓝色 */
+.color.color-202200195{
+	background-color: #3366cd ;
+}
+/* 深棕色 */
+.color.color-202300195{
+	background-color: #5C4033  ;
+}
+/* 深红色 */
+.color.color-202400195{
+	background-color: #C24630  ;
+}
+/* 玫红色 */
+.color.color-202500195{
+	background-color: #DE7683  ;
+}
+/* 红棕色 */
+.color.color-202600195{
+	background-color: #8E1E20  ;
+}
+/* 肉色 */
+.color.color-202700195{
+	background-color: #FA8072  ;
+}
+/* 茉莉色 */
+.color.color-202800195{
+	background-color: #f7f7d2  ;
+}
+/* 藏青色 */
+.color.color-202900195{
+	background-color: #645a37  ;
+}
+/* 西瓜红 */
+.color.color-203000195{
+	background-color: #FD5B78  ;
+}
+/* 青色，青 */
+.color.color-203100195{
+	background-color: #00FFFF  ;
+}
+/* 铁灰色 */
+.color.color-203200195{
+	background-color: #696969  ;
+}
+/* 黑灰 */
+.color.color-203300195{
+	background-color: #111111  ;
+}
+/* 黑鎳 */
+.color.color-203400195{
+	background-color: #222222  ;
+}
+/* 多彩，多彩的，迷彩,多种颜色，黑彩一体，多色/印花，多色的,七彩,天然,杂色，混色,红绿蓝，花色，蓝色 / 绿色，荧光色系 */
+.color.color-200003699 {
+  background: url("../images/bg_post_color_block.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+/* 透明,其它,单一颜色，裸色,透明无色,透明的 */
+.color.color-100018786 {
+  background: url("../images/bg_post_color_block.gif") no-repeat scroll 0 -20px rgba(0, 0, 0, 0);
+}
+/* 棕黄色 */
+.color.color-203500195{
+    background-color: #e6be14  ;
+}
+/* 红褐色 */
+.color.color-203600195{
+    background-color: #5B1F15  ;
+}
+/* 黑褐色 */
+.color.color-203700195{
+    background-color: #1D1814  ;
+}

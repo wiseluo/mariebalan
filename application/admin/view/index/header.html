@@ -1,0 +1,53 @@
+<header class="bg-dark dk header navbar navbar-fixed-top-xs">
+    <div class="navbar-header aside-md"> 
+        <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> <i class="fa fa-cog"></i> </a> 
+        <a href="?" class="navbar-brand" data-toggle="fullscreen"><img src="/static/admin/images/logo.png" class="m-r-sm">{$_G['sitename']}</a> 
+        <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"> <i class="fa fa-bars"></i> </a> 
+    </div>
+    <ul class="nav navbar-nav hidden-xs">
+      <li class="dropdown"> <a style="cursor:pointer;" class="dropdown-toggle dker" data-toggle="dropdown"> <i class="fa fa-building-o"></i> <span class="font-bold">个人信息</span> </a>
+        <section class="dropdown-menu aside-xl on animated fadeInLeft no-borders lt">
+          <div class="wrapper lter m-t-n-xs"> <a  class="thumb pull-left m-r"> <img {if condition="$_U['pic']"}src="{$_G['uploadfile']}/user/{$_U['pic']['pic']}.thumb.jpg"{/if} id="headpic" class="img-circle"> </a>
+            <div class="clear"> <a href="#"><span class="text-white font-bold">{$_U['name']}</span></a> <small class="block">登录IP：{$_U['ip']}</small> <a href="#" class="btn btn-xs btn-success m-t-xs">{$_U['lastadds']}</a> </div>
+          </div>
+          <div class="row m-l-none m-r-none m-b-n-xs text-center">
+            <div class="col-xs-4">
+              <div class="padder-v"> <span class="m-b-xs h4 block text-white">{$_U['logins']}</span> <small class="text-muted">登录次数</small> </div>
+            </div>
+            <div class="col-xs-4 dk">
+              <div class="padder-v"> <span class="m-b-xs h4 block text-white">{$_G['sex'][$_U['sex']]}</span> <small class="text-muted">性别</small> </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="padder-v"> <span class="m-b-xs h4 block text-white">{$_U['lasttime']}</span> <small class="text-muted">日期</small> </div>
+            </div>
+          </div>
+        </section>
+      </li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right hidden-xs nav-user">
+      <li class="dropdown"> <a  class="dropdown-toggle"> {$_U['username']} </a></li>
+    </ul>
+</header>
+<!-- <iframe id="iframlogo" src="/admin/upload?updir=user&imgid=ImgPr&pw=60&ph=60" name="iframlogo" style="display:none"></iframe> -->
+<!-- <input id="pic1" type="hidden"  value=""/> -->
+
+<script>
+$(function () {
+	// $("#span_imgpr").on("click",this,function(){
+	// 	$(window.frames["iframlogo"].document).find("#pic").trigger("click");
+	// })
+ //    $("#iframlogo").load(function(){
+ //        if($("#pic1").val()!=''){
+	// 		$.ajax({
+	// 			type: "post",
+	// 			url: "?mod=home&ac=settingpic&pic="+$("#pic1").val(),
+	// 			success: function(){
+	// 				$("#headpic").attr("src","{$_G['uploadfile']}/"+$("#pic1").val());
+	// 			}
+
+	// 		});
+	// 	}   
+ //    });
+});
+</script>

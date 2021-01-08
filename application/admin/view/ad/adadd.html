@@ -1,0 +1,88 @@
+<form method="post" id="adinfos">
+    <div class="form-group">
+        <select class="form-control m-t parsley-validated" id='selectval' name="info[type]">
+            <option value="0">选择类型</option>
+            {foreach name="types" item="v" key="k"}
+            <option value="{$k}" {if($info['type'] eq $k)}selected="selected"{/if}>{$v}</option>
+            {/foreach} 
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>名称</label>
+        <input type="text" name="info[title]" id="info_title" class="form-control" value="{$info['title']}">
+    </div>
+
+    <div class="form-group">
+        <label>显示</label>
+        <select class="form-control parsley-validated" name="info[state]">
+            <option value="0" {if($info['state']==0)}selected="selected"{/if}>隐藏</option>
+            <option value="1" {if($info['state']==1)}selected="selected"{/if}>显示</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>地址</label>
+        <input type="text" name="info[url]" id="info_url" class="form-control" value="{$info['url']}" >
+    </div>
+
+    <div class="form-group">
+        <label>图片</label>
+        <input type="text" name="info[pic]" id="pdpic" class="form-control" value="{$info['pic']}" placeholder="选择图片">
+        <p class='typea' style="display:none;color:red">请上传尺寸大小为209*485的图片，其他尺寸可能影响显示效果</p>
+        <p class='typeb' style="display:none;color:red">请上传尺寸大小为209*126的图片，其他尺寸可能影响显示效果</p>
+    </div>
+    <div class="form-group over-flow" id="picarea" style="position: relative">
+        {if condition = "$info['pic']"}
+            <div class="tabbox" style="width:50px; height:50px">
+                  <img id="img0" src="{$info['pic']}.thumb.jpg" width="50" height="50">
+                  <div class="imgbg" style="width:50px; height:50px">
+                    <a style="position: absolute;cursor:pointer;left:3px;top:15px"><i title="查看" onclick="view(0)" class="fa fa-eye" style="color: #fff"></i></a>
+                    <a style="position: absolute;cursor:pointer;right:3px;top:15px"><i title="删除" onClick="delFile1(0,'pdpic')" class="fa fa-trash-o deltitle" style="color: #fff"></i></a>
+                  </div>
+            </div>
+        {else}
+            <div class="tabbox" style="width:50px; height:50px">
+                  <img src="/static/admin/images/thumb.jpg" width="50" height="50">
+            </div>
+        {/if}
+    </div>
+
+
+    <div class="form-group">
+        <label>排序</label>
+        <input type="text" name="info[sort]" id="info_sort" class="form-control" value="{$info['sort']}" >
+    </div>
+</form>
+    <div style="text-align:center">
+        <a class="btn btn-s-md btn-success ad_submit"><i class="fa fa-edit" style="margin-right:20px;"></i>确定</a>
+        <a onClick="$('#modal-form').modal('hide');" class="btn btn-s-md btn-default">关闭</a>
+    </div>
+<iframe id="iframuserlogo" src="/admin/upload?updir=ad&picarea=picarea&inpic=pdpic&isshow=true&shownum=single&pw=50&ph=50&style=1" name="iframuserlogo" style="display:none"></iframe>
+<style>
+    .form-group2{
+        position: absolute;
+        right: -252px;
+        top: 0px;
+        display: none;
+    }
+</style>
+<script>
+$(function(){
+    $(".ad_submit").on("click",function(){
+        $.ajax({
+            type:"post",
+            url:"/admin/ad/add?id={$info['id']}",
+            data:$('#adinfos').serialize(),
+            success: function(data){
+                //console.log(data);
+                window.location.reload();
+            }
+        })
+    })
+
+	$("#pdpic").on("click",this,function(){
+        $(window.frames["iframuserlogo"].document).find("#pic").trigger("click");
+    })
+})
+</script>

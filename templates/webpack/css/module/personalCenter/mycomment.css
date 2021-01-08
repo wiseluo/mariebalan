@@ -1,0 +1,180 @@
+
+.wrap{
+    width:1210px;
+    margin: auto;
+    background: #f5f5f5;
+}
+.wrap_content{
+    padding-top: 20px;
+}
+.menu a{
+    text-decoration: none;
+    color: #777;;
+}
+.menu dd{
+    line-height: 24px;
+}
+.mycomment-hd{
+    margin-bottom: 20px;
+
+    /*border: 1px solid black;*/
+    /*padding: 10px 3px 10px 3px;*/
+}
+.m-title h3{
+    width: 1003px;
+    height: 30px;
+    line-height: 30px;
+    padding: 14px 20px;
+    background: #fff;
+    font: 700 12px/30px SimSun;
+}
+.mycomment-bd{
+    width: 100%;
+    background: #fff;
+    /*border: 1px solid black;*/
+}
+
+
+table{
+    display: table;
+    /*border: 1px solid grey;*/
+}
+.order-tb{
+    width: 100%;
+    border-collapse: collapse;
+}
+thead{
+    display: table-header-group;
+    background: #f5f5f5;
+    height: 34px;
+    vertical-align: middle;
+    padding: 20px 0px 20px 0px;
+}
+.order-tb thead th {
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #f5f5f5;
+    color: #666;
+    font-weight: 400;
+}
+.sep-row{
+    height: 20px;
+}
+.order-tb .tr-th{
+    background: #f5f5f5;
+    height: 31px;
+    line-height: 31px;
+    color: #aaa;
+    overflow: hidden;
+}
+.order-tb .tr-th td {
+    border-bottom-color: #f5f5f5;
+}
+.tr-th_gap{
+    width: 14px;
+}
+.order-tb .tr-th span {
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 0 0;
+    _display: inline;
+}
+.order-tb .tr-th .dealtime {
+    margin-right: 30px;
+    font-family: verdana;
+}
+.order-tb .tr-th .delte {
+    float: right;
+    position: relative;
+    margin-right: 15px;
+    width: 397px;
+    height: 23px;
+    overflow: hidden;
+
+}
+.tr-bd td{
+    /*border: 1px solid black;*/
+}
+
+tbody tr td{
+    /*border: 1px solid black;*/
+    text-align: center;
+}
+
+.goods-item{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+.goods-number{
+    width: 200px;
+}
+/*tbody .tr-bd div{
+	border: 1px solid black;
+
+}*/
+.goods-item{
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin: 0 14px;
+    border: 1px solid #efefef;
+}
+.goods-number{
+    width: 240px;
+    float: left;
+    margin-right: 20px;
+}
+.goods-size{
+    width: 70px;
+    float: left;
+    width: 40px;
+    text-align: left;
+    color: #aaa;
+    font-family: verdana;
+}
+.operate{
+    line-height: 22px;
+
+}
+.operate a{
+    display: block;
+}
+.btn-def{
+    width: 87px;
+    height: 27px;
+    line-height: 27px;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 10px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #333;
+    border-radius: 2px;
+    background-color: #f7f7f7;
+    display: block;
+}
+.xiangqing{
+    text-decoration: none;
+    color: black;
+}
+
+tbody .tr-th{
+    border-top: 1px solid gainsboro;
+    border-left: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+}
+tbody .tr-bd td{
+    border-bottom: 1px solid gainsboro;
+    border-left: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+}
+
+.goods-item_zhuiping{
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+}
+

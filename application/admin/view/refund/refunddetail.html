@@ -1,0 +1,199 @@
+<link rel="stylesheet" type="text/css" href="/static/admin/css/order.css">
+<style>
+    .tongyi {
+        background: #8ec165;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+    }
+</style>
+<section class="scrollable padder">
+    <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+        <li><a href="./"><i class="fa fa-home"></i> 首页</a></li>
+        <li><a href="{:url('order/orderlist')}">退款订单管理</a></li>
+        <li><a >退款订单详情</a></li>
+    </ul>
+
+    <section class="panel panel-default">
+        <div class="orderdetail">
+            <h2>基本信息</h2>
+            <ul class="listone">
+                <li><label>E-mail:</label><span>{$order_user.email}</span></li>
+                <li><label>电话:</label><span>{$order_user.tel}</span></li>
+                <li><label>应付金额:</label><span>{$order.payment}元</span></li>
+                <li><label>订单状态:</label><span>{$order.state}</span></li>
+                <li><label>下单时间:</label><span>{$order.create_time}</span></li>
+                <li><label>支付时间:</label></label><span>{$order.paytime}</span></li>
+                <li><label>支付方式:</label><span>{$order.paytype}</span></li>
+                <li><label>发票抬头:</label><span>{$order.invoice}</span></li>
+            </ul>
+            <h2>收货信息</h2>
+            <ul class="listtwo">
+                <li style="width: 30%;"><label>收货人:</label><span>{$order_shouhuo.consignee}</span></li>
+                <li style="width: 33%;"><label>联系方式:</label><span>{$order_shouhuo.telphone}</span></li>
+                <li><label>收货地址:</label><span>{$order_shouhuo.province}{$order_shouhuo.city}{$order_shouhuo.town}{$order_shouhuo.address}</span></li>
+                <!-- <li><label>邮编:</label><span>{$order_shouhuo.zipcode}</span></li> -->
+                <li><label>配送方式:</label><span>{$order_shouhuo.psmode}</span></li>
+                <li><label>留言:</label></label><span>{$order_shouhuo.message}</span></li>
+
+            </ul>
+            <h2>商品信息</h2>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm tableproduct">
+                    <thead>
+                    <tr>
+                        <th width="10%">商品编号 </th>
+                        <th width="40%">商品</th>
+                        <th width="15%">规格属性</th>
+                        <th width="10%">数量</th>
+                        <th width="15%">单品价格</th>
+                        <th width="10%">单品小计</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {foreach name="order_product" key="k" item="v"}
+                    <tr>
+                        <td>{$v.pdcode}</td>
+                        <td><img src="/uploads/products/{$v.pic}.thumb.jpg" width="40"><a href="">{$v.title}</a></td>
+                        <td>{$v.attrinfo}</td>
+                        <td>{$v.count}</td>
+                        <td>{$v.price}</td>
+                        <td class='order_money'>{$v.amount}</td>
+                    </tr>
+                    {/foreach}
+
+                    </tbody>
+                    <tfoot><td colspan="6" align="right" id='orderallmoney'>订单总额：{$order.order_price}</td></tfoot>
+                </table>
+            </div>
+            <ul class="listthree">
+                <li><label>小计:</label><span>{$order.order_price}</span></li>
+                <li><label>运费:</label><span>{$order.logpay}</span></li>
+                <li><label>订单总额:</label><span>{$orderpayment}</span></li>
+                <li><label>余额抵扣:</label><span>{$order.usermoney}</span></li>
+                <li><label>价格调整:</label><span>{$order.dispay}</span></li>
+                <li><label>应付:</label><span class="lightcolor">{$payment}</span></li>
+
+            </ul>
+            <div class="textareabox">
+                <label>原因:</label>
+                {if condition="$order.refund == '1'"}
+                <textarea id="reason"></textarea>
+                {else/}
+                <textarea readonly>{$order.reason}</textarea>
+                {/if}
+            </div>
+            {if condition="$order.refund == '1'"}
+            <div class="textareabox">
+                <label>可执行操作：</label>
+                <input type="button" value="同意退款" class="tongyi agree" data-id="{$order.id}" data-money="{$payment}">
+                <input type="button" value="拒绝退款" class="tongyi noagree" data-id="{$order.id}">
+            </div>
+            {/if}
+            <h2>操作记录</h2>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light text-sm">
+                    <thead>
+                    <tr>
+
+                        <th width="15%">操作者 </th>
+                        <th width="10%">操作时间</th>
+                        <th width="10%">订单状态</th>
+                        <th width="10%">付款状态</th>
+                        <th width="10%">发货状态</th>
+                        <th width="20%">描述</th>
+                        <th width="20%">备注</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {foreach name="order_log" key="k" item="v"}
+                    <tr>
+                        <td>{$v.name}</td>
+                        <td>{$v.create_time}</td>
+                        <td>{$v.state}</td>
+                        <td>{$v.step}</td>
+                        <td>{$v.step}</td>
+                        <td>{$v.content}</td>
+                        <td>{$v.content}</td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</section>
+
+<div class="modal fade" id="modal-form">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <form role="form" id="priceOrder">
+                </form>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(".agree").on("click",this,function(){
+            var id = $(this).attr('data-id');
+            var reason = $("#reason").val();
+            if(reason == ''){
+                alert("请输入同意原因");
+                return false;
+            }
+            $.ajax({
+                type:'post',
+                url:'/admin/refund/oneagree',
+                data:{
+                    id:id,
+                    reason:reason
+                },
+                success:function(msg){
+                    alert(msg);
+                    location.href="/admin/refund/refundlist";
+                }
+            })
+        })
+        $(".noagree").on("click",this,function(){
+            var id = $(this).attr('data-id');
+            var reason = $("#reason").val();
+            if(reason == ''){
+                alert("请输入拒绝原因");
+                return false;
+            }
+            $.ajax({
+                type:'post',
+                url:'/admin/refund/onenoagree',
+                data:{
+                    id:id,
+                    reason:reason,
+                },
+                success:function(msg){
+                    alert(msg);
+                    location.href="/admin/refund/refundlist";
+                }
+            })
+        })
+
+        //订单商品总价格
+        /*var ordermoney = 0;
+         $('.order_money').each(function(){
+         ordermoney += parseInt($(this).text());
+         });*/
+
+    })
+</script>

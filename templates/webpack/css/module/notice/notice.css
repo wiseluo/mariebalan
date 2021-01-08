@@ -1,0 +1,164 @@
+li,ul,a,p {
+    text-decoration: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gg_title h1,.gg_content p,.gg_time {
+    cursor: default;
+}
+a {
+    color: #666;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+body {
+    color: #666;
+    font: 12px/150% tahoma,arial,Microsoft YaHei,Hiragino Sans GB,"\u5b8b\u4f53",sans-serif;
+}
+
+.w {
+    width: 1200px;
+    margin: 20px auto 0;
+}
+
+.gg_r {
+    border: 1px solid #EBEBEB;
+    padding: 15px 30px 0;
+    font-family: \5fae\8f6f\96c5\9ed1;
+    width:1138px;
+    margin: 10px auto 0;
+    background: #fff;
+}
+/*公告标题*/
+.gg_title {
+    padding-bottom: 2px;
+    position: relative;
+}
+
+.gg_title h1 {
+    padding: 10px 0 15px;
+    margin-bottom: 10px;
+    height: 32px;
+    text-align: center;
+    border-bottom: 1px solid #EBEBEB;
+    font-family: \5fae\8f6f\96c5\9ed1;
+    line-height: 32px;
+    font-size: 24px;
+}
+
+.gg_time {
+    color: #999;
+    text-align: center;
+}
+/*公告内容*/
+.gg_content {
+    padding: 30px 10px;
+    font-size: 14px;
+    line-height: 2em;
+}
+
+/*底部内容*/
+/*猜你喜欢*/
+.maylike,.recent_view {
+    border: 1px solid #ddd;
+    border-top: 2px solid #999;
+    margin: 0 10px 10px 10px;
+}
+.mt {
+    height: 30px;
+    line-height: 30px;
+}
+.mt .title {
+    float: left;
+    width: 50%;
+    font-weight:400;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+.extra {
+    width: 50%;
+    float: right;
+    text-align: right
+}
+
+.extra span {
+    color: #005EA7;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.maylike .change .ico {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    background: url("./update.png");
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.maylike .mc {
+    height: 246px;
+    overflow: hidden;
+}
+
+.maylike_list {
+    padding-top: 15px;
+    margin-right: -10px;
+}
+
+.maylike_list li {
+    width: 150px;
+    height: 216px;
+    float: left;
+    margin: 0 8px 0 0;
+    padding: 0 18px 15px;
+    text-align: center;
+}
+
+.p-img {
+    padding: 5px 0;
+}
+
+.p-name {
+    height: 36px;
+    overflow: hidden;
+}
+
+.p-review {
+    line-height: 20px;
+}
+
+.p-review a {
+    color: #005ea7
+}
+.p-price {
+    line-height: 20px;
+    color: #e3393c;
+}
+.recent_view .extra a {
+    color: #005EA7;
+}
+
+.recent_view_list {
+    margin-right: -36px;
+    padding-top: 14px;
+}
+
+.recent_view_list li {
+    width: 86px;
+    float: left;
+    margin: 0 2px 0 3px;
+    padding-bottom: 14px;
+    text-align: center;
+}

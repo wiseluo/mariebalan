@@ -1,0 +1,237 @@
+
+
+.shoppingbox{width: 1200px; margin: 0 auto; font-size: 14px;}
+.mycart{ clear: both; font-size: 12px;}
+.mycart ul li{ width: 50%; float: left; text-align: right; line-height: 30px;}
+.mycart ul li a{ color: #69c; cursor: pointer; display:inline-block;}
+.mycart ul li b{ color: #c00;}
+.mycart ul li a.oncebuy{ color: #c00; background: url(../images/question.png) no-repeat 95px 7px; padding-right: 25px;}
+.mycart ul li samp{  margin-right: 10px; display:inline-block;}
+.mycart ul li select{ min-width: 180px; height: 28px; line-height: 28px; border:1px solid #ececec; margin-left: 10px; font-size: 12px;}
+
+.m-cartbox{ margin-top: 5px;}
+.m-cartbox .f-cb{ height: 40px; line-height: 40px; border:1px solid #ececec; font-size: 14px; padding: 0 15px;}
+.m-cartbox .col{ float: left;}
+.m-cartbox .col input[type="checkbox"]{ margin-right: 10px; vertical-align: middle; margin-bottom: 2px;}
+.m-cartbox .col1 {
+    width: 134px;
+}
+.m-cartbox .col2 {
+    width: 416px;
+}
+.m-cartbox .col3 {
+    width: 130px;
+}
+.m-cartbox .col4 {
+    width: 188px; text-align: center;
+}
+.m-cartbox .col5 {
+    width: 192px; text-align: center;
+}
+.m-cartbox .col6{    width: 93px;
+    padding: 0 7px;
+    text-align: left;
+}
+.m-cart {}
+.ware{    padding: 20px 0 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;}
+.u-cartlabel{ padding: 1px 6px; background: #c00; color: #fff; font-weight: normal;}
+.warename{font-weight: bold;
+    font-size: 14px;
+    color: #333;}
+.m-cart .goods{ border:1px solid #eaeaea; padding: 0 15px;}
+
+.m-goods .gooditm{ padding: 20px 0; border-bottom: 1px solid #eaeaea;}
+.m-goods .gooditm:last-child{ border-bottom: none;}
+.m-goods .gooditm .col { display: table-cell; float: none; vertical-align: top; font-size: 14px;}
+.m-goods .gooditm .col0{padding-right: 0;
+    width: 37px;
+    position: relative;
+    z-index: 100;
+    vertical-align: middle;}
+
+.m-goods .gooditm .col2 {
+    padding: 0 0px 0 0;
+    width: 510px;}
+ .m-goods .imgwrap{float: left;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;}
+.m-goods .txtwrap{margin-left: 15px;
+    width: 224px;
+    padding-right: 30px;
+    float: left;}
+
+.m-goods .txtwrap a{ font-size: 14px; color: #666;}
+.m-goods .txtwrap .goodtlt{ margin-bottom: 5px;}
+.col3{ width: 88px;}
+.m-goods .oldprice{ color: #999;}
+.m-goods .newprice {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+.m-goods .txtwrap .returninfo .returnimg {vertical-align: text-top;}
+.u-setcount .minus, .u-setcount .plus {
+    float: left;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #bcbcbc;
+    color: #333;
+    font-family: "iconfont";
+}
+.u-setcount {
+    display: inline-block;
+    zoom: 1;
+    background-color: #fff;
+}
+.u-setcount .ipt {
+    float: left;
+    width: 43px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border: #bcbcbc 1px solid;
+    border-width: 1px 0;
+}
+.m-goods .gooditm .col3 {
+    width: 135px;
+}
+.m-goods .gooditm .col4 {
+    width: 188px;
+    text-align: center;
+}
+.m-goods .gooditm .col5 {
+    width: 198px; text-align: center;
+  
+}
+.u-taxval{ background: url(../images/question.png) no-repeat; font-size: 13px; text-indent: 1.5em; display: inline-block; cursor: pointer; position: relative;}
+.poptax{ padding: 4px; background: #fff; border:1px solid #eaeaea; border-radius: 4px; display: none; position: absolute; left: -120%; bottom:-44px;}
+.poptax a{ display: block; color: #69c;}
+.m-goods .sum {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+.u-opt {
+    display: block;
+    color: #333;
+    cursor: pointer;
+    line-height: 25px;
+    height: 25px;
+}
+.u-opt {
+    display: block;
+    color: #333;
+    cursor: pointer;
+    line-height: 25px;
+    height: 25px;
+}
+.m-cart .cartinfo {
+    padding: 10px 43px 10px 20px;
+    text-align: right; font-size: 14px; border-top: 1px solid #eaeaea;
+    white-space: nowrap;
+}
+.m-cart .cartinfo .discount, .m-cart .cartinfo .allsum {
+    display: inline-block;
+    zoom: 1;
+    margin-right: 20px;
+}
+.m-cart .cartinfo .allsum {
+    position: relative;
+}
+.m-cart .cartinfo .taxbox {
+    display: inline-block;
+    zoom: 1;
+    position: relative;
+}
+.m-goods .goodtax {
+    line-height: 22px;
+    white-space: nowrap;
+}
+.goodtax .icon-arrow-down{ width: 9px; height: 6px; background: url(../images/updown.png) no-repeat; margin-bottom: 2px; display: inline-block;}
+.goodtax .icon-arrow-up{ width: 9px; height: 6px; background: url(../images/up.png) no-repeat; margin-bottom: 2px; display: inline-block;}
+.goodtax p{ margin-top: 5px;}
+.m-actlabel {
+    display: inline-block;
+    position: relative;
+    padding: 0 6px 0 8px;
+    margin-right: 1px;
+    height: 18px;
+    line-height: 18px;
+    color: #e31436;
+    background-color: #fff;
+    border: 1px solid #f3c7c7;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.m-goods .taxrow {
+    height: 20px;
+    line-height: 18px;
+    white-space: nowrap;
+    text-align: center;
+}
+.m-goods .taxrow .rmk {
+    display: block;
+    color: #e31436;
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+
+.totalbox {
+    min-height: 62px;
+    position: relative;
+    margin-top: 35px;
+}
+.m-total {
+    position: fixed;
+    _position: relative;
+    bottom: 0;
+    width: 1198px;
+    min-width: 820px;
+    border: 1px solid #eaeaea;
+}
+.m-total .ttbar {
+    height: 40px;
+    line-height: 40px;
+    padding: 10px;
+    position: relative;
+    background-color: #f8f8f8;
+}
+.m-total .lt {
+    float: left;
+}
+.m-total .rt {
+    float: right;
+    padding-right: 140px;
+    line-height: 20px;
+    text-align: right;
+}
+.m-total .gobuy {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    bottom: 0;
+    width: 120px;
+    line-height: 60px;
+    text-align: center;
+    background-color: #e31436;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+.m-total .lt .opt {
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.layer{ display: none;position: absolute;left: 10px; top:25px; padding: 4px; background: #fff;
+ border:1px solid #eaeaea; color: #000; border-radius: 4px; box-shadow: 2px 2px 2px #eaeaea;}

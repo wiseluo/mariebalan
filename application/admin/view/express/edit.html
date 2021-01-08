@@ -1,0 +1,300 @@
+<section class="scrollable padder">
+  <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
+    <li>
+      <a href="./">
+        <i class="fa fa-home"></i> 首页</a>
+    </li>
+    <li>
+      <a>系统设置</a>
+    </li>
+    <li>
+      <a>配送方式</a>
+    </li>
+  </ul>
+  <div class="m-b-md">
+    <h3 class="m-b-none">配送方式</h3>
+  </div>
+
+  <section class="panel panel-default">
+    <div class="panel-body">
+      <form class="form-horizontal" method="post">
+        <input type="hidden" name="id" value="{$info['id']}" />
+
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label">配送名称</label>
+          <div class="col-sm-10">
+            <input type="text" placeholder="配送名称" name="info[name]" value="{$info['name']}" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label">是否启用</label>
+          <div class="col-sm-10">
+              <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-sm btn-default {if $info.state==1}active{/if}">
+                      <input type="radio" name="info[state]" id="state1" value="1">
+                      <i class="fa fa-check text-active"></i>是</label>
+                  <label class="btn btn-sm btn-default {if $info.state==0}active{/if}">
+                      <input type="radio" name="info[state]" id="state2" value="0">
+                      <i class="fa fa-check text-active"></i>否</label>
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label">是否默认</label>
+          <div class="col-sm-10">
+              <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-sm btn-default {if $info.isdefault==1}active{/if}">
+                      <input type="radio" name="info[isdefault]" id="isdefault1" value="1">
+                      <i class="fa fa-check text-active"></i>是</label>
+                  <label class="btn btn-sm btn-default {if $info.isdefault==0}active{/if}">
+                      <input type="radio" name="info[isdefault]" id="isdefault2" value="0">
+                      <i class="fa fa-check text-active"></i>否</label>
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label">计费方式</label>
+          <div class="col-sm-10">
+              <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-sm btn-default {if $info.type==0}active{/if}">
+                      <input type="radio" name="info[type]" id="type1" value="1">
+                      <i class="fa fa-check text-active"></i>按重量计费</label>
+                  <label class="btn btn-sm btn-default {if $info.type==1}active{/if}">
+                      <input type="radio" name="info[type]" id="type2" value="0">
+                      <i class="fa fa-check text-active"></i>按件计费</label>
+              </div>
+          </div>
+        </div>
+
+        <!--<div class="form-group">
+          <label class="col-sm-1 control-label">物流公司</label>
+          <div class="col-sm-10">
+            <textarea name="info['summary']" class="form-control" id="summary" placeholder="摘 要"></textarea>
+          </div>
+        </div>-->
+
+        <div class="form-group">
+          <label class="col-sm-1 control-label">配送区域</label>
+          <div class="col-sm-10">
+            <table class="table table-striped b-t b-light text-sm">
+                <thead>
+                <tr>
+                    <th>运送到</th>
+                    <th width="100">首重(克/件)</th>
+                    <th width="100">首费(元)</th>
+                    <th width="100">续重(克/件)</th>
+                    <th width="100">续费(元)</th>
+                    <th width="110">满额包邮(元)</th>
+                    <th width="50">操作</th>
+                </tr>
+                </thead>
+                <tbody id="areaslist">
+                <tr>
+                    <td class="name">全国 [默认运费]</td>
+                    <td><input type="text" name="info[firstnum]" value="{$info['firstnum']}" class="form-control"></td>
+                    <td><input type="text" name="info[firstprice]" value="{$info['firstprice']}" class="form-control"></td>
+                    <td><input type="text" name="info[secondnum]" value="{$info['secondnum']}" class="form-control"></td>
+                    <td><input type="text" name="info[secondprice]" value="{$info['secondprice']}" class="form-control"></td>
+                    <td><input type="text" name="info[freeprice]" value="{$info['freeprice']}" class="form-control"></td>
+                    <td></td>
+                </tr>
+                {foreach name='areas' item='rs' key='k'}
+                <tr>
+                    <input type="hidden" class="citys" name="areas[{$k}][citys]" value="{$rs['citys']}">
+                    <input type="hidden" class="codes" name="areas[{$k}][codes]" value="{$rs['codes']}">
+                    <td class="name">{$rs['citys']}<br><a style="color:#337ab7" href="javascript:;" onclick="editArea(this)">编辑</a></td>
+                    <td><input type="text" name="areas[{$k}][firstnum]" value="{$rs['firstnum']}" class="form-control"></td>
+                    <td><input type="text" name="areas[{$k}][firstprice]" value="{$rs['firstprice']}" class="form-control"></td>
+                    <td><input type="text" name="areas[{$k}][secondnum]" value="{$rs['secondnum']}" class="form-control"></td>
+                    <td><input type="text" name="areas[{$k}][secondprice]" value="{$rs['secondprice']}" class="form-control"></td>
+                    <td><input type="text" name="areas[{$k}][freeprice]" value="{$rs['freeprice']}" class="form-control"></td>
+                    <td><a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a></td>
+                </tr>
+                {/foreach}
+                </tbody>
+            </table>
+            <a class='btn btn-default' href="javascript:;" onclick='addlist()'><span class="fa fa-plus"></span> 新增配送区域</a>
+          </div>
+        </div>
+
+        <div class="line line-dashed line-lg pull-in"></div>
+
+        <div class="form-group">
+          <div class="col-sm-4 col-sm-offset-2" style="text-align:center; width:60%;">
+            <button type="sumbit" class="btn btn-primary"> 提 交 </button>
+            <button type="reset" class="btn btn-default"> 重 置 </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </section>
+</section>
+
+<div class="modal fade" id="modal-view" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div style="padding:2px 20px;">
+                      <h3 class="m-t-none m-b">全国三级联动</h3>
+                      <p>请认真勾选城市.</p>
+                      <style>
+                        .list {
+                          float: left;
+                          width: 33%;
+                          height: 400px;
+                          overflow-x: hidden;
+                          overflow-y: scroll;
+                          border:1px solid #ccc;
+                        }
+                        .item{padding: 5px;cursor: pointer;background:#eee;border-bottom:1px solid #ccc;}
+                        .item input{float: right;}
+                      </style>
+  
+                      <div class="list" id="province">
+                      </div>
+                      
+                      <div class="list" id="city">
+                      </div>
+  
+                      <div class="list" id="county">
+                      </div>
+
+                      <div style="text-align:center">
+                        <a class="btn btn-s-md btn-success" onclick="adddate()"><i class="fa fa-edit" style="margin-right:20px;"></i>确定</a>
+                        <a onClick="$('#modal-view').modal('hide');" class="btn btn-s-md btn-default">关闭</a>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/index/plugins/cityPicker/citydata.js"></script>
+<script>
+  var clickobj;
+  var provinces = [];
+  var citys = [];
+  $(function () {
+    $.each(cityData, function(i,val){
+      if(val.parentId > 0){
+        if(val.parentId == 100000){
+          $('#province').append('<div class="item">'+val.name+'<input type="checkbox" data-id="'+val.id+'" class="check1"/></div>');
+          provinces.push(val.id);
+        }
+        if($.inArray(val.parentId,provinces) > -1){
+          $('#city').append('<div style="display:none;" class="item">'+val.name+'<input type="checkbox" data-name="'+val.name+'" data-id="'+val.id+'" data-pid="'+val.parentId+'"/></div>');
+          citys.push(val.id);
+        }else if($.inArray(val.parentId,citys) > -1){
+          $('#county').append('<div style="display:none;" class="item">'+val.name+'<input type="checkbox" data-id="'+val.id+'" data-pid="'+val.parentId+'"/></div>');
+        }
+      }
+    });
+
+    $('.item').on('click',function () {
+      if($(this).css('backgroundColor') == 'rgb(0, 178, 238)'){return;}
+      $(this).parent().children().css('backgroundColor','#eee');
+      $(this).css('backgroundColor','#00B2EE');
+      var f = $(this).parent().attr('id');
+      if(f == 'province'){
+        $('#city').children().hide();
+        $('#county').children().hide();
+        $('input[data-pid="'+$(this).children().data('id')+'"]').parent().show();
+      }else if(f == 'city'){
+        $('#county').children().hide();
+        $('input[data-pid="'+$(this).children().data('id')+'"]').parent().show();
+      }
+    });
+
+    $('input[type="checkbox"]').on('click',function () {
+      var f = $(this).parent().parent().attr('id');
+      if(f == 'province'){
+        var citys = getChildrens(this);
+        citys.prop("checked",trueorfalse(this));
+        var countys = [];
+        $.each(citys, function(i,val){
+          getChildrens(val).prop("checked",trueorfalse(this));
+        });
+      }else if(f == 'city'){
+        var province = getParent(this);
+        var countys = getChildrens(this);
+        var citys = getPeers(this);
+        countys.prop("checked",trueorfalse(this));
+        province.prop("checked",trueorfalse(citys));
+      }else if(f == 'county'){
+        var countys = getPeers(this);
+        var city = getParent(this);
+        var province = getParent(city);
+        city.prop("checked",trueorfalse(countys));
+        province.prop("checked",trueorfalse(city));
+      }
+    });
+  })
+
+  function getParent(that){
+    return $('input[data-id="'+$(that).data('pid')+'"]');
+  }
+  function getChildrens(that){
+    return $('input[data-pid="'+$(that).data('id')+'"]');
+  }
+  function getPeers(that){
+    return $('input[data-pid="'+$(that).data('pid')+'"]');
+  }
+
+  // 找同级元素的checked状态
+  function trueorfalse(obj) {
+    var bool = false;
+    $(obj).each(function () {
+      if ($(this).prop("checked")) {
+        bool = true;
+      }
+    })
+    return bool;
+  }
+
+  function editArea(obj){
+    $('.item').css('backgroundColor','#eee');
+    $('.item').children().prop("checked",false);
+    clickobj = obj;
+    $("#modal-view").modal("show");
+  }
+
+  function adddate(){
+    $('#modal-view').modal('hide');
+    var city = $('input[data-name]:checked');
+    var citys = '';
+    $(city).each(function (i,val) {
+      citys += $(val).data('name')+';';
+    })
+    $(clickobj).parents('td').prepend(citys);
+    $(clickobj).parents('tr').children('.citys').val(citys);
+    var code = $('#county').find('input[data-id]:checked');
+    var codes = '';
+    $(code).each(function (i,val) {
+      codes += $(val).data('id')+';';
+    })
+    $(clickobj).parents('tr').children('.codes').val(codes);
+  }
+  function addlist(){
+    var id = $("#areaslist").children('tr').length-1;
+    var html = `<tr>
+        <input class="citys" type="hidden" name="areas[`+id+`][citys]">
+        <input class="codes" type="hidden" name="areas[`+id+`][codes]">
+        <td class="name"><a style="color:#337ab7" href="javascript:;" onclick="editArea(this)">编辑</a></td>
+        <td><input type="text" name="areas[`+id+`][firstnum]" class="form-control"></td>
+        <td><input type="text" name="areas[`+id+`][firstprice]" class="form-control"></td>
+        <td><input type="text" name="areas[`+id+`][secondnum]" class="form-control"></td>
+        <td><input type="text" name="areas[`+id+`][secondprice]" class="form-control"></td>
+        <td><input type="text" name="areas[`+id+`][freeprice]" class="form-control"></td>
+        <td><a class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a></td>
+    </tr>`;
+    $("#areaslist").append(html);
+  }
+</script>

@@ -1,0 +1,65 @@
+<style>
+.col-sm-10{width:100%; border-bottom:#e8e8e8 solid 1px; margin-bottom:5px; padding-bottom:5px;}
+</style>
+<input type="hidden" name="id" id="js_id" value="{$info['id']}" />
+<div class="form-group">
+        <label>名称</label>
+        <input type="text" id="qx_name" name="info['name']" class="form-control" value="{$info['name']}">
+</div>
+
+{foreach name="allmodule" item="rs" key="k"}
+{if($rs['fid']==0)}
+<div class="form-group" style="margin-bottom:0; display:block;">
+<label class="control-label">
+<input type="checkbox"  name="IDS[]" value="{$rs['id']}" {if(in_array($rs['id'],$access))}checked="checked"{/if}> {$rs['name']} </label>
+</div>
+
+<div class="col-sm-10">
+{foreach name="allmodule" item="rs2" key="k2"}
+{if($rs2['fid']==$rs['id'])}
+<label class="checkbox-inline">
+<input type="checkbox" name="IDS[]" value="{$rs2['id']}" {if(in_array($rs2['id'],$access))}checked="checked"{/if}> {$rs2['name']} </label>
+{/if}
+{/foreach}
+</div>
+{/if}
+{/foreach}
+
+<div style="text-align:center">
+<a class="btn btn-s-md btn-success" onclick="sumbitMenuInfo()"><i class="fa fa-edit" style="margin-right:20px;"></i>确定</a>
+<a onClick="$('#modal-form').modal('hide');" class="btn btn-s-md btn-default">关闭</a>
+</div>
+<script>
+function sumbitMenuInfo(){
+	var id = $("#js_id").val();
+
+	var info = {};
+	info['name'] = $("#qx_name").val();
+	var access='';
+	/*$("input:checkbox[name='IDS[]']:checked").each(function() { // 遍历name=test的多选框
+		access = access + $(this).val() + ',';  // 每一个被选中项的值
+	});
+	access = access.substr(0, access.length - 1);  */
+
+	access = $("input:checkbox[name='IDS[]']:checked").map(function() { // 遍历name=test的多选框
+		return parseInt(this.value);  // 每一个被选中项的值
+	}).get().sort(function(a, b){return a-b;}).join(',');
+	//console.log(access);
+	
+	info['access'] = access;
+	//console.log(info);
+	$.ajax({
+		type:"POST",
+		url:"/admin/group/add?id="+id,
+		data:info,
+		success: function(data){
+			console.log(data);
+			//if(data=='suss'){
+				//window.location.reload();
+			//}else{
+			//	alert(data);
+			//}
+		}
+	})
+}
+</script>

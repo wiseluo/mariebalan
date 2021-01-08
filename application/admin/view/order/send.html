@@ -1,0 +1,49 @@
+<div class="form-group">
+    <select class="form-control m-t parsley-validated" name="express[name]">
+    	<option value="">请选择快递公司</option>
+    	{foreach name="express" key="k" item="v"}
+    		<option value="{$v['name']}">{$v['name']}</option>
+    	{/foreach}
+    </select>
+</div>
+<div class="form-group">
+    <label>快递单号</label>
+    <input type="text" name="express[no]" class="form-control">
+</div>
+<div style="text-align:center">
+<a class="btn btn-s-md btn-success" onclick="post()"><i class="fa fa-edit" style="margin-right:20px;"></i>确定</a>
+<a onClick="$('#modal-form').modal('hide');" class="btn btn-s-md btn-default">关闭</a>
+</div>
+
+<script>
+function post(){
+	$(this).prop("disabled",true);
+	if ($("[name='express[name]']").val() == ''){
+		layer.msg("请选择快递公司!",{icon:5,time:1000,});
+		return;
+	}
+	$.ajax({
+		type:"POST",
+		url:"/admin/order/send?id={$order['id']}",
+		data:$('#sendinfo').serialize(),
+		success: function(data){
+			if (data.code == 200) {
+	            layer.msg(data.msg,{
+	                          icon:6,
+	                          time:1000,
+	                      });
+
+	            setTimeout(function(){
+	              window.location.reload();
+	            },1000);
+	        } else {
+            	layer.msg("提交失败",{
+                            icon:5,
+                            time:1000,
+                        });
+            	$('a.btn-success').prop("disabled",false);
+        	}
+		}
+	})
+}
+</script>
